@@ -596,7 +596,7 @@
                                     <TextBlock FontSize="14" Text="" Name="TextBlockVersion"/>
                                 </ui:SimpleStackPanel>
                                 <TextBlock FontSize="14">
-                                     <Bold>开发者:</Bold> XY Wang (WXRIW)
+                                     <Bold>开发者:</Bold> Clover Yan, XY Wang (WXRIW)
                                 </TextBlock>
                                 <TextBlock FontSize="14" TextWrapping="Wrap">
                                      <Bold>贡献者:</Bold> Kengwang, Raspberry Kan, jiajiaxd, CN-Ironegg, Clover Yan, STBBRD, ChangSakura
