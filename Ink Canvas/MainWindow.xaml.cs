@@ -3563,7 +3563,7 @@ namespace Ink_Canvas
 
         private void HyperlinkSource_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://github.com/WXRIW/Ink-Canvas");
+            Process.Start("https://github.com/clover-yan/Ink-Canvas-Plus");
         }
 
         #endregion

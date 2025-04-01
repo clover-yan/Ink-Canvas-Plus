@@ -604,7 +604,7 @@
                                 <TextBlock FontSize="14">
                                     <Bold>开源地址:</Bold>
                                     <Hyperlink Click="HyperlinkSource_Click">
-                                           <TextBlock Text="https://github.com/WXRIW/Ink-Canvas"></TextBlock>
+                                           <TextBlock Text="github.com/clover-yan/Ink-Canvas-Plus"></TextBlock>
                                     </Hyperlink>
                                 </TextBlock>
                                 <TextBlock FontSize="14">
@@ -629,7 +629,7 @@
                 </ui:ScrollViewerEx>
                 <Grid Background="White" Margin="10,0,10,0" Height="60" VerticalAlignment="Top">
                     <Grid Margin="10,20,10,-10">
-                        <TextBlock Text="设置" FontSize="26" Margin="0,0,0,12"/>
+                        <TextBlock Text="Ink Canvas Plus 设置" FontSize="26" Margin="0,0,0,12"/>
                         <!--<Viewbox Margin="0,-55,0,0" Height="60" HorizontalAlignment="Right">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="logo.png" Width="120"/>
