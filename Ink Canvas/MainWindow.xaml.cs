@@ -69,7 +69,16 @@ namespace Ink_Canvas
                 ViewBoxStackPanelShapes.Visibility = Visibility.Collapsed;
                 HideSubPanels();
 
-                ViewboxFloatingBar.Margin = new Thickness((SystemParameters.WorkArea.Width - 284) / 2, SystemParameters.WorkArea.Height - 80, -2000, -200);
+                ViewboxFloatingBar.Margin = new Thickness(80, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80, -2000, -200);
+                new Thread(new ThreadStart(() =>
+                {
+                    Thread.Sleep(3000);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        SetBorderFloatingBarMainControlsVisibility(false);
+                    });
+                })).Start();
+
             }
             else
             {
@@ -2809,6 +2818,15 @@ namespace Ink_Canvas
                 if (pointDesktop != new Point(-1, -1))
                 {
                     ViewboxFloatingBar.Margin = new Thickness(pointDesktop.X, pointDesktop.Y, -2000, -200);
+                    new Thread(new ThreadStart(() =>
+                    {
+                        Thread.Sleep(100);
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            SetBorderFloatingBarMainControlsVisibility(false);
+                        });
+                    })).Start();
+
                 }
             });
         }
@@ -7004,6 +7022,15 @@ namespace Ink_Canvas
                     {
                         ViewboxFloatingBar.Margin = new Thickness(pointDesktop.X, pointDesktop.Y, -2000, -200);
                         pointDesktop = new Point(-1, -1);
+                        new Thread(new ThreadStart(() =>
+                        {
+                            Thread.Sleep(100);
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                SetBorderFloatingBarMainControlsVisibility(false);
+                            });
+                        })).Start();
+
                     }
                 }
                 else
