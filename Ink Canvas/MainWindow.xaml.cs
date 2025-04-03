@@ -69,7 +69,7 @@ namespace Ink_Canvas
                 ViewBoxStackPanelShapes.Visibility = Visibility.Collapsed;
                 HideSubPanels();
 
-                ViewboxFloatingBar.Margin = new Thickness(80, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80, -2000, -200);
+                ViewboxFloatingBar.Margin = new Thickness(SystemParameters.WorkArea.Left + 80, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80, -2000, -200);
                 new Thread(new ThreadStart(() =>
                 {
                     Thread.Sleep(3000);
