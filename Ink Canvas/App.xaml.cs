@@ -53,7 +53,7 @@ namespace Ink_Canvas
 
             if (!StoreHelper.IsStoreApp)
             {
-                AutoUpdater.Start($"http://ink.wxriw.cn:1957/update");
+                AutoUpdater.Start($"https://www.khyan.top/apps/Ink-Canvas-Plus/autoupdate.xml");
                 AutoUpdater.ApplicationExitEvent += () =>
                 {
                     Environment.Exit(0);
