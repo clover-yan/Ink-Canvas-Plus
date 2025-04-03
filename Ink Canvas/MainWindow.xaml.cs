@@ -2930,7 +2930,14 @@ namespace Ink_Canvas
         {
             Main_Grid.Background = new SolidColorBrush(StringToColor("#01FFFFFF"));
             BtnHideInkCanvas_Click(sender, e);
-            pptApplication.SlideShowWindows[1].SlideNavigation.Visible = true;
+            try
+            {
+                pptApplication.SlideShowWindows[1].SlideNavigation.Visible = true;
+            }
+            catch
+            {
+                ShowNotification("此功能不支持阅读模式，请在幻灯片放映模式下使用。");
+            }
             // 控制居中
             if (BtnPPTSlideShowEnd.Visibility == Visibility.Visible)
             {
