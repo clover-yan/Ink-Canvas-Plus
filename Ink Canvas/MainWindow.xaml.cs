@@ -110,7 +110,7 @@ namespace Ink_Canvas
             timerCheckPPT.Interval = 1000;
 
             timerKillProcess.Elapsed += TimerKillProcess_Elapsed;
-            timerKillProcess.Interval = 5000;
+            timerKillProcess.Interval = 1000;
         }
 
         private void TimerKillProcess_Elapsed(object sender, ElapsedEventArgs e)
@@ -133,27 +133,19 @@ namespace Ink_Canvas
                             " /IM Sia.Guard.exe";
                     }
                 }
-                if (Settings.Automation.IsAutoKillEasiNote)
-                {
-                    Process[] processes = Process.GetProcessesByName("EasiNote");
-                    if (processes.Length > 0)
-                    {
-                        arg += " /IM EasiNote.exe";
-
-                    }
-                }
                 if (arg != "/F")
                 {
                     Process p = new Process();
                     p.StartInfo = new ProcessStartInfo("taskkill", arg);
                     p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     p.Start();
-
-                    if (arg.Contains("EasiNote"))
+                }
+                if (Settings.Automation.IsAutoKillEasiNote)
+                {
+                    Process[] processes = Process.GetProcessesByName("EasiNote");
+                    if (processes.Length > 0)
                     {
-
-                        BtnSwitch_Click(BtnSwitch, null);
-                        MessageBox.Show("“希沃白板 5”已自动关闭");
+                        AutoKillHelper.KillEasiNoteFloatBall();
                     }
                 }
             }
