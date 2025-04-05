@@ -48,7 +48,7 @@ namespace Ink_Canvas.Helpers
                 {
                     GetWindowRect(hWnd, out RECT rect);
                     int height = rect.Bottom - rect.Top;
-                    if (height <= 200)
+                    if (height <= 200 && rect.Left <= -175)
                     {
                         GetWindowThreadProcessId(hWnd, out uint processId);
                         Process process = Process.GetProcessById((int)processId);
