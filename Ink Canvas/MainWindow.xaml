@@ -487,6 +487,7 @@
                                     <ComboBoxItem Content="浅色（默认）" FontFamily="Microsoft YaHei UI"/>
                                     <ComboBoxItem Content="深色" FontFamily="Microsoft YaHei UI"/>
                                     <ComboBoxItem Content="跟随系统"  FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="Plus 豆沙绿色"  FontFamily="Microsoft YaHei UI"/>
                                 </ComboBox>
                             </ui:SimpleStackPanel>
                         </GroupBox>

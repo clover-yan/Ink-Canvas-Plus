@@ -6577,11 +6577,11 @@ namespace Ink_Canvas
         #region Auto Theme
 
         Color FloatBarForegroundColor = Color.FromRgb(102, 102, 102);
-        private void SetTheme(string theme)
+        private void SetTheme(string theme, string favor)
         {
-            if (theme == "Light")
+            if (favor == "Light")
             {
-                ResourceDictionary rd1 = new ResourceDictionary() { Source = new Uri("Resources/Styles/Light.xaml", UriKind.Relative) };
+                ResourceDictionary rd1 = new ResourceDictionary() { Source = new Uri($"Resources/Styles/{theme}Light.xaml", UriKind.Relative) };
                 Application.Current.Resources.MergedDictionaries.Add(rd1);
 
                 ResourceDictionary rd2 = new ResourceDictionary() { Source = new Uri("Resources/DrawShapeImageDictionary.xaml", UriKind.Relative) };
@@ -6597,9 +6597,9 @@ namespace Ink_Canvas
 
                 FloatBarForegroundColor = (Color)Application.Current.FindResource("FloatBarForegroundColor");
             }
-            else if (theme == "Dark")
+            else if (favor == "Dark")
             {
-                ResourceDictionary rd1 = new ResourceDictionary() { Source = new Uri("Resources/Styles/Dark.xaml", UriKind.Relative) };
+                ResourceDictionary rd1 = new ResourceDictionary() { Source = new Uri($"Resources/Styles/{theme}Dark.xaml", UriKind.Relative) };
                 Application.Current.Resources.MergedDictionaries.Add(rd1);
 
                 ResourceDictionary rd2 = new ResourceDictionary() { Source = new Uri("Resources/DrawShapeImageDictionary.xaml", UriKind.Relative) };
@@ -6625,14 +6625,17 @@ namespace Ink_Canvas
             switch (Settings.Appearance.Theme)
             {
                 case 0:
-                    SetTheme("Light");
+                    SetTheme("", "Light");
                     break;
                 case 1:
-                    SetTheme("Dark");
+                    SetTheme("", "Dark");
                     break;
                 case 2:
-                    if (IsSystemThemeLight()) SetTheme("Light");
-                    else SetTheme("Dark");
+                    if (IsSystemThemeLight()) SetTheme("", "Light");
+                    else SetTheme("", "Dark");
+                    break;
+                case 3:
+                    SetTheme("Green", "Light");
                     break;
             }
         }
