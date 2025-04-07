@@ -487,7 +487,15 @@
                                     <ComboBoxItem Content="浅色（默认）" FontFamily="Microsoft YaHei UI"/>
                                     <ComboBoxItem Content="深色" FontFamily="Microsoft YaHei UI"/>
                                     <ComboBoxItem Content="跟随系统"  FontFamily="Microsoft YaHei UI"/>
-                                    <ComboBoxItem Content="Plus 豆沙绿色"  FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="Plus 苜蓿绿 - 浅色"  FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="Plus 苜蓿绿 - 深色"  FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="Plus 苜蓿绿 - 跟随系统"  FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="Plus 三月粉 - 浅色"  FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="Plus 三月粉 - 深色"  FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="Plus 三月粉 - 跟随系统"  FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="Plus 朱砂红 - 浅色"  FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="Plus 朱砂红 - 深色"  FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="Plus 朱砂红 - 跟随系统"  FontFamily="Microsoft YaHei UI"/>
                                 </ComboBox>
                             </ui:SimpleStackPanel>
                         </GroupBox>

@@ -1,0 +1,7 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="FloatBarBackground" Color="#9F5A1F1F"/>
+    <SolidColorBrush x:Key="FloatBarBorderBrush" Color="#BFF8E0E0"/>
+    <SolidColorBrush x:Key="FloatBarForeground" Color="#F8E0E0"/>
+    <Color x:Key="FloatBarForegroundColor">#FFF8E0E0</Color>
+</ResourceDictionary>

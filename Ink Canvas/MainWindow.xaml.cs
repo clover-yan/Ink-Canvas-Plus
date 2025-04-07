@@ -6577,9 +6577,9 @@ namespace Ink_Canvas
         #region Auto Theme
 
         Color FloatBarForegroundColor = Color.FromRgb(102, 102, 102);
-        private void SetTheme(string theme, string favor)
+        private void SetTheme(string theme, int favor)
         {
-            if (favor == "Light")
+            if (favor == 1)
             {
                 ResourceDictionary rd1 = new ResourceDictionary() { Source = new Uri($"Resources/Styles/{theme}Light.xaml", UriKind.Relative) };
                 Application.Current.Resources.MergedDictionaries.Add(rd1);
@@ -6597,7 +6597,7 @@ namespace Ink_Canvas
 
                 FloatBarForegroundColor = (Color)Application.Current.FindResource("FloatBarForegroundColor");
             }
-            else if (favor == "Dark")
+            else if (favor == 2)
             {
                 ResourceDictionary rd1 = new ResourceDictionary() { Source = new Uri($"Resources/Styles/{theme}Dark.xaml", UriKind.Relative) };
                 Application.Current.Resources.MergedDictionaries.Add(rd1);
@@ -6622,20 +6622,33 @@ namespace Ink_Canvas
 
         private void SystemEvents_UserPreferenceChanged(object sender, Microsoft.Win32.UserPreferenceChangedEventArgs e)
         {
-            switch (Settings.Appearance.Theme)
+            int favor = 0;
+            switch (Settings.Appearance.Theme % 3)
             {
                 case 0:
-                    SetTheme("", "Light");
+                    favor = 1;
                     break;
                 case 1:
-                    SetTheme("", "Dark");
+                    favor = 2;
                     break;
                 case 2:
-                    if (IsSystemThemeLight()) SetTheme("", "Light");
-                    else SetTheme("", "Dark");
+                    if (IsSystemThemeLight()) favor = 1;
+                    else favor = 2;
+                    break;
+            }
+            switch (Settings.Appearance.Theme / 3)
+            {
+                case 0:
+                    SetTheme("", favor);
+                    break;
+                case 1:
+                    SetTheme("Green", favor);
+                    break;
+                case 2:
+                    SetTheme("Pink", favor);
                     break;
                 case 3:
-                    SetTheme("Green", "Light");
+                    SetTheme("Red", favor);
                     break;
             }
         }
