@@ -951,14 +951,14 @@ namespace Ink_Canvas
             if (Settings.Gesture.IsDisableLockSmithByDefault)
             {
                 ToggleSwitchDisableLockSmithByDefault.IsOn = true;
-                _lockSmith = false;
-                LockSmithSymbol.Symbol = iNKORE.UI.WPF.Modern.Controls.Symbol.Pin;
+                lockSmithDesktop = false;
+                ChangeLockSmithState(false);
             }
             else
             {
                 ToggleSwitchDisableLockSmithByDefault.IsOn = false;
-                _lockSmith = true;
-                LockSmithSymbol.Symbol = iNKORE.UI.WPF.Modern.Controls.Symbol.UnPin;
+                lockSmithDesktop = true;
+                ChangeLockSmithState(true);
             }
             if (Settings.Gesture.IsEnableTwoFingerZoom)
             {
@@ -2060,6 +2060,16 @@ namespace Ink_Canvas
         bool isLastTouchEraser = false;
         private bool forcePointEraser = true;
         private bool _lockSmith = false; //临时停用双指手势
+        private bool lockSmithPPT = false;
+        private bool lockSmithDesktop = false;
+
+        private void ChangeLockSmithState(bool state)
+        {
+            _lockSmith = state;
+            if (_lockSmith) LockSmithSymbol.Symbol = iNKORE.UI.WPF.Modern.Controls.Symbol.UnPin;
+            else LockSmithSymbol.Symbol = iNKORE.UI.WPF.Modern.Controls.Symbol.Pin;
+
+        }
 
         private void Main_Grid_TouchDown(object sender, TouchEventArgs e)
         {
@@ -2225,7 +2235,7 @@ namespace Ink_Canvas
         private void Main_Grid_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
             if (isInMultiTouchMode || !Settings.Gesture.IsEnableTwoFingerGesture || _lockSmith) return;
-            if ((dec.Count >= 2 && (Settings.PowerPointSettings.IsEnableTwoFingerGestureInPresentationMode || StackPanelPPTControls.Visibility != Visibility.Visible || StackPanelPPTButtons.Visibility == Visibility.Collapsed)) || isSingleFingerDragMode)
+            if ((dec.Count >= 2 && (StackPanelPPTControls.Visibility != Visibility.Visible || StackPanelPPTButtons.Visibility == Visibility.Collapsed)) || isSingleFingerDragMode)
             {
                 ManipulationDelta md = e.DeltaManipulation;
                 Vector trans = md.Translation;  // 获得位移矢量
@@ -2518,6 +2528,7 @@ namespace Ink_Canvas
             {
                 //BtnPPTSlideShow.Visibility = Visibility.Collapsed;
                 BtnPPTSlideShowEnd.Visibility = Visibility.Collapsed;
+                ChangeLockSmithState(lockSmithDesktop);
             });
         }
 
@@ -2617,6 +2628,8 @@ namespace Ink_Canvas
                 BtnPPTSlideShow.Visibility = Visibility.Collapsed;
                 BtnPPTSlideShowEnd.Visibility = Visibility.Visible;
                 ViewBoxStackPanelMain.Margin = new Thickness(10, 10, 10, 10);
+                lockSmithDesktop = _lockSmith;
+                ChangeLockSmithState(!Settings.PowerPointSettings.IsEnableTwoFingerGestureInPresentationMode);
 
                 if (Settings.PowerPointSettings.IsShowCanvasAtNewSlideShow && Main_Grid.Background == Brushes.Transparent)
                 {
@@ -2774,6 +2787,7 @@ namespace Ink_Canvas
                 BtnPPTSlideShowEnd.Visibility = Visibility.Collapsed;
                 StackPanelPPTControls.Visibility = Visibility.Collapsed;
                 ViewBoxStackPanelMain.Margin = new Thickness(10, 10, 10, 55);
+                ChangeLockSmithState(lockSmithDesktop);
 
                 if (currentMode != 0)
                 {
@@ -7006,6 +7020,8 @@ namespace Ink_Canvas
                 else
                 {
                     pointPPT = new Point(ViewboxFloatingBar.Margin.Left, ViewboxFloatingBar.Margin.Top);
+                    lockSmithPPT = _lockSmith;
+                    ChangeLockSmithState(lockSmithDesktop);
                 }
                 //ViewboxFloatingBar.Margin = new Thickness(10, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
 
@@ -7050,6 +7066,8 @@ namespace Ink_Canvas
                 }
                 else
                 {
+                    lockSmithDesktop = _lockSmith;
+                    ChangeLockSmithState(lockSmithPPT);
                     new Thread(new ThreadStart(() =>
                     {
                         Thread.Sleep(100);
@@ -7381,9 +7399,7 @@ namespace Ink_Canvas
 
         private void SymbolIconPin_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            _lockSmith = !_lockSmith;
-            if (_lockSmith) LockSmithSymbol.Symbol = iNKORE.UI.WPF.Modern.Controls.Symbol.UnPin;
-            else LockSmithSymbol.Symbol = iNKORE.UI.WPF.Modern.Controls.Symbol.Pin;
+            ChangeLockSmithState(!_lockSmith);
         }
 
         private void SymbolIconOpenStrokes_MouseUp(object sender, MouseButtonEventArgs e)
