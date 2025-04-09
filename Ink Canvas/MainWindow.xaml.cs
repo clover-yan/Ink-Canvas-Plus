@@ -2235,7 +2235,7 @@ namespace Ink_Canvas
         private void Main_Grid_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
             if (isInMultiTouchMode || !Settings.Gesture.IsEnableTwoFingerGesture || _lockSmith) return;
-            if ((dec.Count >= 2 && (StackPanelPPTControls.Visibility != Visibility.Visible || StackPanelPPTButtons.Visibility == Visibility.Collapsed)) || isSingleFingerDragMode)
+            if (dec.Count >= 2 || isSingleFingerDragMode)
             {
                 ManipulationDelta md = e.DeltaManipulation;
                 Vector trans = md.Translation;  // 获得位移矢量
