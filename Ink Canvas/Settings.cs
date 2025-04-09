@@ -31,7 +31,7 @@ namespace Ink_Canvas
         [JsonProperty("inkStyle")]
         public int InkStyle { get; set; } = 0;
         [JsonProperty("eraserSize")]
-        public int EraserSize { get; set; } = 2;
+        public int EraserSize { get; set; } = 0;
         [JsonProperty("eraserType")]
         public int EraserType { get; set; } = 0; // 0 - 图标切换模式      1 - 面积擦     2 - 线条擦
         [JsonProperty("hideStrokeWhenSelecting")]
@@ -64,7 +64,7 @@ namespace Ink_Canvas
         [JsonProperty("isEnableTwoFingerRotation")]
         public bool IsEnableTwoFingerRotation { get; set; } = false;
         [JsonProperty("isEnableTwoFingerRotationOnSelection")]
-        public bool IsEnableTwoFingerRotationOnSelection { get; set; } = false;
+        public bool IsEnableTwoFingerRotationOnSelection { get; set; } = true;
 
     }
 
@@ -73,7 +73,7 @@ namespace Ink_Canvas
         [JsonProperty("isAutoHideCanvas")]
         public bool IsAutoHideCanvas { get; set; } = true;
         [JsonProperty("isAutoEnterModeFinger")]
-        public bool IsAutoEnterModeFinger { get; set; } = false;
+        public bool IsAutoEnterModeFinger { get; set; } = true;
     }
 
     public class Appearance
@@ -91,7 +91,7 @@ namespace Ink_Canvas
         [JsonProperty("isShowModeFingerToggleSwitch")]
         public bool IsShowModeFingerToggleSwitch { get; set; } = true;
         [JsonProperty("theme")]
-        public int Theme { get; set; } = 0;
+        public int Theme { get; set; } = 5;
     }
 
     public class PowerPointSettings
@@ -105,15 +105,15 @@ namespace Ink_Canvas
         [JsonProperty("isNoClearStrokeOnSelectWhenInPowerPoint")]
         public bool IsNoClearStrokeOnSelectWhenInPowerPoint { get; set; } = true;
         [JsonProperty("isShowStrokeOnSelectInPowerPoint")]
-        public bool IsShowStrokeOnSelectInPowerPoint { get; set; } = false;
+        public bool IsShowStrokeOnSelectInPowerPoint { get; set; } = true;
         [JsonProperty("isAutoSaveStrokesInPowerPoint")]
         public bool IsAutoSaveStrokesInPowerPoint { get; set; } = true;
         [JsonProperty("isAutoSaveScreenShotInPowerPoint")]
-        public bool IsAutoSaveScreenShotInPowerPoint { get; set; } = false;
+        public bool IsAutoSaveScreenShotInPowerPoint { get; set; } = true;
         [JsonProperty("isNotifyPreviousPage")]
         public bool IsNotifyPreviousPage { get; set; } = false;
         [JsonProperty("isNotifyHiddenPage")]
-        public bool IsNotifyHiddenPage { get; set; } = true;
+        public bool IsNotifyHiddenPage { get; set; } = false;
         [JsonProperty("isEnableTwoFingerGestureInPresentationMode")]
         public bool IsEnableTwoFingerGestureInPresentationMode { get; set; } = false;
         [JsonProperty("isEnableFingerGestureSlideShowControl")]
@@ -125,36 +125,36 @@ namespace Ink_Canvas
     public class Automation
     {
         [JsonProperty("isAutoKillPptService")]
-        public bool IsAutoKillPptService { get; set; } = false;
+        public bool IsAutoKillPptService { get; set; } = true;
 
         [JsonProperty("isAutoKillEasiNote")]
-        public bool IsAutoKillEasiNote { get; set; } = false;
+        public bool IsAutoKillEasiNote { get; set; } = true;
 
         [JsonProperty("isSaveScreenshotsInDateFolders")]
-        public bool IsSaveScreenshotsInDateFolders { get; set; } = false;
+        public bool IsSaveScreenshotsInDateFolders { get; set; } = true;
 
         [JsonProperty("isAutoSaveStrokesAtScreenshot")]
-        public bool IsAutoSaveStrokesAtScreenshot { get; set; } = false;
+        public bool IsAutoSaveStrokesAtScreenshot { get; set; } = true;
 
         [JsonProperty("isAutoSaveStrokesAtClear")]
-        public bool IsAutoSaveStrokesAtClear { get; set; } = false;
+        public bool IsAutoSaveStrokesAtClear { get; set; } = true;
 
         [JsonProperty("isAutoClearWhenExitingWritingMode")]
-        public bool IsAutoClearWhenExitingWritingMode { get; set; } = false;
+        public bool IsAutoClearWhenExitingWritingMode { get; set; } = true;
 
         [JsonProperty("minimumAutomationStrokeNumber")]
-        public int MinimumAutomationStrokeNumber { get; set; } = 0;
+        public int MinimumAutomationStrokeNumber { get; set; } = 5;
 
     }
 
     public class Advanced
     {
         [JsonProperty("isSpecialScreen")]
-        public bool IsSpecialScreen { get; set; } = false;
+        public bool IsSpecialScreen { get; set; } = true;
         [JsonProperty("isQuadIR")]
-        public bool IsQuadIR { get; set; } = false;
+        public bool IsQuadIR { get; set; } = true;
         [JsonProperty("touchMultiplier")]
-        public double TouchMultiplier { get; set; } = 0.25;
+        public double TouchMultiplier { get; set; } = 0.3;
         [JsonProperty("eraserBindTouchMultiplier")]
         public bool EraserBindTouchMultiplier { get; set; } = false;
         [JsonProperty("isLogEnabled")]

@@ -386,7 +386,7 @@
                         </GroupBox>
                         <GroupBox Header="启动">
                             <ui:SimpleStackPanel Spacing="12">
-                                <ui:ToggleSwitch Name="ToggleSwitchAutoHideCanvas" Header="自动隐藏画板" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchAutoHideCanvas_Toggled"/>
+                                <ui:ToggleSwitch Name="ToggleSwitchAutoHideCanvas" Header="启动时不自动进入批注模式" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchAutoHideCanvas_Toggled"/>
                                 <ui:ToggleSwitch Name="ToggleSwitchAutoEnterModeFinger" Header="自动进入手指模式" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchAutoEnterModeFinger_Toggled"/>
                             </ui:SimpleStackPanel>
                         </GroupBox>
@@ -484,12 +484,12 @@
                                 <ui:ToggleSwitch Name="ToggleSwitchShowButtonPPTNavigation" Header="显示 PPT 浏览切页按钮" IsOn="True" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchShowButtonPPTNavigation_OnToggled"/>
                                 <TextBlock Text="颜色主题" FontFamily="Microsoft YaHei UI" FontSize="14"/>
                                 <ComboBox Name="ComboBoxTheme" FontFamily="Microsoft YaHei UI" SelectedIndex="0" SelectionChanged="ComboBoxTheme_SelectionChanged">
-                                    <ComboBoxItem Content="浅色（默认）" FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="浅色（经典）" FontFamily="Microsoft YaHei UI"/>
                                     <ComboBoxItem Content="深色" FontFamily="Microsoft YaHei UI"/>
                                     <ComboBoxItem Content="跟随系统"  FontFamily="Microsoft YaHei UI"/>
                                     <ComboBoxItem Content="Plus 苜蓿绿 - 浅色"  FontFamily="Microsoft YaHei UI"/>
                                     <ComboBoxItem Content="Plus 苜蓿绿 - 深色"  FontFamily="Microsoft YaHei UI"/>
-                                    <ComboBoxItem Content="Plus 苜蓿绿 - 跟随系统"  FontFamily="Microsoft YaHei UI"/>
+                                    <ComboBoxItem Content="Plus 苜蓿绿 - 跟随系统（默认）"  FontFamily="Microsoft YaHei UI"/>
                                     <ComboBoxItem Content="Plus 三月粉 - 浅色"  FontFamily="Microsoft YaHei UI"/>
                                     <ComboBoxItem Content="Plus 三月粉 - 深色"  FontFamily="Microsoft YaHei UI"/>
                                     <ComboBoxItem Content="Plus 三月粉 - 跟随系统"  FontFamily="Microsoft YaHei UI"/>
@@ -556,14 +556,6 @@
                         </GroupBox>
                         <GroupBox Header="重置">
                             <ui:SimpleStackPanel Spacing="12">
-                                <StackPanel>
-                                    <TextBlock FontSize="14" Margin="0,0,0,12"
-                                        Text="重置设置为推荐设置"/>
-                                    <ui:SimpleStackPanel Orientation="Horizontal" Spacing="12">
-                                        <Button Content="重置" Width="100" FontFamily="Microsoft YaHei UI" Click="BtnResetToSuggestion_Click" Margin="0,0,0,0"/>
-                                        <ui:SymbolIcon Name="SymbolIconResetSuggestionComplete" Symbol="Accept" Visibility="Collapsed"/>
-                                    </ui:SimpleStackPanel>
-                                </StackPanel>
                                 <StackPanel>
                                     <TextBlock FontSize="14" Margin="0,0,0,12"
                                         Text="重置设置为默认设置"/>

@@ -3466,33 +3466,6 @@ namespace Ink_Canvas
             Settings.Canvas.InkWidth = 2.5;
         }
 
-        private void BtnResetToSuggestion_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                isLoaded = false;
-                SetSettingsToRecommendation();
-                SaveSettingsToFile();
-                LoadSettings(false);
-                isLoaded = true;
-
-                if (ToggleSwitchRunAtStartup.IsOn == false)
-                {
-                    ToggleSwitchRunAtStartup.IsOn = true;
-                }
-            }
-            catch { }
-            SymbolIconResetSuggestionComplete.Visibility = Visibility.Visible;
-            new Thread(new ThreadStart(() =>
-            {
-                Thread.Sleep(5000);
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    SymbolIconResetSuggestionComplete.Visibility = Visibility.Collapsed;
-                });
-            })).Start();
-        }
-
         private void BtnResetToDefault_Click(object sender, RoutedEventArgs e)
         {
             try
