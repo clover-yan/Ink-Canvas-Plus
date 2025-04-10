@@ -778,25 +778,8 @@ namespace Ink_Canvas
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            LogHelper.WriteLogToFile("Ink Canvas closing", LogHelper.LogType.Event);
-            if (!CloseIsFromButton)
-            {
-                e.Cancel = true;
-                if (MessageBox.Show("是否继续关闭 Ink Canvas 画板，这将丢失当前未保存的工作。", "Ink Canvas 画板", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.OK)
-                {
-                    if (MessageBox.Show("真的狠心关闭 Ink Canvas 画板吗？", "Ink Canvas 画板", MessageBoxButton.OKCancel, MessageBoxImage.Error) == MessageBoxResult.OK)
-                    {
-                        if (MessageBox.Show("是否取消关闭 Ink Canvas 画板？", "Ink Canvas 画板", MessageBoxButton.OKCancel, MessageBoxImage.Error) != MessageBoxResult.OK)
-                        {
-                            e.Cancel = false;
-                        }
-                    }
-                }
-            }
-            if (e.Cancel)
-            {
-                LogHelper.WriteLogToFile("Ink Canvas closing cancelled", LogHelper.LogType.Event);
-            }
+            e.Cancel = true;
+            ShowNotification("如果关闭 Ink Canvas Plus，你将丢失所有未保存的工作。如要继续，请从“Ink Canvas Plus 设置”面板关闭 Ink Canvas Plus。");
         }
 
         private void Window_Closed(object sender, EventArgs e)
