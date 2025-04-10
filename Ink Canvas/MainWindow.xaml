@@ -370,11 +370,46 @@
                 <ui:ScrollViewerEx Margin="0,60,0,50" VerticalScrollBarVisibility="Auto"
                               PanningMode="VerticalOnly" ui:ThemeManager.RequestedTheme="Light"
                               ManipulationBoundaryFeedback="SCManipulationBoundaryFeedback">
-                    <StackPanel Margin="20,20,10,20">
-                        <TextBlock FontSize="14" Margin="0,0,0,0"
-                                   Text="*设置将自动保存，再次点击“设置”按钮即可关闭此页面。"/>
-                        <TextBlock FontSize="14" Margin="0,0,0,12"
-                                   Text="*部分设置可能需要重新打开后生效。"/>
+                    <StackPanel Margin="20,0,10,20">
+                        <TextBlock FontSize="14" Margin="0,0,0,10"
+                                   Text="* 设置将自动保存"/>
+                        <GroupBox Header="关于">
+                            <ui:SimpleStackPanel Spacing="12">
+                                <ui:SimpleStackPanel Orientation="Horizontal" Spacing="4">
+                                    <TextBlock FontSize="14">
+                                        <Bold>当前版本:</Bold>
+                                    </TextBlock>
+                                    <TextBlock FontSize="14" Text="" Name="TextBlockVersion"/>
+                                </ui:SimpleStackPanel>
+                                <TextBlock FontSize="14">
+                                     <Bold>开发者:</Bold> Clover Yan, XY Wang (WXRIW)
+                                </TextBlock>
+                                <TextBlock FontSize="14" TextWrapping="Wrap">
+                                     <Bold>贡献者:</Bold> Kengwang, Raspberry Kan, jiajiaxd, CN-Ironegg, Clover Yan, STBBRD, ChangSakura
+                                </TextBlock>
+                                <TextBlock FontSize="14">
+                                    <Bold>官方网站:</Bold>
+                                    <Hyperlink Click="HyperlinkWebsite_Click">
+                                           <TextBlock Text="khyan.top/apps/Ink-Canvas-Plus"></TextBlock>
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock FontSize="14">
+                                    <Bold>开源地址:</Bold>
+                                    <Hyperlink Click="HyperlinkSource_Click">
+                                           <TextBlock Text="github.com/clover-yan/Ink-Canvas-Plus"></TextBlock>
+                                    </Hyperlink>
+                                </TextBlock>
+                                <TextBlock FontSize="14">
+                                     <Bold>开源协议:</Bold> GNU General Public License v3.0
+                                </TextBlock>
+                                <StackPanel>
+                                    <ui:SimpleStackPanel Orientation="Horizontal" Spacing="12">
+                                        <Button Content="检查更新" Width="100" FontFamily="Microsoft YaHei UI" Click="BtnCheckForUpdate_Click" Margin="0,0,0,10"/>
+                                        <ui:SymbolIcon Name="SymbolIconCheckForUpdateComplete" Symbol="Accept" Visibility="Collapsed"/>
+                                    </ui:SimpleStackPanel>
+                                </StackPanel>
+                            </ui:SimpleStackPanel>
+                        </GroupBox>
                         <GroupBox Header="行为">
                             <ui:SimpleStackPanel Spacing="12">
                                 <ui:SimpleStackPanel Spacing="12" Orientation="Horizontal">
@@ -587,31 +622,6 @@
                                            VerticalAlignment="Bottom" Margin="10,0,0,8"
                                            FontSize="14" Width="25" HorizontalAlignment="Center"/>
                                 </StackPanel>
-                            </ui:SimpleStackPanel>
-                        </GroupBox>
-                        <GroupBox Header="关于">
-                            <ui:SimpleStackPanel Spacing="12">
-                                <ui:SimpleStackPanel Orientation="Horizontal" Spacing="4">
-                                    <TextBlock FontSize="14">
-                                        <Bold>当前版本:</Bold>
-                                    </TextBlock>
-                                    <TextBlock FontSize="14" Text="" Name="TextBlockVersion"/>
-                                </ui:SimpleStackPanel>
-                                <TextBlock FontSize="14">
-                                     <Bold>开发者:</Bold> Clover Yan, XY Wang (WXRIW)
-                                </TextBlock>
-                                <TextBlock FontSize="14" TextWrapping="Wrap">
-                                     <Bold>贡献者:</Bold> Kengwang, Raspberry Kan, jiajiaxd, CN-Ironegg, Clover Yan, STBBRD, ChangSakura
-                                </TextBlock>
-                                <TextBlock FontSize="14">
-                                    <Bold>开源地址:</Bold>
-                                    <Hyperlink Click="HyperlinkSource_Click">
-                                           <TextBlock Text="github.com/clover-yan/Ink-Canvas-Plus"></TextBlock>
-                                    </Hyperlink>
-                                </TextBlock>
-                                <TextBlock FontSize="14">
-                                     <Bold>开源协议:</Bold> GNU General Public License v3.0
-                                </TextBlock>
                             </ui:SimpleStackPanel>
                         </GroupBox>
                         <GroupBox Name="GroupBoxMASEZVersion"

@@ -50,15 +50,6 @@ namespace Ink_Canvas
             }
 
             StartArgs = e.Args;
-
-            if (!StoreHelper.IsStoreApp)
-            {
-                AutoUpdater.Start($"https://www.khyan.top/apps/Ink-Canvas-Plus/autoupdate.xml");
-                AutoUpdater.ApplicationExitEvent += () =>
-                {
-                    Environment.Exit(0);
-                };
-            }
         }
 
         private void ScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)

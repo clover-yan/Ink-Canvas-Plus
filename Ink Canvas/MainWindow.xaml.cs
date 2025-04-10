@@ -1,3 +1,4 @@
+using AutoUpdaterDotNET;
 using Ink_Canvas.Helpers;
 using iNKORE.UI.WPF.Modern;
 using iNKORE.UI.WPF.Modern.Helpers;
@@ -95,6 +96,14 @@ namespace Ink_Canvas
             inkCanvas.Strokes.StrokesChanged += StrokesOnStrokesChanged;
 
             Microsoft.Win32.SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
+
+            AutoUpdater.RunUpdateAsAdmin = false;
+            AutoUpdater.TopMost = true;
+            AutoUpdater.ApplicationExitEvent += () =>
+            {
+                Environment.Exit(0);
+            };
+            CheckForUpdate();
         }
 
         #endregion
@@ -1270,11 +1279,32 @@ namespace Ink_Canvas
             }
         }
 
+        private void CheckForUpdate()
+        {
+            AutoUpdater.Start($"https://www.khyan.top/apps/Ink-Canvas-Plus/autoupdate.xml");
+        }
+
         #endregion Definations and Loading
 
         #region Right Side Panel
 
         public static bool CloseIsFromButton = false;
+
+        private void BtnCheckForUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            AutoUpdater.Mandatory = true;
+            CheckForUpdate();
+            SymbolIconCheckForUpdateComplete.Visibility = Visibility.Visible;
+            new Thread(new ThreadStart(() =>
+            {
+                Thread.Sleep(5000);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    SymbolIconCheckForUpdateComplete.Visibility = Visibility.Collapsed;
+                });
+            })).Start();
+
+        }
         private void BtnExit_Click(object sender, RoutedEventArgs e)
         {
             CloseIsFromButton = true;
@@ -3565,6 +3595,10 @@ namespace Ink_Canvas
             e.Handled = true;
         }
 
+        private void HyperlinkWebsite_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://www.khyan.top/apps/Ink-Canvas-Plus");
+        }
         private void HyperlinkSource_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://github.com/clover-yan/Ink-Canvas-Plus");
