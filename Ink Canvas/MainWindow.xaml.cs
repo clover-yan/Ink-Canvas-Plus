@@ -778,6 +778,11 @@ namespace Ink_Canvas
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (CloseIsFromButton)
+            {
+                e.Cancel = false;
+                return;
+            }
             e.Cancel = true;
             ShowNotification("如果关闭 Ink Canvas Plus，你将丢失所有未保存的工作。如要继续，请从“Ink Canvas Plus 设置”面板关闭 Ink Canvas Plus。");
         }
