@@ -383,13 +383,13 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <Image Grid.Column="0" Grid.Row="0" Width="64" Height="64" Stretch="Uniform">  
+                                    <Image Grid.Column="0" Grid.Row="0" Width="60" Height="60" Stretch="Uniform">  
                                        <Image.Source>  
-                                           <BitmapImage DecodePixelWidth="64" DecodePixelHeight="64" UriSource="pack://application:,,,/Resources/InkCanvas.png" />  
+                                           <BitmapImage DecodePixelWidth="60" DecodePixelHeight="60" UriSource="pack://application:,,,/Resources/InkCanvas.png" />  
                                        </Image.Source>  
                                     </Image>
                                     <TextBlock Grid.Column="1" Grid.Row="0" FontSize="14" TextWrapping="Wrap">
-                                        <Bold>Ink Canvas Plus</Bold> 是一款由 Clover Yan 维护、复刻自 WXRIW/Ink Canvas 的 Windows 画板应用，旨在优化各方面的使用体验，并尽可能保留原版 Ink Canvas的操作体验。
+                                        <Bold>Ink Canvas Plus</Bold> 是一款由 Clover Yan 维护、复刻自 WXRIW/Ink Canvas 的 Windows 画板应用，旨在优化各方面的使用体验，并尽可能保留原版 Ink Canvas 的操作体验。
                                     </TextBlock>
                                 </Grid>
                                 <ui:SimpleStackPanel Orientation="Horizontal" Spacing="4">

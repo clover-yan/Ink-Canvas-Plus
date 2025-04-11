@@ -38,6 +38,9 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
 	  <Prefer32Bit>True</Prefer32Bit>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Resources\InkCanvas.png" />
+	</ItemGroup>
 	
 	
 	<!--WinRT Reference (this is not needed so comment it)-->
@@ -130,6 +133,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="Resources\InkCanvas.ico" />
+		<Resource Include="Resources\InkCanvas.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 	</ItemGroup>
 	<ItemGroup>
 		<Resource Include="Resources\logo.png" />
