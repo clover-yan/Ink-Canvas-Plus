@@ -2542,12 +2542,10 @@ namespace Ink_Canvas
             pptApplication.SlideShowEnd -= PptApplication_SlideShowEnd;
             pptApplication = null;
             timerCheckPPT.Start();
-            Application.Current.Dispatcher.Invoke(() =>
+            if (BtnPPTSlideShowEnd.Visibility != Visibility.Collapsed)
             {
-                //BtnPPTSlideShow.Visibility = Visibility.Collapsed;
-                BtnPPTSlideShowEnd.Visibility = Visibility.Collapsed;
-                ChangeLockSmithState(lockSmithDesktop);
-            });
+                PptApplication_SlideShowEnd(Pres);
+            }
         }
 
         bool isPresentationHaveBlackSpace = false;
