@@ -159,6 +159,8 @@ namespace Ink_Canvas
         public bool EraserBindTouchMultiplier { get; set; } = false;
         [JsonProperty("isLogEnabled")]
         public bool IsLogEnabled { get; set; } = true;
+
+        [JsonProperty("disableEdgeGesture")] public bool DisableEdgeGesture { get; set; } = false;
     }
 
     public class InkToShape

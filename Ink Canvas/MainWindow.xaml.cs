@@ -25,6 +25,7 @@ using System.Windows.Controls;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Input.StylusPlugIns;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
@@ -669,96 +670,6 @@ namespace Ink_Canvas
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //new CountdownTimerWindow().ShowDialog();
-            //检查
-            new Thread(new ThreadStart(() =>
-            {
-                try
-                {
-                    string VersionInfo = "";
-                    if (File.Exists(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "VersionInfo.ini"))
-                    {
-                        VersionInfo = File.ReadAllText(System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "VersionInfo.ini");
-                    }
-                    string Url = "http://ink.wxriw.cn:1957";
-                    if (VersionInfo != "")
-                    {
-                        Url += "/?verinfo=" + VersionInfo;// + "&pc=" + Environment.MachineName;
-                    }
-                    string response = GetWebClient(Url);
-                    if (response.Contains("Special Version"))
-                    {
-                        //isAutoUpdateEnabled = true;
-
-                        if (response.Contains("<notice>"))
-                        {
-                            string str = Strings.Mid(response, response.IndexOf("<notice>") + 9);
-                            if (str.Contains("<notice>"))
-                            {
-                                str = Strings.Left(str, str.IndexOf("<notice>")).Trim();
-                                if (str.Length > 0)
-                                {
-                                    Application.Current.Dispatcher.Invoke(() =>
-                                    {
-                                        GroupBoxMASEZVersion.Visibility = Visibility.Visible;
-                                        TextBlockMASEZNotice.Text = str;
-                                    });
-                                }
-                            }
-                        }
-                    }
-
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        Version version = Assembly.GetExecutingAssembly().GetName().Version;
-                        TextBlockVersion.Text = version.ToString();
-
-                        string lastVersion = "";
-                        if (response.Contains("Special Version") && !File.Exists(App.RootPath + "Versions.ini"))
-                        {
-                            LogHelper.WriteLogToFile("Welcome Window Show Dialog", LogHelper.LogType.Event);
-
-                            if (response.Contains("Special Version Alhua"))
-                            {
-                                WelcomeWindow.IsNewBuilding = true;
-                            }
-                            new WelcomeWindow().ShowDialog();
-                        }
-                        else
-                        {
-                            try
-                            {
-                                lastVersion = File.ReadAllText(App.RootPath + "Versions.ini");
-                            }
-                            catch { }
-                            if (response.Contains("Special Version") && !lastVersion.Contains("NewWelcomeConfigured"))
-                            {
-                                LogHelper.WriteLogToFile("Welcome Window Show Dialog (Second time)", LogHelper.LogType.Event);
-
-                                if (response.Contains("Special Version Alhua"))
-                                {
-                                    WelcomeWindow.IsNewBuilding = true;
-                                }
-                                new WelcomeWindow().ShowDialog();
-                            }
-                            try
-                            {
-                                lastVersion = File.ReadAllText(App.RootPath + "Versions.ini");
-                            }
-                            catch { }
-                            if (!lastVersion.Contains(version.ToString()))
-                            {
-                                //LogHelper.WriteLogToFile("Change Log Window Show Dialog", LogHelper.LogType.Event);
-                                //new ChangeLogWindow().ShowDialog();
-                                lastVersion += "\n" + version.ToString();
-                                File.WriteAllText(App.RootPath + "Versions.ini", lastVersion.Trim());
-                            }
-                        }
-                    });
-                }
-                catch { }
-            })).Start();
-
             loadPenCanvas();
 
             //加载设置
@@ -1244,6 +1155,10 @@ namespace Ink_Canvas
                 {
                     ToggleSwitchIsSpecialScreen.IsOn = false;
                 }
+
+                ToggleSwitchDisableEdgeGesture.IsOn = Settings.Advanced.DisableEdgeGesture;
+                EdgeGesturesUtils.DisableEdgeGestures(new WindowInteropHelper(this).Handle,
+                    Settings.Advanced.DisableEdgeGesture);
                 TouchMultiplierSlider.Visibility = ToggleSwitchIsSpecialScreen.IsOn ? Visibility.Visible : Visibility.Collapsed;
 
                 ToggleSwitchIsQuadIR.IsOn = Settings.Advanced.IsQuadIR;
@@ -1285,13 +1200,14 @@ namespace Ink_Canvas
         {
             AutoUpdater.Mandatory = true;
             CheckForUpdate();
-            SymbolIconCheckForUpdateComplete.Visibility = Visibility.Visible;
+            CheckingUpdatesTip.Visibility = Visibility.Visible;
+            AssemblyVersionInfoPanel.Visibility = Visibility.Collapsed;
             new Thread(new ThreadStart(() =>
             {
                 Thread.Sleep(5000);
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    SymbolIconCheckForUpdateComplete.Visibility = Visibility.Collapsed;
+                Application.Current.Dispatcher.Invoke(() => {
+                    CheckingUpdatesTip.Visibility = Visibility.Collapsed;
+                    AssemblyVersionInfoPanel.Visibility = Visibility.Visible;
                 });
             })).Start();
 
@@ -3485,10 +3401,8 @@ namespace Ink_Canvas
             Settings.Canvas.InkWidth = 2.5;
         }
 
-        private void BtnResetToDefault_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
+        private void BtnResetToDefault_Click(object sender, RoutedEventArgs e) {
+            try {
                 isLoaded = false;
                 File.Delete("settings.json");
                 Settings = new Settings();
@@ -3496,16 +3410,8 @@ namespace Ink_Canvas
                 isLoaded = true;
             }
             catch { }
-            SymbolIconResetDefaultComplete.Visibility = Visibility.Visible;
-            new Thread(new ThreadStart(() =>
-            {
-                Thread.Sleep(5000);
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    SymbolIconResetDefaultComplete.Visibility = Visibility.Collapsed;
-                });
-            })).Start();
         }
+
         #endregion
 
         #region Ink To Shape
@@ -3567,6 +3473,14 @@ namespace Ink_Canvas
             SaveSettingsToFile();
         }
 
+        private void ToggleSwitchDisableEdgeGesture_Toggled(object sender, RoutedEventArgs e) {
+            if (!isLoaded) return;
+            Settings.Advanced.DisableEdgeGesture = ToggleSwitchDisableEdgeGesture.IsOn;
+            EdgeGesturesUtils.DisableEdgeGestures(new WindowInteropHelper(this).Handle,
+                ToggleSwitchDisableEdgeGesture.IsOn);
+            SaveSettingsToFile();
+        }
+
         #endregion
 
         public static void SaveSettingsToFile()
@@ -3588,6 +3502,11 @@ namespace Ink_Canvas
         {
             Process.Start("https://www.khyan.top/apps/Ink-Canvas-Plus");
         }
+
+        private void HyperlinkQQGroup_Click(object sender, RoutedEventArgs e) {
+            Process.Start("https://qm.qq.com/q/I6OCRh38oU");
+        }
+
         private void HyperlinkSource_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://github.com/clover-yan/Ink-Canvas-Plus");

@@ -138,13 +138,6 @@
 		</Resource>
 	</ItemGroup>
 	<ItemGroup>
-		<Resource Include="Resources\logo.png" />
-		<Resource Include="Resources\text.png" />
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="Resources\textCN.png" />
-	</ItemGroup>
-	<ItemGroup>
 		<Resource Include="Resources\logo2.png" />
 	</ItemGroup>
 	<ItemGroup>
