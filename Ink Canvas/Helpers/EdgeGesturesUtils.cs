@@ -1,23 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.VisualBasic;
-using System.Collections;
-using System.Data;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace Ink_Canvas.Helpers
 {
-    public static class EdgeGesturesUtils {
+    public static class EdgeGesturesUtils
+    {
 
         private static Guid DISABLE_TOUCH_SCREEN = new Guid("32CE38B2-2C9A-41B1-9BC5-B3784394AA44");
         private static Guid IID_PROPERTY_STORE = new Guid("886d8eeb-8cf2-4446-8d02-cdba1dbdcf99");

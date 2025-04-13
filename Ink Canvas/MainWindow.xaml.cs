@@ -4,7 +4,6 @@ using iNKORE.UI.WPF.Modern;
 using iNKORE.UI.WPF.Modern.Helpers;
 using IWshRuntimeLibrary;
 using Microsoft.Office.Interop.PowerPoint;
-using Microsoft.VisualBasic;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using System;
@@ -74,14 +73,14 @@ namespace Ink_Canvas
                 ViewboxFloatingBar.Margin = new Thickness(SystemParameters.WorkArea.Left + 80, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80, -2000, -200);
                 new Thread(new ThreadStart(() =>
                 {
-                        Thread.Sleep(3000);
-                        Application.Current.Dispatcher.Invoke(() =>
+                    Thread.Sleep(3000);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        if (Main_Grid.Background == Brushes.Transparent)
                         {
-                            if (Main_Grid.Background == Brushes.Transparent)
-                            {
-                                SetBorderFloatingBarMainControlsVisibility(false);
-                            }
-                        });
+                            SetBorderFloatingBarMainControlsVisibility(false);
+                        }
+                    });
                 })).Start();
 
             }
@@ -1205,7 +1204,8 @@ namespace Ink_Canvas
             new Thread(new ThreadStart(() =>
             {
                 Thread.Sleep(5000);
-                Application.Current.Dispatcher.Invoke(() => {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
                     CheckingUpdatesTip.Visibility = Visibility.Collapsed;
                     AssemblyVersionInfoPanel.Visibility = Visibility.Visible;
                 });
@@ -2378,7 +2378,7 @@ namespace Ink_Canvas
                             {
                                 if (int.TryParse(File.ReadAllText(folderPath + "/Position"), out var page))
                                 {
-                                    IsNotifyPreviousPageWindowShown= true;
+                                    IsNotifyPreviousPageWindowShown = true;
                                     if (page <= 0) return;
                                     new YesOrNoNotificationWindow($"上次播放到了第 {page} 页, 是否立即跳转", () =>
                                     {
@@ -3340,7 +3340,8 @@ namespace Ink_Canvas
             SaveSettingsToFile();
         }
 
-        private void ToggleSwitchDisableLockSmithByDefault_Toggled(object sender, RoutedEventArgs e) {
+        private void ToggleSwitchDisableLockSmithByDefault_Toggled(object sender, RoutedEventArgs e)
+        {
             if (!isLoaded) return;
 
             Settings.Gesture.IsDisableLockSmithByDefault = ToggleSwitchDisableLockSmithByDefault.IsOn;
@@ -3348,7 +3349,8 @@ namespace Ink_Canvas
             SaveSettingsToFile();
         }
 
-        private void ToggleSwitchEnableTwoFingerZoom_Toggled(object sender, RoutedEventArgs e) {
+        private void ToggleSwitchEnableTwoFingerZoom_Toggled(object sender, RoutedEventArgs e)
+        {
             if (!isLoaded) return;
 
             Settings.Gesture.IsEnableTwoFingerZoom = ToggleSwitchEnableTwoFingerZoom.IsOn;
@@ -3401,8 +3403,10 @@ namespace Ink_Canvas
             Settings.Canvas.InkWidth = 2.5;
         }
 
-        private void BtnResetToDefault_Click(object sender, RoutedEventArgs e) {
-            try {
+        private void BtnResetToDefault_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
                 isLoaded = false;
                 File.Delete("settings.json");
                 Settings = new Settings();
@@ -3473,7 +3477,8 @@ namespace Ink_Canvas
             SaveSettingsToFile();
         }
 
-        private void ToggleSwitchDisableEdgeGesture_Toggled(object sender, RoutedEventArgs e) {
+        private void ToggleSwitchDisableEdgeGesture_Toggled(object sender, RoutedEventArgs e)
+        {
             if (!isLoaded) return;
             Settings.Advanced.DisableEdgeGesture = ToggleSwitchDisableEdgeGesture.IsOn;
             EdgeGesturesUtils.DisableEdgeGestures(new WindowInteropHelper(this).Handle,
@@ -3503,7 +3508,8 @@ namespace Ink_Canvas
             Process.Start("https://www.khyan.top/apps/Ink-Canvas-Plus");
         }
 
-        private void HyperlinkQQGroup_Click(object sender, RoutedEventArgs e) {
+        private void HyperlinkQQGroup_Click(object sender, RoutedEventArgs e)
+        {
             Process.Start("https://qm.qq.com/q/I6OCRh38oU");
         }
 
@@ -5513,7 +5519,8 @@ namespace Ink_Canvas
                             case OptionalOperation.Ask:
                                 opFlag = MessageBox.Show("是否移除渐近线？", "Ink Canvas", MessageBoxButton.YesNo) != MessageBoxResult.Yes;
                                 break;
-                        };
+                        }
+                        ;
                         if (!opFlag)
                         {
                             inkCanvas.Strokes.Remove(drawMultiStepShapeSpecialStrokeCollection);
