@@ -771,8 +771,8 @@
                                 <ui:ToggleSwitch Name="ToggleSwitchEraserBindTouchMultiplier" Header="橡皮擦绑定触摸大小倍数" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" IsOn="False" Toggled="ToggleSwitchEraserBindTouchMultiplier_Toggled" Visibility="{Binding Path=Visibility, ElementName=TouchMultiplierSlider, Mode=OneWay}" />
                                 <ui:ToggleSwitch Name="ToggleSwitchIsQuadIR" Header="四边红外模式" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchIsQuadIR_Toggled" />
                                 <ui:ToggleSwitch Name="ToggleSwitchIsLogEnabled" Header="记录日志" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" IsOn="True" Toggled="ToggleSwitchIsLogEnabled_Toggled" />
-                                <ui:ToggleSwitch Name="ToggleSwitchDisableEdgeGesture" Header="禁用触摸屏边缘手势" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" IsOn="True" Toggled="ToggleSwitchDisableEdgeGesture_Toggled" />
-                                <TextBlock TextWrapping="Wrap" Text="开启后可阻止 Windows10 设备上在屏幕边缘书写时滑出通知中心和书写卡顿的问题（Windows 11 还有一个多指手势，可以在设置中关闭）" Foreground="#666666" />
+                                <ui:ToggleSwitch Name="ToggleSwitchDisableEdgeGesture" Header="画板模式下禁用触摸屏边缘手势" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" IsOn="True" Toggled="ToggleSwitchDisableEdgeGesture_Toggled" />
+                                <TextBlock TextWrapping="Wrap" Text="开启后可阻止 Windows 10 以上设备在屏幕边缘书写时滑出任务视图、通知中心或操作中心，并缓解书写卡顿的问题（Windows 11 多指多任务手势可以在系统设置中关闭）" Foreground="#666666" />
                             </ui:SimpleStackPanel>
                         </GroupBox>
                     </StackPanel>

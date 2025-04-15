@@ -1154,7 +1154,7 @@ namespace Ink_Canvas
 
                 ToggleSwitchDisableEdgeGesture.IsOn = Settings.Advanced.DisableEdgeGesture;
                 EdgeGesturesUtils.DisableEdgeGestures(new WindowInteropHelper(this).Handle,
-                    Settings.Advanced.DisableEdgeGesture);
+                    Settings.Advanced.DisableEdgeGesture && Main_Grid.Background != Brushes.Transparent);
                 TouchMultiplierSlider.Visibility = ToggleSwitchIsSpecialScreen.IsOn ? Visibility.Visible : Visibility.Collapsed;
 
                 ToggleSwitchIsQuadIR.IsOn = Settings.Advanced.IsQuadIR;
@@ -1537,6 +1537,10 @@ namespace Ink_Canvas
             if (Main_Grid.Background == Brushes.Transparent)
             {
                 Main_Grid.Background = new SolidColorBrush(StringToColor("#01FFFFFF"));
+                if (Settings.Advanced.DisableEdgeGesture)
+                {
+                    EdgeGesturesUtils.DisableEdgeGestures(new WindowInteropHelper(this).Handle, true);
+                }
                 if (Settings.Canvas.HideStrokeWhenSelecting)
                 {
                     inkCanvas.Visibility = Visibility.Visible;
@@ -1639,6 +1643,11 @@ namespace Ink_Canvas
 
 
                 Main_Grid.Background = Brushes.Transparent;
+
+                if (Settings.Advanced.DisableEdgeGesture)
+                {
+                    EdgeGesturesUtils.DisableEdgeGestures(new WindowInteropHelper(this).Handle, false);
+                }
 
 
                 GridBackgroundCoverHolder.Visibility = Visibility.Collapsed;
@@ -3472,7 +3481,7 @@ namespace Ink_Canvas
             if (!isLoaded) return;
             Settings.Advanced.DisableEdgeGesture = ToggleSwitchDisableEdgeGesture.IsOn;
             EdgeGesturesUtils.DisableEdgeGestures(new WindowInteropHelper(this).Handle,
-                ToggleSwitchDisableEdgeGesture.IsOn);
+                Settings.Advanced.DisableEdgeGesture && Main_Grid.Background != Brushes.Transparent);
             SaveSettingsToFile();
         }
 
