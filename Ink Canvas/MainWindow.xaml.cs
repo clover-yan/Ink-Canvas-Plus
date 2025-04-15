@@ -678,9 +678,6 @@ namespace Ink_Canvas
                 GroupBoxInkRecognition.Visibility = Visibility.Collapsed;
             }
 
-            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
-            SystemEvents_UserPreferenceChanged(null, null);
-
             TextBlockVersion.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             LogHelper.WriteLogToFile("Ink Canvas Loaded", LogHelper.LogType.Event);
 
@@ -1182,6 +1179,9 @@ namespace Ink_Canvas
             {
                 Settings.InkToShape = new InkToShape();
             }
+
+            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+            SystemEvents_UserPreferenceChanged(null, null);
         }
 
         private void CheckForUpdate()
