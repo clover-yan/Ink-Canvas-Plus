@@ -381,57 +381,77 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="关于" FontSize="20"/>
                                     <ui:SimpleStackPanel Margin="0,0,4,0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal" Spacing="8">
-                                        <Canvas MouseDown="HyperlinkSource_Click" Width="24" Height="24" Background="Transparent">
-                                            <Canvas.LayoutTransform>
-                                                <MatrixTransform Matrix="Identity" />
-                                            </Canvas.LayoutTransform>
-                                            <Path Data="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
-                                                  Stroke="{x:Null}"
-                                                  Fill="#FF000000"
-                                                  Stretch="Uniform"
-                                                  Width="24"
-                                                  Height="24"
-                                                  SnapsToDevicePixels="False"
-                                                  UseLayoutRounding="False"
-                                                  StrokeThickness="0"
-                                                  StrokeStartLineCap="flat"
-                                                  StrokeEndLineCap="flat"
-                                                  StrokeLineJoin="miter"/>
-                                        </Canvas>
-                                        <Canvas MouseDown="HyperlinkQQGroup_Click" Width="24" Height="24" Background="Transparent">
-                                            <Canvas.LayoutTransform>
-                                                <MatrixTransform Matrix="Identity" />
-                                            </Canvas.LayoutTransform>
-                                            <Path Data="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"
-                                                  Stroke="{x:Null}"
-                                                  Fill="#FF000000"
-                                                  Stretch="Uniform"
-                                                  Width="24"
-                                                  Height="24"
-                                                  SnapsToDevicePixels="False"
-                                                  UseLayoutRounding="False"
-                                                  StrokeThickness="0"
-                                                  StrokeStartLineCap="flat"
-                                                  StrokeEndLineCap="flat"
-                                                  StrokeLineJoin="miter"/>
-                                        </Canvas>
-                                        <Canvas MouseDown="HyperlinkWebsite_Click" Width="24" Height="24" Background="Transparent">
-                                            <Canvas.LayoutTransform>
-                                                <MatrixTransform Matrix="Identity" />
-                                            </Canvas.LayoutTransform>
-                                            <Path Data="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
-                                                  Stroke="{x:Null}"
-                                                  Fill="#FF000000"
-                                                  Stretch="Uniform"
-                                                  Width="24"
-                                                  Height="24"
-                                                  SnapsToDevicePixels="False"
-                                                  UseLayoutRounding="False"
-                                                  StrokeThickness="0"
-                                                  StrokeStartLineCap="flat"
-                                                  StrokeEndLineCap="flat"
-                                                  StrokeLineJoin="miter"/>
-                                        </Canvas>
+                                        <Button Click="HyperlinkSource_Click">
+                                            <Canvas Width="24" Height="24" Background="Transparent">
+                                                <Canvas.LayoutTransform>
+                                                    <MatrixTransform Matrix="Identity" />
+                                                </Canvas.LayoutTransform>
+                                                <Path Data="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
+                                                      Stroke="{x:Null}"
+                                                      Fill="#FF000000"
+                                                      Stretch="Uniform"
+                                                      Width="24"
+                                                      Height="24"
+                                                      SnapsToDevicePixels="False"
+                                                      UseLayoutRounding="False"
+                                                      StrokeThickness="0"
+                                                      StrokeStartLineCap="flat"
+                                                      StrokeEndLineCap="flat"
+                                                      StrokeLineJoin="miter"/>
+                                            </Canvas>
+                                        </Button>
+                                        <Button>
+                                            <Canvas Width="24" Height="24" Background="Transparent">
+                                                <Canvas.LayoutTransform>
+                                                    <MatrixTransform Matrix="Identity" />
+                                                </Canvas.LayoutTransform>
+                                                <Path Data="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"
+                                                      Stroke="{x:Null}"
+                                                      Fill="#FF000000"
+                                                      Stretch="Uniform"
+                                                      Width="24"
+                                                      Height="24"
+                                                      SnapsToDevicePixels="False"
+                                                      UseLayoutRounding="False"
+                                                      StrokeThickness="0"
+                                                      StrokeStartLineCap="flat"
+                                                      StrokeEndLineCap="flat"
+                                                      StrokeLineJoin="miter"/>
+                                            </Canvas>
+                                            <ui:FlyoutService.Flyout>
+                                                <ui:Flyout x:Name="FlyoutQQGroup" Placement="Bottom">
+                                                    <StackPanel>
+                                                        <TextBox
+                                                            Margin="0,0,0,12"
+                                                            Background="Transparent"
+                                                            BorderThickness="0"
+                                                            IsReadOnly="True"
+                                                            TextWrapping="Wrap"
+                                                            Text="群号: 996760298" />
+                                                        <Button Content="跳转到 QQ" Click="HyperlinkQQGroup_Click" />
+                                                    </StackPanel>
+                                                </ui:Flyout>
+                                            </ui:FlyoutService.Flyout>
+                                        </Button>
+                                        <Button>
+                                            <Canvas MouseDown="HyperlinkWebsite_Click" Width="24" Height="24" Background="Transparent">
+                                                <Canvas.LayoutTransform>
+                                                    <MatrixTransform Matrix="Identity" />
+                                                </Canvas.LayoutTransform>
+                                                <Path Data="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,12.69 19.9,13.36 19.74,14M14.59,19.56C15.19,18.45 15.65,17.25 15.97,16H18.92C17.96,17.65 16.43,18.93 14.59,19.56M14.34,14H9.66C9.56,13.34 9.5,12.68 9.5,12C9.5,11.32 9.56,10.65 9.66,10H14.34C14.43,10.65 14.5,11.32 14.5,12C14.5,12.68 14.43,13.34 14.34,14M12,19.96C11.17,18.76 10.5,17.43 10.09,16H13.91C13.5,17.43 12.83,18.76 12,19.96M8,8H5.08C6.03,6.34 7.57,5.06 9.4,4.44C8.8,5.55 8.35,6.75 8,8M5.08,16H8C8.35,17.25 8.8,18.45 9.4,19.56C7.57,18.93 6.03,17.65 5.08,16M4.26,14C4.1,13.36 4,12.69 4,12C4,11.31 4.1,10.64 4.26,10H7.64C7.56,10.66 7.5,11.32 7.5,12C7.5,12.68 7.56,13.34 7.64,14M12,4.03C12.83,5.23 13.5,6.57 13.91,8H10.09C10.5,6.57 11.17,5.23 12,4.03M18.92,8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+                                                      Stroke="{x:Null}"
+                                                      Fill="#FF000000"
+                                                      Stretch="Uniform"
+                                                      Width="24"
+                                                      Height="24"
+                                                      SnapsToDevicePixels="False"
+                                                      UseLayoutRounding="False"
+                                                      StrokeThickness="0"
+                                                      StrokeStartLineCap="flat"
+                                                      StrokeEndLineCap="flat"
+                                                      StrokeLineJoin="miter"/>
+                                            </Canvas>
+                                        </Button>
                                     </ui:SimpleStackPanel>
                                 </Grid>
                             </GroupBox.Header>
@@ -460,7 +480,7 @@
                                 <StackPanel Orientation="Vertical">
                                     <ui:SimpleStackPanel Name="AssemblyVersionInfoPanel" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="4" Margin="0,0,0,6">
                                         <TextBlock FontSize="14">
-                                            <Bold>版本:</Bold>
+                                            <Bold>当前版本:</Bold>
                                         </TextBlock>
                                         <TextBlock FontSize="14" Text="" Name="TextBlockVersion" />
                                     </ui:SimpleStackPanel>
@@ -493,9 +513,9 @@
                                                   StrokeEndLineCap="flat"
                                                   StrokeLineJoin="miter"/>
                                         </Canvas>
-                                        <TextBlock Margin="8,0,0,0" FontSize="14" Text="稍安勿躁，检查更新中..." />
+                                        <TextBlock Margin="8,0,0,0" FontSize="14" Text="少安毋躁，正在检查更新…" />
                                     </StackPanel>
-                                    <Button Content="检查更新" HorizontalAlignment="Center" Width="100" FontFamily="Microsoft YaHei UI" Click="BtnCheckForUpdate_Click" Margin="0,0,0,10" />
+                                    <Button Name="BtnCheckForUpdate" Content="检查更新" HorizontalAlignment="Center" Width="100" FontFamily="Microsoft YaHei UI" Click="BtnCheckForUpdate_Click" Margin="0,0,0,10" />
                                 </StackPanel>
                                 <ui:SimpleStackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="4">
                                     <Canvas Width="20" Height="20">
@@ -542,7 +562,18 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Button Grid.Column="0" Content="重启应用" HorizontalAlignment="Stretch" FontFamily="Microsoft YaHei UI" Click="BtnRestart_Click" Margin="0,0,5,0" />
-                                    <Button Grid.Column="1" Content="重置配置" Foreground="Red" HorizontalAlignment="Stretch" FontFamily="Microsoft YaHei UI" Click="BtnResetToDefault_Click" Margin="5,0,5,0" />
+                                    <Button Grid.Column="1" Content="重置配置" Foreground="Red" HorizontalAlignment="Stretch" FontFamily="Microsoft YaHei UI" Margin="5,0,5,0">
+                                        <ui:FlyoutService.Flyout>
+                                            <ui:Flyout x:Name="FlyoutResetToDefault" Placement="Bottom">
+                                                <StackPanel>
+                                                    <TextBlock
+                                                            Margin="0,0,0,12"
+                                                            Text="确定要重置所有配置吗？此操作无法撤销。" />
+                                                    <Button Content="重置所有配置" Foreground="White" Background="Red" FontFamily="Microsoft YaHei UI" Click="BtnResetToDefault_Click" />
+                                                </StackPanel>
+                                            </ui:Flyout>
+                                        </ui:FlyoutService.Flyout>
+                                    </Button>
                                     <Button Grid.Column="2" Content="退出应用" HorizontalAlignment="Stretch" FontFamily="Microsoft YaHei UI" Click="BtnExit_Click" Margin="5,0,0,0" />
                                 </Grid>
                                 <ui:ToggleSwitch Name="ToggleSwitchRunAtStartup" Header="开机时运行" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchRunAtStartup_Toggled" />

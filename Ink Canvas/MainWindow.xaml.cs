@@ -1197,6 +1197,7 @@ namespace Ink_Canvas
 
         private void BtnCheckForUpdate_Click(object sender, RoutedEventArgs e)
         {
+            BtnCheckForUpdate.IsEnabled = false;
             AutoUpdater.Mandatory = true;
             CheckForUpdate();
             CheckingUpdatesTip.Visibility = Visibility.Visible;
@@ -1208,6 +1209,7 @@ namespace Ink_Canvas
                 {
                     CheckingUpdatesTip.Visibility = Visibility.Collapsed;
                     AssemblyVersionInfoPanel.Visibility = Visibility.Visible;
+                    BtnCheckForUpdate.IsEnabled = true;
                 });
             })).Start();
 
@@ -3390,23 +3392,11 @@ namespace Ink_Canvas
 
         #region Reset
 
-        public static void SetSettingsToRecommendation()
-        {
-            bool IsAutoKillPptService = Settings.Automation.IsAutoKillPptService;
-            bool IsAutoKillEasiNote = Settings.Automation.IsAutoKillEasiNote;
-            Settings = new Settings();
-            Settings.Appearance.IsShowEraserButton = false;
-            Settings.Appearance.IsShowExitButton = false;
-            Settings.Startup.IsAutoHideCanvas = true;
-            Settings.Automation.IsAutoKillEasiNote = IsAutoKillEasiNote;
-            Settings.Automation.IsAutoKillPptService = IsAutoKillPptService;
-            Settings.Canvas.InkWidth = 2.5;
-        }
-
         private void BtnResetToDefault_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                FlyoutResetToDefault.Hide();
                 isLoaded = false;
                 File.Delete("settings.json");
                 Settings = new Settings();
@@ -3510,6 +3500,7 @@ namespace Ink_Canvas
 
         private void HyperlinkQQGroup_Click(object sender, RoutedEventArgs e)
         {
+            FlyoutQQGroup.Hide();
             Process.Start("https://qm.qq.com/q/I6OCRh38oU");
         }
 
