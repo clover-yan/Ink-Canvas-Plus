@@ -5520,7 +5520,6 @@ namespace Ink_Canvas
                                 opFlag = MessageBox.Show("是否移除渐近线？", "Ink Canvas", MessageBoxButton.YesNo) != MessageBoxResult.Yes;
                                 break;
                         }
-                        ;
                         if (!opFlag)
                         {
                             inkCanvas.Strokes.Remove(drawMultiStepShapeSpecialStrokeCollection);
