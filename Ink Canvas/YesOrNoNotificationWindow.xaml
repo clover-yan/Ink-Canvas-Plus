@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ink_Canvas" xmlns:ui="http://schemas.inkore.net/lib/ui/wpf/modern"
+        xmlns:ikw="http://schemas.inkore.net/lib/ui/wpf"
         mc:Ignorable="d" Topmost="True" WindowStartupLocation="CenterScreen" ui:WindowHelper.UseModernWindowStyle="True"
         ResizeMode="NoResize" Closed="Window_Closed" ui:ThemeManager.RequestedTheme="Light"
         Title="提示 - Ink Canvas 画板" Height="160" Width="450" FontFamily="Microsoft YaHei UI">
@@ -17,10 +18,10 @@
                 <ui:SymbolIcon Symbol="SlideShow" Foreground="{Binding ElementName=Label, Path=Foreground}"/>
             </Viewbox>
             <Label Name="Label" Margin="60,20,0,20" VerticalAlignment="Center"/>
-            <ui:SimpleStackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal" Spacing="10">
+            <ikw:SimpleStackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal" Spacing="10">
                 <Button Margin="0" Content="是" Width="100" FontFamily="Microsoft YaHei UI" Click="ButtonYes_Click"/>
                 <Button Margin="0" Content="否" Width="100" FontFamily="Microsoft YaHei UI" Click="ButtonNo_Click"/>
-            </ui:SimpleStackPanel>
+            </ikw:SimpleStackPanel>
         </Grid>
     </Grid>
 </Window>
