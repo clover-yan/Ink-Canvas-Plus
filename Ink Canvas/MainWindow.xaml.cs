@@ -107,6 +107,38 @@ namespace Ink_Canvas
                 Environment.Exit(0);
             };
             CheckForUpdate();
+
+            UpdateWindowTitle();
+        }
+
+        private void UpdateWindowTitle()
+        {
+            string title = "Ink Canvas Plus - ";
+            if (currentMode == 0)
+            {
+                if (BtnPPTSlideShowEnd.Visibility == Visibility.Visible)
+                {
+                    title += "Presentation";
+                }
+                else
+                {
+                    title += "Desktop";
+                }
+            }
+            else if (currentMode == 1)
+            {
+                title += "Board";
+            }
+            title += " ";
+            if (Main_Grid.Background == Brushes.Transparent)
+            {
+                title += "Idle";
+            }
+            else
+            {
+                title += "Active";
+            }
+            this.Title = title;
         }
 
         #endregion
@@ -1457,6 +1489,8 @@ namespace Ink_Canvas
                         break;
                 }
             }
+
+            UpdateWindowTitle();
         }
 
         private void BtnSwitchTheme_Click(object sender, RoutedEventArgs e)
@@ -1680,6 +1714,8 @@ namespace Ink_Canvas
                 StackPanelCanvasControls.Visibility = Visibility.Visible;
                 StackPanelCanvacMain.Visibility = Visibility.Collapsed;
             }
+
+            UpdateWindowTitle();
         }
 
         private void BtnSwitchSide_Click(object sender, RoutedEventArgs e)
@@ -2629,6 +2665,8 @@ namespace Ink_Canvas
                     });
                 })).Start();
             });
+
+            UpdateWindowTitle();
             //previousSlideID = Wn.View.CurrentShowPosition;
             ////检查是否有已有墨迹，并加载当前页
             //if (Settings.Automation.IsAutoSaveStrokesInPowerPoint)
