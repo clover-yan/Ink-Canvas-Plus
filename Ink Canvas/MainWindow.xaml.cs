@@ -2819,6 +2819,8 @@ namespace Ink_Canvas
 
                 }
             });
+
+            UpdateWindowTitle();
         }
 
         int previousSlideID = 0;
