@@ -616,10 +616,10 @@
                                     <ComboBoxItem Content="笔画擦" FontFamily="Microsoft YaHei UI" />
                                 </ComboBox>
                                 <TextBlock Text="橡皮大小" FontFamily="Microsoft YaHei UI" FontSize="14" />
-                                <ComboBox Name="ComboBoxEraserSize" FontFamily="Microsoft YaHei UI" SelectedIndex="2" SelectionChanged="ComboBoxEraserSize_SelectionChanged">
-                                    <ComboBoxItem Content="小" FontFamily="Microsoft YaHei UI" />
+                                <ComboBox Name="ComboBoxEraserSize" FontFamily="Microsoft YaHei UI" SelectedIndex="0" SelectionChanged="ComboBoxEraserSize_SelectionChanged">
+                                    <ComboBoxItem Content="小（默认）" FontFamily="Microsoft YaHei UI" />
                                     <ComboBoxItem Content="较小" FontFamily="Microsoft YaHei UI" />
-                                    <ComboBoxItem Content="中（默认）" FontFamily="Microsoft YaHei UI" />
+                                    <ComboBoxItem Content="中" FontFamily="Microsoft YaHei UI" />
                                     <ComboBoxItem Content="较大" FontFamily="Microsoft YaHei UI" />
                                     <ComboBoxItem Content="大" FontFamily="Microsoft YaHei UI" />
                                 </ComboBox>
