@@ -71,17 +71,20 @@ namespace Ink_Canvas
                 HideSubPanels();
 
                 ViewboxFloatingBar.Margin = new Thickness(SystemParameters.WorkArea.Left + 80, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80, -2000, -200);
-                new Thread(new ThreadStart(() =>
+                if (Settings.Appearance.IsAutoCollapseFloatBar)
                 {
-                    Thread.Sleep(3000);
-                    Application.Current.Dispatcher.Invoke(() =>
+                    new Thread(new ThreadStart(() =>
                     {
-                        if (Main_Grid.Background == Brushes.Transparent)
+                        Thread.Sleep(3000);
+                        Application.Current.Dispatcher.Invoke(() =>
                         {
-                            SetBorderFloatingBarMainControlsVisibility(false);
-                        }
-                    });
-                })).Start();
+                            if (Main_Grid.Background == Brushes.Transparent)
+                            {
+                                SetBorderFloatingBarMainControlsVisibility(false);
+                            }
+                        });
+                    })).Start();
+                }
 
             }
             else
@@ -790,6 +793,14 @@ namespace Ink_Canvas
                 ToggleSwitchAutoHideCanvas.IsOn = false;
             }
 
+            if (Settings.Appearance.IsAutoCollapseFloatBar)
+            {
+                ToggleSwitchAutoCollapseFloatBar.IsOn = true;
+            }
+            else
+            {
+                ToggleSwitchAutoCollapseFloatBar.IsOn = false;
+            }
             if (Settings.Appearance.IsShowEraserButton)
             {
                 BtnErase.Visibility = Visibility.Visible;
@@ -2808,14 +2819,17 @@ namespace Ink_Canvas
                 if (pointDesktop != new Point(-1, -1))
                 {
                     ViewboxFloatingBar.Margin = new Thickness(pointDesktop.X, pointDesktop.Y, -2000, -200);
-                    new Thread(new ThreadStart(() =>
+                    if (Settings.Appearance.IsAutoCollapseFloatBar)
                     {
-                        Thread.Sleep(100);
-                        Application.Current.Dispatcher.Invoke(() =>
+                        new Thread(new ThreadStart(() =>
                         {
-                            SetBorderFloatingBarMainControlsVisibility(false);
-                        });
-                    })).Start();
+                            Thread.Sleep(100);
+                            Application.Current.Dispatcher.Invoke(() =>
+                            {
+                                SetBorderFloatingBarMainControlsVisibility(false);
+                            });
+                        })).Start();
+                    }
 
                 }
             });
@@ -3052,6 +3066,12 @@ namespace Ink_Canvas
 
         }
 
+        private void ToggleSwitchAutoCollapseFloatBar_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (!isLoaded) return;
+            Settings.Appearance.IsAutoCollapseFloatBar = ToggleSwitchAutoCollapseFloatBar.IsOn;
+            SaveSettingsToFile();
+        }
         private void ToggleSwitchShowButtonExit_Toggled(object sender, RoutedEventArgs e)
         {
             if (!isLoaded) return;
@@ -7014,14 +7034,17 @@ namespace Ink_Canvas
                     {
                         ViewboxFloatingBar.Margin = new Thickness(pointDesktop.X, pointDesktop.Y, -2000, -200);
                         pointDesktop = new Point(-1, -1);
-                        new Thread(new ThreadStart(() =>
+                        if (Settings.Appearance.IsAutoCollapseFloatBar)
                         {
-                            Thread.Sleep(100);
-                            Application.Current.Dispatcher.Invoke(() =>
+                            new Thread(new ThreadStart(() =>
                             {
-                                SetBorderFloatingBarMainControlsVisibility(false);
-                            });
-                        })).Start();
+                                Thread.Sleep(100);
+                                Application.Current.Dispatcher.Invoke(() =>
+                                {
+                                    SetBorderFloatingBarMainControlsVisibility(false);
+                                });
+                            })).Start();
+                        }
 
                     }
                 }

@@ -80,6 +80,8 @@ namespace Ink_Canvas
     {
         [JsonProperty("isTransparentButtonBackground")]
         public bool IsTransparentButtonBackground { get; set; } = true;
+        [JsonProperty("isAutoCollapseFloatBar")]
+        public bool IsAutoCollapseFloatBar { get; set; } = false;
         [JsonProperty("isShowExitButton")]
         public bool IsShowExitButton { get; set; } = true;
         [JsonProperty("isShowEraserButton")]

@@ -675,6 +675,7 @@
                         </GroupBox>
                         <GroupBox Name="GroupBoxAppearanceNewUI" Header="外观">
                             <ui:SimpleStackPanel Spacing="12">
+                                <ui:ToggleSwitch Name="ToggleSwitchAutoCollapseFloatBar" Header="自动折叠浮动栏" IsOn="False" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchAutoCollapseFloatBar_Toggled" />
                                 <ui:ToggleSwitch Header="显示“橡皮”按钮" IsOn="{Binding ElementName=ToggleSwitchShowButtonEraser, Path=IsOn}" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" />
                                 <ui:ToggleSwitch Name="ToggleSwitchShowButtonPPTNavigation" Header="显示 PPT 浏览切页按钮" IsOn="True" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchShowButtonPPTNavigation_OnToggled" />
                                 <TextBlock Text="颜色主题" FontFamily="Microsoft YaHei UI" FontSize="14" />
