@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Ink_Canvas.Helpers
+namespace InkCanvasPlus.Helpers
 {
     class LogHelper
     {

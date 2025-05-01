@@ -1,5 +1,5 @@
 using AutoUpdaterDotNET;
-using Ink_Canvas.Helpers;
+using InkCanvasPlus.Helpers;
 using iNKORE.UI.WPF.Modern;
 using iNKORE.UI.WPF.Modern.Helpers;
 using IWshRuntimeLibrary;
@@ -35,7 +35,7 @@ using Path = System.IO.Path;
 using Point = System.Windows.Point;
 using Timer = System.Timers.Timer;
 
-namespace Ink_Canvas
+namespace InkCanvasPlus
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

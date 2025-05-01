@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Ink_Canvas
+namespace InkCanvasPlus
 {
     /// <summary>
     /// Interaction logic for StopwatchWindow.xaml
@@ -59,7 +59,7 @@ namespace Ink_Canvas
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     //Play sound
-                    player.Stream = Properties.Resources.TimerDownNotice;
+                    player.Stream = Ink_Canvas.Properties.Resources.TimerDownNotice;
                     player.Play();
                 });
             }

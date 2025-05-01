@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Ink;
 using System.Windows.Input;
 
-namespace Ink_Canvas.Helpers
+namespace InkCanvasPlus.Helpers
 {
     public class TimeMachine
     {

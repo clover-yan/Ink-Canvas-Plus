@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Ink_Canvas
+namespace InkCanvasPlus
 {
     public class Settings
     {

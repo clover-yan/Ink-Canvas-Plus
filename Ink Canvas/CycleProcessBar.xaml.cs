@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Ink_Canvas.ProcessBars
+namespace InkCanvasPlus
 {
     /// <summary>
     /// CycleProcessBar1.xaml 的交互逻辑

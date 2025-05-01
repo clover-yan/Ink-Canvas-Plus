@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 
-namespace Ink_Canvas
+namespace InkCanvasPlus
 {
     /// <summary>
     /// Interaction logic for RestoreHiddenSlidesWindow.xaml

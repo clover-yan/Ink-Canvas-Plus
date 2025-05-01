@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace Ink_Canvas.Converter
+namespace InkCanvasPlus.Helpers
 {
     public class VisibilityConverter : IValueConverter
     {

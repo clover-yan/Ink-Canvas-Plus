@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Ink_Canvas
+namespace InkCanvasPlus.Controls
 {
     /// <summary>
     /// Interaction logic for ClickSensitiveGrid.xaml

@@ -8,7 +8,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Ink_Canvas
+namespace InkCanvasPlus
 {
     /// <summary>
     /// Interaction logic for RandWindow.xaml

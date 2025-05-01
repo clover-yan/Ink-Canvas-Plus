@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Ink_Canvas.Helpers
+namespace InkCanvasPlus.Helpers
 {
     public static class EdgeGesturesUtils
     {

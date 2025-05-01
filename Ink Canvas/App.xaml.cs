@@ -1,5 +1,4 @@
-﻿using AutoUpdaterDotNET;
-using Ink_Canvas.Helpers;
+﻿using InkCanvasPlus.Helpers;
 using iNKORE.UI.WPF.Modern.Controls;
 using System;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Reflection;
 using System.Windows;
 using MessageBox = System.Windows.MessageBox;
 
-namespace Ink_Canvas
+namespace InkCanvasPlus
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -27,7 +26,7 @@ namespace Ink_Canvas
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            Ink_Canvas.MainWindow.ShowNewMessage("抱歉，出现未预期的异常，可能导致 Ink Canvas 画板运行不稳定。\n建议保存墨迹后重启应用。", true);
+            InkCanvasPlus.MainWindow.ShowNewMessage("抱歉，出现未预期的异常，可能导致 Ink Canvas 画板运行不稳定。\n建议保存墨迹后重启应用。", true);
             LogHelper.NewLog(e.Exception.ToString());
             e.Handled = true;
         }

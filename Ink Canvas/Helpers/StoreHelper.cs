@@ -1,4 +1,4 @@
-﻿namespace Ink_Canvas.Helpers
+﻿namespace InkCanvasPlus.Helpers
 {
     public static class StoreHelper
     {

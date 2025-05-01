@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Ink_Canvas.Helpers
+namespace InkCanvasPlus.Helpers
 {
     class AutoKillHelper
     {

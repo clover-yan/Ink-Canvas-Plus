@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Windows;
 
-namespace Ink_Canvas
+namespace InkCanvasPlus
 {
     /// <summary>
     /// Interaction logic for NamesInputWindow.xaml

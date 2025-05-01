@@ -3,7 +3,7 @@ using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Ink_Canvas.Helpers
+namespace InkCanvasPlus.Helpers
 {
     public class VisualCanvas : FrameworkElement
     {
