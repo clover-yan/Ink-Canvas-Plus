@@ -6212,28 +6212,96 @@ namespace InkCanvasPlus
                                 var points = strokeToBeChecked.StylusPoints.Select(p => p.ToPoint()).ToList();
                                 if (points.Count >= 10)
                                 {
-                                    // 最小二乘法
-                                    double sumX = 0, sumY = 0, sumXY = 0, sumXX = 0, sumYY = 0, minX = double.PositiveInfinity, minY = double.PositiveInfinity, maxX = double.NegativeInfinity, maxY = double.NegativeInfinity;
+                                    // 使用总最小二乘法(TLS/PCA)进行直线拟合
                                     int n = points.Count - 8;
-                                    for (int i = 0; i < n + 8; i++)
+                                    List<Point> filteredPoints = new List<Point>();
+
+                                    // 收集过滤后的点（跳过前 4 个和后 4 个点，用于计算直线方向）
+                                    for (int i = 4; i < n + 4; i++)
                                     {
-                                        minX = Math.Min(minX, points[i].X);
-                                        minY = Math.Min(minY, points[i].Y);
-                                        maxX = Math.Max(maxX, points[i].X);
-                                        maxY = Math.Max(maxY, points[i].Y);
-                                        if (i < 4 || i > n + 3) continue;
-                                        sumX += points[i].X;
-                                        sumY += points[i].Y;
-                                        sumXY += points[i].X * points[i].Y;
-                                        sumXX += points[i].X * points[i].X;
-                                        sumYY += points[i].Y * points[i].Y;
+                                        filteredPoints.Add(points[i]);
                                     }
-                                    double a = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
-                                    double b = (sumY - a * sumX) / n;
-                                    double r = (n * sumXY - sumX * sumY) / Math.Sqrt((n * sumXX - sumX * sumX) * (n * sumYY - sumY * sumY));
-                                    if (Math.Abs(r) > Settings.InkToShape.LineNormalizationThreshold)
+
+                                    // 计算中心点（使用过滤后的点）
+                                    double centerX = 0, centerY = 0;
+                                    foreach (Point p in filteredPoints)
                                     {
-                                        var pointList = r > 0 ? new List<Point> { new Point(minX, minY), new Point(maxX, maxY) } : new List<Point> { new Point(maxX, minY), new Point(minX, maxY) };
+                                        centerX += p.X;
+                                        centerY += p.Y;
+                                    }
+                                    centerX /= filteredPoints.Count;
+                                    centerY /= filteredPoints.Count;
+
+                                    // 计算协方差矩阵（使用过滤后的点）
+                                    double covXX = 0, covYY = 0, covXY = 0;
+                                    foreach (Point p in filteredPoints)
+                                    {
+                                        double dx = p.X - centerX;
+                                        double dy = p.Y - centerY;
+                                        covXX += dx * dx;
+                                        covYY += dy * dy;
+                                        covXY += dx * dy;
+                                    }
+
+                                    // 计算特征值和特征向量
+                                    double trace = covXX + covYY;
+                                    double determinant = covXX * covYY - covXY * covXY;
+                                    double discriminant = Math.Sqrt(trace * trace - 4 * determinant);
+
+                                    double eigenvalue1 = (trace + discriminant) / 2;
+                                    double eigenvalue2 = (trace - discriminant) / 2;
+
+                                    // 最大特征值对应的特征向量即为直线方向
+                                    double directionX, directionY;
+                                    if (Math.Abs(covXY) > 1e-10)
+                                    {
+                                        directionX = covXY;
+                                        directionY = eigenvalue1 - covXX;
+                                        // 归一化
+                                        double length = Math.Sqrt(directionX * directionX + directionY * directionY);
+                                        directionX /= length;
+                                        directionY /= length;
+                                    }
+                                    else
+                                    {
+                                        // 如果协方差为 0，则是水平或垂直直线
+                                        directionX = (covXX >= covYY) ? 1 : 0;
+                                        directionY = (covXX >= covYY) ? 0 : 1;
+                                    }
+
+                                    // 计算解释方差比例（拟合优度）
+                                    double totalVariance = eigenvalue1 + eigenvalue2;
+                                    double explainedVarianceRatio = (totalVariance > 1e-10) ?
+                                        Math.Max(eigenvalue1, eigenvalue2) / totalVariance : 1d;
+
+                                    // 使用所有点计算端点
+                                    double minProjection = double.MaxValue;
+                                    double maxProjection = double.MinValue;
+
+                                    // 计算所有点在直线方向上的投影
+                                    foreach (Point p in points)
+                                    {
+                                        // 相对于过滤点中心的投影
+                                        double projection = (p.X - centerX) * directionX + (p.Y - centerY) * directionY;
+                                        minProjection = Math.Min(minProjection, projection);
+                                        maxProjection = Math.Max(maxProjection, projection);
+                                    }
+
+                                    // 计算端点坐标
+                                    Point endpoint1 = new Point(
+                                        centerX + minProjection * directionX,
+                                        centerY + minProjection * directionY
+                                    );
+
+                                    Point endpoint2 = new Point(
+                                        centerX + maxProjection * directionX,
+                                        centerY + maxProjection * directionY
+                                    );
+
+                                    // 使用解释方差比例作为判断条件
+                                    if (explainedVarianceRatio > 0.998 + Settings.InkToShape.LineNormalizationThreshold / 500)
+                                    {
+                                        var pointList = new List<Point> { endpoint1, endpoint2 };
                                         var point = new StylusPointCollection(pointList);
                                         var stroke = new Stroke(point)
                                         {
@@ -6250,7 +6318,8 @@ namespace InkCanvasPlus
                                 }
                             }
                         }
-                        catch (Exception ex) {
+                        catch (Exception ex)
+                        {
                             LogHelper.WriteLogToFile($"{ex.Message}");
                         }
                     }
