@@ -647,6 +647,19 @@
                             <ui:SimpleStackPanel Spacing="12">
                                 <TextBlock Text="墨迹识别功能目前处于开发阶段，目前可实现智能识别圆、三角形、&#x000A;矩形，并自动转换为规范图形。" Foreground="#666666" />
                                 <ui:ToggleSwitch Name="ToggleSwitchEnableInkToShape" Header="启用墨迹识别" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchEnableInkToShape_Toggled" IsOn="True" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider x:Name="LineNormalizationThresholdSlider"
+                                            HorizontalAlignment="Left"
+                                            Minimum="0.8" Maximum="1.0"
+                                            Width="320" FontFamily="Microsoft YaHei UI"
+                                            ui:ControlHelper.Header="直线规范化阈值"
+                                            IsSnapToTickEnabled="True" Value="0.9"
+                                            TickFrequency="0.01" TickPlacement="Both"
+                                            ValueChanged="LineNormalizationThresholdSlider_ValueChanged" />
+                                    <TextBlock Text="{Binding Value, ElementName=LineNormalizationThresholdSlider, Mode=OneWay}"
+                                               VerticalAlignment="Bottom" Margin="10,0,0,8"
+                                               FontSize="14" Width="25" HorizontalAlignment="Center" />
+                                </StackPanel>
                             </ui:SimpleStackPanel>
                         </GroupBox>
                         <GroupBox Name="GroupBoxAppearance" Header="外观">

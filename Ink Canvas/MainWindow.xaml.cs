@@ -1217,6 +1217,7 @@ namespace InkCanvasPlus
                 {
                     ToggleSwitchEnableInkToShape.IsOn = false;
                 }
+                LineNormalizationThresholdSlider.Value = Settings.InkToShape.LineNormalizationThreshold;
             }
             else
             {
@@ -3489,6 +3490,13 @@ namespace InkCanvasPlus
         {
             if (!isLoaded) return;
             Settings.InkToShape.IsInkToShapeEnabled = ToggleSwitchEnableInkToShape.IsOn;
+            SaveSettingsToFile();
+        }
+
+        private void LineNormalizationThresholdSlider_ValueChanged(object sender, RoutedEventArgs e)
+        {
+            if (!isLoaded) return;
+            Settings.InkToShape.LineNormalizationThreshold = (double)LineNormalizationThresholdSlider.Value;
             SaveSettingsToFile();
         }
 
@@ -6223,7 +6231,7 @@ namespace InkCanvasPlus
                                     double a = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
                                     double b = (sumY - a * sumX) / n;
                                     double r = (n * sumXY - sumX * sumY) / Math.Sqrt((n * sumXX - sumX * sumX) * (n * sumYY - sumY * sumY));
-                                    if (Math.Abs(r) > 0.9)
+                                    if (Math.Abs(r) > Settings.InkToShape.LineNormalizationThreshold)
                                     {
                                         var pointList = r > 0 ? new List<Point> { new Point(minX, minY), new Point(maxX, maxY) } : new List<Point> { new Point(maxX, minY), new Point(minX, maxY) };
                                         var point = new StylusPointCollection(pointList);

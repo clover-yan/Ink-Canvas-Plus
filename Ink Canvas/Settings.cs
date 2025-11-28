@@ -169,5 +169,7 @@ namespace InkCanvasPlus
     {
         [JsonProperty("isInkToShapeEnabled")]
         public bool IsInkToShapeEnabled { get; set; } = true;
+        [JsonProperty("lineNormalizationThreshold")]
+        public double LineNormalizationThreshold { get; set; } = 0.9;
     }
 }
