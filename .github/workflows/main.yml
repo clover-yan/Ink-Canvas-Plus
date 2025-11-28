@@ -2,78 +2,70 @@ name: .NET Build
 
 on:
   push:
-    branches: [ master ]
+    branches: [master, dev]
   pull_request:
-    branches: [ master ]
+    branches: [master, dev]
 
 jobs:
-
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3.5.2
-      with:
-        fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v3.5.2
+        with:
+          fetch-depth: 0
 
-    # 安装 .NET Core
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v3.0.3
-      with:
-        dotnet-version: '6.0.x'
-        
-    # 安装 NuGet
-    - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1.2.0
-      with:
-        nuget-version: '5.x'
+      # 安装 .NET Core
+      - name: Install .NET Core
+        uses: actions/setup-dotnet@v3.0.3
+        with:
+          dotnet-version: "6.0.x"
 
-    # 还原 NuGet 包
-    - name: NuGet restore
-      run: nuget restore
-      
-    # 添加 MSBuild.exe 到环境变量: https://github.com/microsoft/setup-msbuild
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.3.1
+      # 安装 NuGet
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.2.0
+        with:
+          nuget-version: "5.x"
 
-    # 编译整个项目
-    - name: Build the solution
-      run: |
-        msbuild -t:restore /p:GitFlow="Github Action"
-        msbuild -target:"Ink Canvas" /p:Configuration=Release /p:Platform="Any CPU" /p:GitFlow="Github Action"
-      env:
-        Configuration: ${{ matrix.configuration }}
+      # 还原 NuGet 包
+      - name: NuGet restore
+        run: nuget restore
 
-    - name: Build the solution (x64)
-      run: |
-        msbuild -t:restore /p:GitFlow="Github Action"
-        msbuild -target:"Ink Canvas" /p:Configuration=Release /p:Platform="x64" /p:GitFlow="Github Action"
-      env:
-        Configuration: ${{ matrix.configuration }}
+      # 添加 MSBuild.exe 到环境变量: https://github.com/microsoft/setup-msbuild
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.3.1
 
-    - name: Build the solution (ARM64)
-      run: |
-        msbuild -t:restore /p:GitFlow="Github Action"
-        msbuild -target:"Ink Canvas" /p:Configuration=Release /p:Platform="ARM64" /p:GitFlow="Github Action"
-      env:
-        Configuration: ${{ matrix.configuration }}
-        
-    # 上传编译成品
-    - name: Upload to artifact
-      uses: actions/upload-artifact@main
-      with:
-        name: Ink-Canvas
-        path: Ink Canvas/bin/Release
-        
-    - name: Upload to artifact (x64)
-      uses: actions/upload-artifact@main
-      with:
-        name: Ink-Canvas-x64
-        path: Ink Canvas/bin/x64/Release
-        
-    - name: Upload to artifact (ARM64)
-      uses: actions/upload-artifact@main
-      with:
-        name: Ink-Canvas-ARM64
-        path: Ink Canvas/bin/ARM64/Release
+      # 编译整个项目
+      - name: Build the solution
+        run: |
+          msbuild -t:restore /p:GitFlow="Github Action"
+          msbuild -target:"InkCanvasPlus" /p:Configuration=Release /p:Platform="Any CPU" /p:GitFlow="Github Action"
+        env:
+          Configuration: ${{ matrix.configuration }}
+
+      # 上传编译成品
+      - name: Upload to artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: Ink-Canvas
+          path: Ink Canvas/bin/Release
+
+      # 下载 Inno Setup 翻译文件
+      - name: Download Inno Setup Translation Files
+        run: |
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseSimplified.isl" -OutFile "C:\Program Files (x86)\Inno Setup 6\Languages\ChineseSimplified.isl"
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/jrsoftware/issrc/main/Files/Languages/Unofficial/ChineseTraditional.isl" -OutFile "C:\Program Files (x86)\Inno Setup 6\Languages\ChineseTraditional.isl"
+
+      # 用 Inno Setup 打包
+      - name: Build installer with Inno Setup
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        with:
+          path: packaging/setup.iss
+
+      # 上传安装包
+      - name: Upload installer
+        uses: actions/upload-artifact@main
+        with:
+          name: Ink-Canvas-Installer
+          path: packaging/output/Ink-Canvas-Plus_setup*.exe
