@@ -1,0 +1,3 @@
+Ink Canvas Plus 是一款由 Clover Yan 维护、复刻自 WXRIW/Ink Canvas 的 Windows 画板应用，旨在优化各方面的使用体验，并尽可能保留原版 Ink Canvas 的操作体验。
+
+此应用基于 GPLv3 协议开源，如果你付费购买了该应用，请即刻退款。
