@@ -42,6 +42,17 @@ namespace InkCanvasPlus
     /// </summary>
     public partial class MainWindow : Window
     {
+        [DllImport("user32.dll")]
+        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
+
+        [DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+
+        private const uint MOD_ALT = 0x0001;
+        private const uint MOD_CONTROL = 0x0002;
+        private const uint VK_D = 0x44;
+        private const int HOTKEY_ID = 9000;
+
         #region Window Initialization
 
         public MainWindow()
@@ -404,6 +415,21 @@ namespace InkCanvasPlus
             ImageBlackboard_MouseUp(null, null);
         }
 
+        private void KeyClearAll(object sender, ExecutedRoutedEventArgs e)
+        {
+            BtnClear_Click(null, null);
+        }
+
+        private void ComponentDispatcher_ThreadPreprocessMessage(ref MSG msg, ref bool handled)
+        {
+            if (msg.message == 0x0312 && msg.wParam.ToInt32() == HOTKEY_ID)
+            {
+                this.Activate();
+                KeyChangeMode(null, null);
+                handled = true;
+            }
+        }
+
         #endregion Hotkeys
 
         #region TimeMachine
@@ -728,6 +754,10 @@ namespace InkCanvasPlus
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            var helper = new WindowInteropHelper(this);
+            RegisterHotKey(helper.Handle, HOTKEY_ID, MOD_CONTROL | MOD_ALT, VK_D);
+            ComponentDispatcher.ThreadPreprocessMessage += ComponentDispatcher_ThreadPreprocessMessage;
+
             loadPenCanvas();
 
             //加载设置
@@ -749,6 +779,10 @@ namespace InkCanvasPlus
         {
             if (CloseIsFromButton)
             {
+                var helper = new WindowInteropHelper(this);
+                UnregisterHotKey(helper.Handle, HOTKEY_ID);
+                ComponentDispatcher.ThreadPreprocessMessage -= ComponentDispatcher_ThreadPreprocessMessage;
+
                 e.Cancel = false;
                 return;
             }

@@ -44,6 +44,7 @@
         <RoutedUICommand x:Key="HotKey_ChangeToPen5" Text=" " />
         <RoutedUICommand x:Key="HotKey_DrawLine" Text=" " />
         <RoutedUICommand x:Key="HotKey_SwitchToBoard" Text=" " />
+        <RoutedUICommand x:Key="HotKey_ClearAll" Text=" " />
     </Window.Resources>
     <!--输入命令绑定-->
     <Window.InputBindings>
@@ -65,6 +66,7 @@
         <KeyBinding Modifiers="Alt" Key="L" Command="{StaticResource HotKey_DrawLine}" />
         <KeyBinding Key="B" Command="{StaticResource HotKey_SwitchToBoard}" />
         <KeyBinding Modifiers="Alt" Key="B" Command="{StaticResource HotKey_SwitchToBoard}" />
+        <KeyBinding Modifiers="Alt" Key="X" Command="{StaticResource HotKey_ClearAll}" />
     </Window.InputBindings>
     <!--命令执行方法绑定-->
     <Window.CommandBindings>
@@ -113,6 +115,9 @@
         <CommandBinding Command="{StaticResource HotKey_SwitchToBoard}"
                         CanExecute="CommandBinding_CanExecute"
                         Executed="KeySwitchToBoard" />
+        <CommandBinding Command="{StaticResource HotKey_ClearAll}"
+                        CanExecute="CommandBinding_CanExecute"
+                        Executed="KeyClearAll" />
     </Window.CommandBindings>
     <Grid x:Name="Main_Grid" Background="#01FFFFFF">
         <Grid Name="GridBackgroundCoverHolder">
@@ -816,6 +821,10 @@
                                 <ui:ToggleSwitch Name="ToggleSwitchDisableEdgeGesture" Header="画板模式下禁用触摸屏边缘手势" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" IsOn="True" Toggled="ToggleSwitchDisableEdgeGesture_Toggled" />
                                 <TextBlock TextWrapping="Wrap" Text="开启后可阻止 Windows 10 以上设备在屏幕边缘书写时滑出任务视图、通知中心或操作中心，并缓解书写卡顿的问题（Windows 11 多指多任务手势可以在系统设置中关闭）" Foreground="#666666" />
                             </ui:SimpleStackPanel>
+                        </GroupBox>
+
+                        <GroupBox Header="快捷键指南">
+                            <TextBlock TextWrapping="Wrap" Text="全局快捷键&#x000A;• Ctrl+Alt+D：激活 Ink Canvas Plus 并切换书写／鼠标模式&#x000A;&#x000A;应用内快捷键&#x000A;• Alt+V：展开或收起工具栏&#x000A;• Alt+D, Alt+S：切换书写／鼠标模式&#x000A;• Alt+`, Alt+1–5：切换画笔颜色&#x000A;• Alt+L：使用直线工具&#x000A;• Alt+E：切换橡皮擦&#x000A;• Ctrl+Z：撤销上一步&#x000A;• Ctrl+Shift+Z, Ctrl+Y：重做&#x000A;• Alt+X：清空所有笔迹&#x000A;• Alt+C：屏幕截图&#x000A;• B, Alt+B：进入／退出黑板模式" />
                         </GroupBox>
                     </StackPanel>
                 </ui:ScrollViewerEx>
