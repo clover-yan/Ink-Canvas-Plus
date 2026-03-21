@@ -406,6 +406,18 @@ namespace InkCanvasPlus
             BtnDrawLine_Click(lastMouseDownSender, e);
         }
 
+        private void KeyDrawRectangle(object sender, ExecutedRoutedEventArgs e)
+        {
+            SetColorByIndex();
+            BtnDrawRectangle_Click(lastMouseDownSender, e);
+        }
+
+        private void KeyDrawCircle(object sender, ExecutedRoutedEventArgs e)
+        {
+            SetColorByIndex();
+            BtnDrawCircle_Click(lastMouseDownSender, e);
+        }
+
         private void KeyHide(object sender, ExecutedRoutedEventArgs e)
         {
             SymbolIconEmoji_MouseUp(sender, null);
