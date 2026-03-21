@@ -322,13 +322,20 @@ namespace InkCanvasPlus
             e.CanExecute = true;
         }
 
-        private void back_HotKey(object sender, ExecutedRoutedEventArgs e)
+        private void Undo_HotKey(object sender, ExecutedRoutedEventArgs e)
         {
-            try
+            if (BtnUndo.IsEnabled)
             {
-                inkCanvas.Strokes.Remove(inkCanvas.Strokes[inkCanvas.Strokes.Count - 1]);
+                BtnUndo_Click(null, null);
             }
-            catch { }
+        }
+
+        private void Redo_HotKey(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (BtnRedo.IsEnabled)
+            {
+                BtnRedo_Click(null, null);
+            }
         }
 
         private void KeyExit(object sender, ExecutedRoutedEventArgs e)
@@ -336,37 +343,49 @@ namespace InkCanvasPlus
             BtnPPTSlideShowEnd_Click(BtnPPTSlideShowEnd, null);
         }
 
-        private void KeyChangeToDrawTool(object sender, ExecutedRoutedEventArgs e)
+        private void KeyChangeMode(object sender, ExecutedRoutedEventArgs e)
         {
-            if (inkCanvas.Visibility == Visibility.Collapsed)
-            {
-                BtnHideInkCanvas_Click(sender, e);
-            }
-        }
-
-        private void KeyChangeToSelect(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (inkCanvas.Visibility == Visibility.Visible)
-            {
-                BtnHideInkCanvas_Click(sender, e);
-            }
+            SymbolIconCursor_Click(null, null);
         }
 
         private void KeyChangeToEraser(object sender, ExecutedRoutedEventArgs e)
         {
-            if (ImageEraserMask.Visibility == Visibility.Visible)
-            {
-                BorderPenColorRed_MouseUp(null, null);
-            }
-            else
-            {
-                BtnErase_Click(sender, e);
-            }
+            BtnErase_Click(sender, e);
         }
 
         private void KeyCapture(object sender, ExecutedRoutedEventArgs e)
         {
             BtnScreenshot_Click(sender, e);
+        }
+
+        private void KeyChangeToPen0(object sender, ExecutedRoutedEventArgs e)
+        {
+            BorderPenColorBlack_MouseUp(null, null);
+        }
+
+        private void KeyChangeToPen1(object sender, ExecutedRoutedEventArgs e)
+        {
+            BorderPenColorRed_MouseUp(null, null);
+        }
+
+        private void KeyChangeToPen2(object sender, ExecutedRoutedEventArgs e)
+        {
+            BorderPenColorGreen_MouseUp(null, null);
+        }
+
+        private void KeyChangeToPen3(object sender, ExecutedRoutedEventArgs e)
+        {
+            BorderPenColorBlue_MouseUp(null, null);
+        }
+
+        private void KeyChangeToPen4(object sender, ExecutedRoutedEventArgs e)
+        {
+            BorderPenColorYellow_MouseUp(null, null);
+        }
+
+        private void KeyChangeToPen5(object sender, ExecutedRoutedEventArgs e)
+        {
+            BorderPenColorWhite_MouseUp(null, null);
         }
 
         private void KeyDrawLine(object sender, ExecutedRoutedEventArgs e)
@@ -378,6 +397,11 @@ namespace InkCanvasPlus
         private void KeyHide(object sender, ExecutedRoutedEventArgs e)
         {
             SymbolIconEmoji_MouseUp(sender, null);
+        }
+
+        private void KeySwitchToBoard(object sender, ExecutedRoutedEventArgs e)
+        {
+            ImageBlackboard_MouseUp(null, null);
         }
 
         #endregion Hotkeys
