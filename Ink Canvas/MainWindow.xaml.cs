@@ -52,6 +52,7 @@ namespace InkCanvasPlus
         private const uint MOD_CONTROL = 0x0002;
         private const uint VK_D = 0x44;
         private const int HOTKEY_ID = 9000;
+        private const int WM_HOTKEY = 0x0312;
 
         #region Window Initialization
 
@@ -422,7 +423,7 @@ namespace InkCanvasPlus
 
         private void ComponentDispatcher_ThreadPreprocessMessage(ref MSG msg, ref bool handled)
         {
-            if (msg.message == 0x0312 && msg.wParam.ToInt32() == HOTKEY_ID)
+            if (msg.message == WM_HOTKEY && msg.wParam.ToInt32() == HOTKEY_ID)
             {
                 this.Activate();
                 KeyChangeMode(null, null);
