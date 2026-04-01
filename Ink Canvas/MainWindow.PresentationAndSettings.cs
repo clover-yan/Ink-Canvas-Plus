@@ -38,6 +38,9 @@ using Timer = System.Timers.Timer;
 
 namespace InkCanvasPlus
 {
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
     public partial class MainWindow : Window
     {
         #region Touch Events
@@ -153,7 +156,6 @@ namespace InkCanvasPlus
             }
 
             var strokeVisual = new StrokeVisual(inkCanvas.DefaultDrawingAttributes.Clone());
-            StrokeVisualList[id] = strokeVisual;
             StrokeVisualList[id] = strokeVisual;
             var visualCanvas = new VisualCanvas(strokeVisual);
             VisualCanvasList[id] = visualCanvas;

@@ -35,7 +35,6 @@ using Path = System.IO.Path;
 using Point = System.Windows.Point;
 using Timer = System.Timers.Timer;
 
-
 namespace InkCanvasPlus
 {
     /// <summary>
