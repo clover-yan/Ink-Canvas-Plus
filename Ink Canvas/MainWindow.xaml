@@ -35,7 +35,10 @@
         <RoutedUICommand x:Key="HotKey_Capture" Text=" " />
         <RoutedUICommand x:Key="HotKey_Hide" Text=" " />
         <RoutedUICommand x:Key="HotKey_ChangeMode" Text=" " />
+        <RoutedUICommand x:Key="HotKey_ChangeModeToPen" Text=" " />
+        <RoutedUICommand x:Key="HotKey_ChangeModeToMouse" Text=" " />
         <RoutedUICommand x:Key="HotKey_ChangeToEraser" Text=" " />
+        <RoutedUICommand x:Key="HotKey_ChangeToLasso" Text=" " />
         <RoutedUICommand x:Key="HotKey_ChangeToPen0" Text=" " />
         <RoutedUICommand x:Key="HotKey_ChangeToPen1" Text=" " />
         <RoutedUICommand x:Key="HotKey_ChangeToPen2" Text=" " />
@@ -54,9 +57,10 @@
         <KeyBinding Modifiers="Control" Key="Z" Command="{StaticResource Undo_HotKey_Command}" />
         <KeyBinding Modifiers="Control" Key="Y" Command="{StaticResource Redo_HotKey_Command}" />
         <KeyBinding Modifiers="Control+Shift" Key="Z" Command="{StaticResource Redo_HotKey_Command}" />
-        <KeyBinding Modifiers="Alt" Key="S" Command="{StaticResource HotKey_ChangeMode}" />
-        <KeyBinding Modifiers="Alt" Key="D" Command="{StaticResource HotKey_ChangeMode}" />
+        <KeyBinding Modifiers="Alt" Key="D" Command="{StaticResource HotKey_ChangeModeToPen}" />
+        <KeyBinding Modifiers="Alt" Key="S" Command="{StaticResource HotKey_ChangeModeToMouse}" />
         <KeyBinding Modifiers="Alt" Key="E" Command="{StaticResource HotKey_ChangeToEraser}" />
+        <KeyBinding Modifiers="Alt" Key="Q" Command="{StaticResource HotKey_ChangeToLasso}" />
         <KeyBinding Modifiers="Alt" Key="C" Command="{StaticResource HotKey_Capture}" />
         <KeyBinding Modifiers="Alt" Key="OemTilde" Command="{StaticResource HotKey_ChangeToPen0}" />
         <KeyBinding Modifiers="Alt" Key="D1" Command="{StaticResource HotKey_ChangeToPen1}" />
@@ -86,9 +90,18 @@
         <CommandBinding Command="{StaticResource HotKey_ChangeMode}"
                         CanExecute="CommandBinding_CanExecute"
                         Executed="KeyChangeMode" />
+        <CommandBinding Command="{StaticResource HotKey_ChangeModeToPen}"
+                        CanExecute="CommandBinding_CanExecute"
+                        Executed="KeyChangeModeToPen" />
+        <CommandBinding Command="{StaticResource HotKey_ChangeModeToMouse}"
+                        CanExecute="CommandBinding_CanExecute"
+                        Executed="KeyChangeModeToMouse" />
         <CommandBinding Command="{StaticResource HotKey_ChangeToEraser}"
                         CanExecute="CommandBinding_CanExecute"
                         Executed="KeyChangeToEraser" />
+        <CommandBinding Command="{StaticResource HotKey_ChangeToLasso}"
+                        CanExecute="CommandBinding_CanExecute"
+                        Executed="KeyChangeToLasso" />
         <CommandBinding Command="{StaticResource HotKey_Capture}"
                         CanExecute="CommandBinding_CanExecute"
                         Executed="KeyCapture" />
@@ -834,7 +847,7 @@
                         </GroupBox>
 
                         <GroupBox Header="快捷键指南">
-                            <TextBlock TextWrapping="Wrap" Text="全局快捷键&#x000A;• Ctrl+Alt+D：激活 Ink Canvas Plus 并切换书写／鼠标模式&#x000A;&#x000A;应用内快捷键&#x000A;• Alt+V：展开或收起工具栏&#x000A;• Alt+D, Alt+S：切换书写／鼠标模式&#x000A;• Alt+`, Alt+1–5：切换画笔颜色&#x000A;• Alt+L：使用直线工具&#x000A;• Alt+R：使用矩形工具&#x000A;• Alt+O：使用圆形工具&#x000A;• Alt+E：切换橡皮擦&#x000A;• Ctrl+Z：撤销上一步&#x000A;• Ctrl+Shift+Z, Ctrl+Y：重做&#x000A;• Alt+X：清空所有笔迹&#x000A;• Alt+C：屏幕截图&#x000A;• B, Alt+B：进入／退出黑板模式" />
+                            <TextBlock TextWrapping="Wrap" Text="全局快捷键&#x000A;• Ctrl+Alt+D：激活 Ink Canvas Plus 并切换书写／鼠标模式&#x000A;&#x000A;应用内快捷键&#x000A;• Alt+V：展开或收起工具栏&#x000A;• Alt+D：切换到书写模式&#x000A;• Alt+S：切换到鼠标模式&#x000A;• Alt+`, Alt+1–5：切换画笔颜色&#x000A;• Alt+L：使用直线工具&#x000A;• Alt+R：使用矩形工具&#x000A;• Alt+O：使用圆形工具&#x000A;• Alt+Q：使用套索工具&#x000A;• Alt+E：切换橡皮擦&#x000A;• Ctrl+Z：撤销上一步&#x000A;• Ctrl+Shift+Z, Ctrl+Y：重做&#x000A;• Alt+X：清空所有笔迹&#x000A;• Alt+C：屏幕截图&#x000A;• B, Alt+B：进入／退出黑板模式" />
                         </GroupBox>
                     </StackPanel>
                 </ui:ScrollViewerEx>

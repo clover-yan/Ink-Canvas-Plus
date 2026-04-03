@@ -187,9 +187,30 @@ namespace InkCanvasPlus
             SymbolIconCursor_Click(null, null);
         }
 
+        private void KeyChangeModeToMouse(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (inkCanvas.Visibility == Visibility.Visible)
+            {
+                SymbolIconCursor_Click(null, null);
+            }
+        }
+
+        private void KeyChangeModeToPen(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (inkCanvas.Visibility == Visibility.Collapsed)
+            {
+                SymbolIconCursor_Click(null, null);
+            }
+        }
+
         private void KeyChangeToEraser(object sender, ExecutedRoutedEventArgs e)
         {
             BtnErase_Click(sender, e);
+        }
+
+        private void KeyChangeToLasso(object sender, ExecutedRoutedEventArgs e)
+        {
+            SymbolIconSelect_MouseUp(null, null);
         }
 
         private void KeyCapture(object sender, ExecutedRoutedEventArgs e)
