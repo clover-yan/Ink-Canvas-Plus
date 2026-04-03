@@ -1219,6 +1219,54 @@ namespace InkCanvasPlus
             Settings.Appearance.IsAutoCollapseFloatBar = ToggleSwitchAutoCollapseFloatBar.IsOn;
             SaveSettingsToFile();
         }
+
+        private void ToggleSwitchFloatBarShowOnRight_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (!isLoaded) return;
+            Settings.Appearance.IsFloatBarShowOnRight = ToggleSwitchFloatBarShowOnRight.IsOn;
+            SaveSettingsToFile();
+            UpdateFloatBarExpansionDirection();
+        }
+
+        private void UpdateFloatBarExpansionDirection()
+        {
+            if (!isLoaded) return;
+            if (StackPanelFloatBarContainer == null) return;
+
+            var isFloatBarShowOnRight = Settings.Appearance.IsFloatBarShowOnRight;
+
+            // 通过子元素顺序控制展开方向，避免 FlowDirection 反转导致方向判断异常
+            StackPanelFloatBarContainer.FlowDirection = FlowDirection.LeftToRight;
+            BorderFloatingBarMainControls.FlowDirection = FlowDirection.LeftToRight;
+            BorderFloatingBarMainControls.RenderTransformOrigin = isFloatBarShowOnRight ? new Point(1, 0.5) : new Point(0, 0.5);
+            BorderFloatingBarMainControls.Margin = isFloatBarShowOnRight ? new Thickness(0, 0, 5, 0) : new Thickness(5, 0, 0, 0);
+
+            StackPanelFloatBarContainer.Children.Remove(BorderFloatingBarEmoji);
+            StackPanelFloatBarContainer.Children.Remove(BorderFloatingBarMainControls);
+
+            if (isFloatBarShowOnRight)
+            {
+                StackPanelFloatBarContainer.Children.Add(BorderFloatingBarMainControls);
+                StackPanelFloatBarContainer.Children.Add(BorderFloatingBarEmoji);
+            }
+            else
+            {
+                StackPanelFloatBarContainer.Children.Add(BorderFloatingBarEmoji);
+                StackPanelFloatBarContainer.Children.Add(BorderFloatingBarMainControls);
+            }
+
+            if (currentMode != 0 || BtnPPTSlideShowEnd.Visibility == Visibility.Visible) return;
+
+            if (isFloatBarShowOnRight)
+            {
+                ViewboxFloatingBar.Margin = new Thickness(SystemParameters.WorkArea.Left + SystemParameters.WorkArea.Width - 80 - ViewboxFloatingBar.ActualWidth, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80, -2000, -200);
+            }
+            else
+            {
+                ViewboxFloatingBar.Margin = new Thickness(SystemParameters.WorkArea.Left + 80, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80, -2000, -200);
+            }
+        }
+
         private void ToggleSwitchShowButtonExit_Toggled(object sender, RoutedEventArgs e)
         {
             if (!isLoaded) return;

@@ -82,6 +82,8 @@ namespace InkCanvasPlus
         public bool IsTransparentButtonBackground { get; set; } = true;
         [JsonProperty("isAutoCollapseFloatBar")]
         public bool IsAutoCollapseFloatBar { get; set; } = false;
+        [JsonProperty("isFloatBarShowOnRight")]
+        public bool IsFloatBarShowOnRight { get; set; } = false;
         [JsonProperty("isShowExitButton")]
         public bool IsShowExitButton { get; set; } = true;
         [JsonProperty("isShowEraserButton")]

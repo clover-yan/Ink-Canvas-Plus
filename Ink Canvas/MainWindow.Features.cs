@@ -1427,6 +1427,8 @@ namespace InkCanvasPlus
             }
             else
             {
+                var width = ViewboxFloatingBar.ActualWidth;
+                
                 BtnHideInkCanvas_Click(BtnHideInkCanvas, null);
 
                 if (BtnPPTSlideShowEnd.Visibility == Visibility.Visible)
@@ -1437,6 +1439,13 @@ namespace InkCanvasPlus
                         ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
                     }
                 }
+                else if (Settings.Appearance.IsFloatBarShowOnRight)
+                {
+                    await Task.Delay(100);
+                    ViewboxFloatingBar.Margin = new Thickness(ViewboxFloatingBar.Margin.Left + width - ViewboxFloatingBar.ActualWidth, ViewboxFloatingBar.Margin.Top, ViewboxFloatingBar.Margin.Right, ViewboxFloatingBar.Margin.Bottom);
+                }
+
+
             }
 
             SetColors();
@@ -1499,13 +1508,19 @@ namespace InkCanvasPlus
         Point pointDesktop = new Point(-1, -1); //用于记录上次进入PPT或白板时的坐标
         Point pointPPT = new Point(-1, -1); //用于记录上次在PPT中打开白板时的坐标
 
-        private void ImageBlackboard_MouseUp(object sender, MouseButtonEventArgs e)
+        private async void ImageBlackboard_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (currentMode == 0)
             {
                 //进入黑板
                 if (BtnPPTSlideShowEnd.Visibility == Visibility.Collapsed)
                 {
+                    if (Main_Grid.Background != Brushes.Transparent)
+                    {
+                        SymbolIconCursor_Click(null, null);
+                        // 不要问为什么
+                        await Task.Delay(160);
+                    }
                     pointDesktop = new Point(ViewboxFloatingBar.Margin.Left, ViewboxFloatingBar.Margin.Top);
                 }
                 else
