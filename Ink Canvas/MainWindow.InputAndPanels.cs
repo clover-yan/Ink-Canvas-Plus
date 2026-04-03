@@ -1232,7 +1232,7 @@ namespace InkCanvasPlus
                     forcePointEraser = false;
                     break;
             }
-            inkCanvas.EraserShape = forcePointEraser ? new EllipseStylusShape(50, 50) : new EllipseStylusShape(5, 5);
+            inkCanvas.EraserShape = forcePointEraser ? new EllipseStylusShape(50 * GetEraserSizeCoefficient(), 50 * GetEraserSizeCoefficient()) : new EllipseStylusShape(5, 5);
             inkCanvas.EditingMode =
                 forcePointEraser ? InkCanvasEditingMode.EraseByPoint : InkCanvasEditingMode.EraseByStroke;
             drawingShapeMode = 0;
