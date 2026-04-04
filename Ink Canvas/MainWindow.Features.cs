@@ -1559,9 +1559,26 @@ namespace InkCanvasPlus
                 BorderPenColorRed_MouseUp(BorderPenColorRed, null);
             }
             BtnSwitch_Click(BtnSwitch, null);
+            SetColors();
+            SetColorByIndex();
 
             if (currentMode != 0)
             {
+                if (Settings.Canvas.UsingWhiteboard)
+                {
+                    await Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        BorderPenColorBlack_MouseUp(BorderPenColorBlack, null);
+                    }), DispatcherPriority.Loaded);
+                }
+                else
+                {
+                    await Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        BorderPenColorWhite_MouseUp(BorderPenColorWhite, null);
+                    }), DispatcherPriority.Loaded);
+                }
+
                 SetBorderFloatingBarMainControlsVisibility(true, false);
 
                 //ViewboxFloatingBar.Margin = new Thickness(10, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
@@ -1573,6 +1590,11 @@ namespace InkCanvasPlus
             }
             else
             {
+                await Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    BorderPenColorRed_MouseUp(BorderPenColorRed, null);
+                }), DispatcherPriority.Loaded);
+
                 if (BtnPPTSlideShowEnd.Visibility == Visibility.Collapsed)
                 {
                     if (pointDesktop != new Point(-1, -1))
@@ -1599,8 +1621,6 @@ namespace InkCanvasPlus
 
             BtnExit.Foreground = Brushes.White;
             ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
-            SetColors();
-            SetColorByIndex();
             if (currentMode == 0 && inkCanvas.Strokes.Count == 0 && BtnPPTSlideShowEnd.Visibility != Visibility.Visible)
             {
                 BtnHideInkCanvas_Click(BtnHideInkCanvas, null);
