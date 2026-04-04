@@ -615,7 +615,7 @@ namespace InkCanvasPlus
 
         public static Settings Settings = new Settings();
         public static string settingsFileName = "Settings.json";
-        public static string positionFileName = "position";
+        public static string positionFileName = "FloatBarPosition.txt";
         bool isLoaded = false;
         //bool isAutoUpdateEnabled = false;
 
@@ -767,7 +767,14 @@ namespace InkCanvasPlus
             {
                 ToggleSwitchFloatBarShowOnRight.IsOn = false;
             }
-            ToggleSwitchRememberFloatBarPosition.IsOn = Settings.Appearance.IsRememberFloatBarPosition;
+            if (Settings.Appearance.IsRememberFloatBarPosition)
+            {
+                ToggleSwitchRememberFloatBarPosition.IsOn = true;
+            }
+            else
+            {
+                ToggleSwitchRememberFloatBarPosition.IsOn = false;
+            }
             if (Settings.Appearance.IsShowEraserButton)
             {
                 BtnErase.Visibility = Visibility.Visible;
