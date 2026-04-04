@@ -423,15 +423,17 @@ namespace InkCanvasPlus
             if (upPosition == initialMouseDownPositionOnGridInkCanvasCover)
             {
                 // No movement — treat as a click
+                StrokesSelectionClone = new StrokeCollection();
                 if (upPosition.X < inkCanvas.GetSelectionBounds().Left ||
                     upPosition.Y < inkCanvas.GetSelectionBounds().Top ||
                     upPosition.X > inkCanvas.GetSelectionBounds().Right ||
                     upPosition.Y > inkCanvas.GetSelectionBounds().Bottom)
                 {
+                    // Click outside selection: deselect and hide cover
                     inkCanvas.Select(new StrokeCollection());
-                    StrokesSelectionClone = new StrokeCollection();
-                    GridInkCanvasSelectionCover.Visibility = Visibility.Collapsed;
                 }
+                // Click inside or outside: always collapse cover so resize handles are accessible
+                GridInkCanvasSelectionCover.Visibility = Visibility.Collapsed;
             }
             else if (inkCanvas.GetSelectedStrokes().Count == 0)
             {
