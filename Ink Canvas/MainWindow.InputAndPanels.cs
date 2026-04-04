@@ -201,11 +201,29 @@ namespace InkCanvasPlus
             {
                 SymbolIconCursor_Click(null, null);
             }
+            else
+            {
+                if (currentMode == 0)
+                {
+                    BorderPenColorRed_MouseUp(null, null);
+                }
+                else
+                {
+                    if (Settings.Canvas.UsingWhiteboard)
+                    {
+                        BorderPenColorBlack_MouseUp(null, null);
+                    }
+                    else
+                    {
+                        BorderPenColorWhite_MouseUp(null, null);
+                    }
+                }
+            }
         }
 
         private void KeyChangeToEraser(object sender, ExecutedRoutedEventArgs e)
         {
-            BtnErase_Click(sender, e);
+            ImageEraser_MouseUp(null, null);
         }
 
         private void KeyChangeToLasso(object sender, ExecutedRoutedEventArgs e)
