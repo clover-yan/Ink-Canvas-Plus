@@ -94,6 +94,8 @@ namespace InkCanvasPlus
         public bool IsShowLRSwitchButton { get; set; } = false;
         [JsonProperty("isShowModeFingerToggleSwitch")]
         public bool IsShowModeFingerToggleSwitch { get; set; } = true;
+        [JsonProperty("isRememberFloatBarPosition")]
+        public bool IsRememberFloatBarPosition { get; set; } = false;
         [JsonProperty("theme")]
         public int Theme { get; set; } = 5;
     }

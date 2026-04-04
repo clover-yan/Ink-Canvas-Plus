@@ -615,6 +615,7 @@ namespace InkCanvasPlus
 
         public static Settings Settings = new Settings();
         public static string settingsFileName = "Settings.json";
+        public static string positionFileName = "FloatBarPosition.txt";
         bool isLoaded = false;
         //bool isAutoUpdateEnabled = false;
 
@@ -643,6 +644,7 @@ namespace InkCanvasPlus
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 UpdateFloatBarExpansionDirection();
+                RestoreFloatBarPosition();
             }), DispatcherPriority.Render);
 
             if (Settings.Appearance.IsAutoCollapseFloatBar)
@@ -674,6 +676,35 @@ namespace InkCanvasPlus
             }
             e.Cancel = true;
             ShowNotification("如果关闭 Ink Canvas Plus，你将丢失所有未保存的工作。如要继续，请从“Ink Canvas Plus 设置”面板关闭 Ink Canvas Plus。");
+        }
+
+        private void RestoreFloatBarPosition()
+        {
+            if (!Settings.Appearance.IsRememberFloatBarPosition) return;
+            string posFile = App.RootPath + positionFileName;
+            if (!File.Exists(posFile)) return;
+            try
+            {
+                string[] parts = File.ReadAllText(posFile).Trim().Split(',');
+                if (parts.Length != 2) return;
+                double x = double.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture);
+                double y = double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture);
+
+                double barWidth = ViewboxFloatingBar.ActualWidth;
+                double barHeight = ViewboxFloatingBar.ActualHeight;
+                if (barWidth <= 0 || barHeight <= 0) return;
+
+                Rect workArea = SystemParameters.WorkArea;
+                double minX = workArea.Left;
+                double minY = workArea.Top;
+                double maxX = workArea.Right - barWidth;
+                double maxY = workArea.Bottom - barHeight;
+                if (x >= minX && x <= maxX && y >= minY && y <= maxY)
+                {
+                    ViewboxFloatingBar.Margin = new Thickness(x, y, -2000, -200);
+                }
+            }
+            catch { }
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -752,6 +783,14 @@ namespace InkCanvasPlus
             else
             {
                 ToggleSwitchFloatBarShowOnRight.IsOn = false;
+            }
+            if (Settings.Appearance.IsRememberFloatBarPosition)
+            {
+                ToggleSwitchRememberFloatBarPosition.IsOn = true;
+            }
+            else
+            {
+                ToggleSwitchRememberFloatBarPosition.IsOn = false;
             }
             if (Settings.Appearance.IsShowEraserButton)
             {

@@ -1226,6 +1226,17 @@ namespace InkCanvasPlus
             UpdateFloatBarExpansionDirection();
         }
 
+        private void ToggleSwitchRememberFloatBarPosition_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (!isLoaded) return;
+            Settings.Appearance.IsRememberFloatBarPosition = ToggleSwitchRememberFloatBarPosition.IsOn;
+            SaveSettingsToFile();
+            if (Settings.Appearance.IsRememberFloatBarPosition)
+            {
+                SaveFloatBarPositionToFile();
+            }
+        }
+
         private void UpdateFloatBarExpansionDirection()
         {
             if (!isLoaded) return;
@@ -1753,6 +1764,17 @@ namespace InkCanvasPlus
             try
             {
                 File.WriteAllText(App.RootPath + settingsFileName, text);
+            }
+            catch { }
+        }
+
+        private void SaveFloatBarPositionToFile()
+        {
+            try
+            {
+                File.WriteAllText(App.RootPath + positionFileName,
+                    ViewboxFloatingBar.Margin.Left.ToString(System.Globalization.CultureInfo.InvariantCulture) + "," +
+                    ViewboxFloatingBar.Margin.Top.ToString(System.Globalization.CultureInfo.InvariantCulture));
             }
             catch { }
         }
