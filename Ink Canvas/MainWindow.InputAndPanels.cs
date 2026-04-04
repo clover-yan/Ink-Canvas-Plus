@@ -644,6 +644,21 @@ namespace InkCanvasPlus
             {
                 UpdateFloatBarExpansionDirection();
             }), DispatcherPriority.Render);
+
+            if (Settings.Appearance.IsAutoCollapseFloatBar)
+            {
+                new Thread(new ThreadStart(() =>
+                {
+                    Thread.Sleep(3000);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        if (Main_Grid.Background == Brushes.Transparent)
+                        {
+                            SetBorderFloatingBarMainControlsVisibility(false);
+                        }
+                    });
+                })).Start();
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
