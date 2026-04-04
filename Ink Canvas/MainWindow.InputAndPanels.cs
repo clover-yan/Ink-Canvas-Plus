@@ -643,6 +643,7 @@ namespace InkCanvasPlus
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 UpdateFloatBarExpansionDirection();
+                RestoreFloatBarPosition();
             }), DispatcherPriority.Render);
         }
 
@@ -659,6 +660,32 @@ namespace InkCanvasPlus
             }
             e.Cancel = true;
             ShowNotification("如果关闭 Ink Canvas Plus，你将丢失所有未保存的工作。如要继续，请从“Ink Canvas Plus 设置”面板关闭 Ink Canvas Plus。");
+        }
+
+        private void RestoreFloatBarPosition()
+        {
+            if (!Settings.Appearance.IsRememberFloatBarPosition) return;
+            string posFile = App.RootPath + "position";
+            if (!File.Exists(posFile)) return;
+            try
+            {
+                string[] parts = File.ReadAllText(posFile).Trim().Split(',');
+                if (parts.Length != 2) return;
+                double x = double.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture);
+                double y = double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture);
+                double barWidth = ViewboxFloatingBar.ActualWidth;
+                double barHeight = ViewboxFloatingBar.ActualHeight;
+                double screenLeft = SystemParameters.VirtualScreenLeft;
+                double screenTop = SystemParameters.VirtualScreenTop;
+                double screenRight = screenLeft + SystemParameters.VirtualScreenWidth;
+                double screenBottom = screenTop + SystemParameters.VirtualScreenHeight;
+                if (x >= screenLeft && y >= screenTop &&
+                    x + barWidth <= screenRight && y + barHeight <= screenBottom)
+                {
+                    ViewboxFloatingBar.Margin = new Thickness(x, y, -2000, -200);
+                }
+            }
+            catch { }
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -738,6 +765,7 @@ namespace InkCanvasPlus
             {
                 ToggleSwitchFloatBarShowOnRight.IsOn = false;
             }
+            ToggleSwitchRememberFloatBarPosition.IsOn = Settings.Appearance.IsRememberFloatBarPosition;
             if (Settings.Appearance.IsShowEraserButton)
             {
                 BtnErase.Visibility = Visibility.Visible;

@@ -1823,6 +1823,10 @@ namespace InkCanvasPlus
             {
                 SetBorderFloatingBarMainControlsVisibility(!borderFloatingBarMainControlsVisibility);
             }
+            else if (Settings.Appearance.IsRememberFloatBarPosition)
+            {
+                SaveFloatBarPositionToFile();
+            }
 
             GridForFloatingBarDraging.Visibility = Visibility.Collapsed;
             SymbolIconEmoji.Symbol = iNKORE.UI.WPF.Modern.Controls.Symbol.Emoji2;
