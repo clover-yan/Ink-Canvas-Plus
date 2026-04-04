@@ -189,7 +189,7 @@ namespace InkCanvasPlus
 
         private void KeyChangeModeToMouse(object sender, ExecutedRoutedEventArgs e)
         {
-            if (inkCanvas.Visibility == Visibility.Visible)
+            if (Main_Grid.Background != Brushes.Transparent)
             {
                 SymbolIconCursor_Click(null, null);
             }
@@ -197,7 +197,7 @@ namespace InkCanvasPlus
 
         private void KeyChangeModeToPen(object sender, ExecutedRoutedEventArgs e)
         {
-            if (inkCanvas.Visibility == Visibility.Collapsed)
+            if (Main_Grid.Background == Brushes.Transparent)
             {
                 SymbolIconCursor_Click(null, null);
             }
