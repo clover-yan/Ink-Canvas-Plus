@@ -1419,7 +1419,7 @@ namespace InkCanvasPlus
             HideSubPanels();
         }
 
-        private async void SymbolIconCursor_Click(object sender, RoutedEventArgs e)
+        private void SymbolIconCursor_Click(object sender, RoutedEventArgs e)
         {
             if (currentMode != 0)
             {
@@ -1428,28 +1428,24 @@ namespace InkCanvasPlus
             else
             {
                 var width = ViewboxFloatingBar.ActualWidth;
-                
-                BtnHideInkCanvas_Click(BtnHideInkCanvas, null);
-
-                if (BtnPPTSlideShowEnd.Visibility == Visibility.Visible)
+                using (Dispatcher.DisableProcessing())
                 {
-                    if (ViewboxFloatingBar.Margin == new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200))
+                    BtnHideInkCanvas_Click(BtnHideInkCanvas, null);
+
+                    ViewboxFloatingBar.UpdateLayout();
+
+                    if (BtnPPTSlideShowEnd.Visibility == Visibility.Visible)
                     {
-                        await Dispatcher.BeginInvoke(new Action(() =>
+                        if (ViewboxFloatingBar.Margin == new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200))
                         {
                             ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
-                        }), DispatcherPriority.Render);
+                        }
                     }
-                }
-                else if (Settings.Appearance.IsFloatBarShowOnRight)
-                {
-                    await Dispatcher.BeginInvoke(new Action(() =>
+                    else if (Settings.Appearance.IsFloatBarShowOnRight)
                     {
                         ViewboxFloatingBar.Margin = new Thickness(ViewboxFloatingBar.Margin.Left + width - ViewboxFloatingBar.ActualWidth, ViewboxFloatingBar.Margin.Top, ViewboxFloatingBar.Margin.Right, ViewboxFloatingBar.Margin.Bottom);
-                    }), DispatcherPriority.Render);
+                    }
                 }
-
-
             }
 
             SetColors();
