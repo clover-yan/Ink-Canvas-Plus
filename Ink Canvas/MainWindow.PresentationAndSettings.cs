@@ -965,14 +965,10 @@ namespace InkCanvasPlus
                     ViewboxFloatingBar.Margin = new Thickness(pointDesktop.X, pointDesktop.Y, -2000, -200);
                     if (Settings.Appearance.IsAutoCollapseFloatBar)
                     {
-                        new Thread(new ThreadStart(() =>
+                        Dispatcher.BeginInvoke(new Action(() =>
                         {
-                            Thread.Sleep(100);
-                            Application.Current.Dispatcher.Invoke(() =>
-                            {
-                                SetBorderFloatingBarMainControlsVisibility(false);
-                            });
-                        })).Start();
+                            SetBorderFloatingBarMainControlsVisibility(false);
+                        }), DispatcherPriority.Loaded);
                     }
 
                 }
@@ -1096,8 +1092,10 @@ namespace InkCanvasPlus
             {
                 if (ViewboxFloatingBar.Margin == new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200))
                 {
-                    await Task.Delay(100);
-                    ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                    await Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                    }), DispatcherPriority.Render);
                 }
             }
         }
@@ -1255,8 +1253,8 @@ namespace InkCanvasPlus
                 StackPanelFloatBarContainer.Children.Add(BorderFloatingBarMainControls);
             }
 
+            // 重置位置
             if (currentMode != 0 || BtnPPTSlideShowEnd.Visibility == Visibility.Visible) return;
-
             if (isFloatBarShowOnRight)
             {
                 ViewboxFloatingBar.Margin = new Thickness(SystemParameters.WorkArea.Left + SystemParameters.WorkArea.Width - 80 - ViewboxFloatingBar.ActualWidth, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80, -2000, -200);

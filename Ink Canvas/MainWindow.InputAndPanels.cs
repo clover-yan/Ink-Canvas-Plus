@@ -640,13 +640,10 @@ namespace InkCanvasPlus
 
             isLoaded = true;
 
-            new Thread(new ThreadStart(() =>
+            Dispatcher.BeginInvoke(new Action(() =>
             {
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    UpdateFloatBarExpansionDirection();
-                });
-            })).Start();
+                UpdateFloatBarExpansionDirection();
+            }), DispatcherPriority.Render);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -1522,6 +1519,8 @@ namespace InkCanvasPlus
         {
             if (Main_Grid.Background == Brushes.Transparent)
             {
+                SetBorderFloatingBarMainControlsVisibility(true);
+
                 Main_Grid.Background = new SolidColorBrush(StringToColor("#01FFFFFF"));
                 if (Settings.Advanced.DisableEdgeGesture)
                 {
