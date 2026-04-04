@@ -12,19 +12,19 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.2
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       # 安装 .NET Core
       - name: Install .NET Core
-        uses: actions/setup-dotnet@v3.0.3
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: "6.0.x"
 
       # 安装 NuGet
       - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.2.0
+        uses: NuGet/setup-nuget@v3
         with:
           nuget-version: "5.x"
 
@@ -34,7 +34,7 @@ jobs:
 
       # 添加 MSBuild.exe 到环境变量: https://github.com/microsoft/setup-msbuild
       - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.3.1
+        uses: microsoft/setup-msbuild@v3
 
       # 编译整个项目
       - name: Build the solution
@@ -46,7 +46,7 @@ jobs:
 
       # 上传编译成品
       - name: Upload to artifact
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v7
         with:
           name: Ink-Canvas
           path: Ink Canvas/bin/Release
@@ -59,13 +59,13 @@ jobs:
 
       # 用 Inno Setup 打包
       - name: Build installer with Inno Setup
-        uses: Minionguyjpro/Inno-Setup-Action@v1.2.2
+        uses: Minionguyjpro/Inno-Setup-Action@72b8e3d017d7aca25b688c5e1ba29f655350efc8
         with:
           path: packaging/setup.iss
 
       # 上传安装包
       - name: Upload installer
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@v7
         with:
           name: Ink-Canvas-Installer
           path: packaging/output/Ink-Canvas-Plus_setup*.exe
