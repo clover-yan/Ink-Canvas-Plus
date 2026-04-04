@@ -363,6 +363,7 @@ namespace InkCanvasPlus
 
 
         bool isGridInkCanvasSelectionCoverMouseDown = false;
+        bool isMouseDraggingStrokes = false;
         StrokeCollection StrokesSelectionClone = new StrokeCollection();
         Point lastMousePositionOnGridInkCanvasCover = new Point(0, 0);
         Point initialMouseDownPositionOnGridInkCanvasCover = new Point(0, 0);
@@ -397,6 +398,8 @@ namespace InkCanvasPlus
 
             if (delta.X == 0 && delta.Y == 0) return;
 
+            isMouseDraggingStrokes = true;
+
             Matrix m = new Matrix();
             m.Translate(delta.X, delta.Y);
 
@@ -420,9 +423,14 @@ namespace InkCanvasPlus
             isProgramChangeStrokeSelection = false;
 
             Point upPosition = e.GetPosition(null);
-            if (upPosition == initialMouseDownPositionOnGridInkCanvasCover)
+            bool isClick = Math.Abs(upPosition.X - initialMouseDownPositionOnGridInkCanvasCover.X) <= SystemParameters.MinimumHorizontalDragDistance
+                        && Math.Abs(upPosition.Y - initialMouseDownPositionOnGridInkCanvasCover.Y) <= SystemParameters.MinimumVerticalDragDistance;
+
+            isMouseDraggingStrokes = false;
+
+            if (isClick)
             {
-                // No movement — treat as a click
+                // No meaningful movement — treat as a click
                 StrokesSelectionClone = new StrokeCollection();
                 if (upPosition.X < inkCanvas.GetSelectionBounds().Left ||
                     upPosition.Y < inkCanvas.GetSelectionBounds().Top ||
@@ -435,15 +443,29 @@ namespace InkCanvasPlus
                 // Click inside or outside: always collapse cover so resize handles are accessible
                 GridInkCanvasSelectionCover.Visibility = Visibility.Collapsed;
             }
-            else if (inkCanvas.GetSelectedStrokes().Count == 0)
-            {
-                GridInkCanvasSelectionCover.Visibility = Visibility.Collapsed;
-                StrokesSelectionClone = new StrokeCollection();
-            }
             else
             {
-                GridInkCanvasSelectionCover.Visibility = Visibility.Visible;
-                StrokesSelectionClone = new StrokeCollection();
+                // Drag ended — commit the whole movement as a single undo entry
+                if (StrokeManipulationHistory?.Count > 0)
+                {
+                    timeMachine.CommitStrokeManipulationHistory(StrokeManipulationHistory);
+                    foreach (var item in StrokeManipulationHistory)
+                    {
+                        StrokeInitialHistory[item.Key] = item.Value.Item2;
+                    }
+                    StrokeManipulationHistory = null;
+                }
+
+                if (inkCanvas.GetSelectedStrokes().Count == 0)
+                {
+                    GridInkCanvasSelectionCover.Visibility = Visibility.Collapsed;
+                    StrokesSelectionClone = new StrokeCollection();
+                }
+                else
+                {
+                    GridInkCanvasSelectionCover.Visibility = Visibility.Visible;
+                    StrokesSelectionClone = new StrokeCollection();
+                }
             }
         }
 
