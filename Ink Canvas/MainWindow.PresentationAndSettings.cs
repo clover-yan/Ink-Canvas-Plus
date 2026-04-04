@@ -1772,7 +1772,7 @@ namespace InkCanvasPlus
         {
             try
             {
-                File.WriteAllText(App.RootPath + "position",
+                File.WriteAllText(App.RootPath + positionFileName,
                     ViewboxFloatingBar.Margin.Left.ToString(System.Globalization.CultureInfo.InvariantCulture) + "," +
                     ViewboxFloatingBar.Margin.Top.ToString(System.Globalization.CultureInfo.InvariantCulture));
             }

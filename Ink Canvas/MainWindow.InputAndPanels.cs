@@ -615,6 +615,7 @@ namespace InkCanvasPlus
 
         public static Settings Settings = new Settings();
         public static string settingsFileName = "Settings.json";
+        public static string positionFileName = "position";
         bool isLoaded = false;
         //bool isAutoUpdateEnabled = false;
 
@@ -665,7 +666,7 @@ namespace InkCanvasPlus
         private void RestoreFloatBarPosition()
         {
             if (!Settings.Appearance.IsRememberFloatBarPosition) return;
-            string posFile = App.RootPath + "position";
+            string posFile = App.RootPath + positionFileName;
             if (!File.Exists(posFile)) return;
             try
             {
@@ -675,6 +676,7 @@ namespace InkCanvasPlus
                 double y = double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture);
                 double barWidth = ViewboxFloatingBar.ActualWidth;
                 double barHeight = ViewboxFloatingBar.ActualHeight;
+                if (barWidth <= 0 || barHeight <= 0) return;
                 double screenLeft = SystemParameters.VirtualScreenLeft;
                 double screenTop = SystemParameters.VirtualScreenTop;
                 double screenRight = screenLeft + SystemParameters.VirtualScreenWidth;
