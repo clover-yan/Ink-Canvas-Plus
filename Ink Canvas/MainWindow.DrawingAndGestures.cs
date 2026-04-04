@@ -364,18 +364,84 @@ namespace InkCanvasPlus
 
         bool isGridInkCanvasSelectionCoverMouseDown = false;
         StrokeCollection StrokesSelectionClone = new StrokeCollection();
+        Point lastMousePositionOnGridInkCanvasCover = new Point(0, 0);
+        Point initialMouseDownPositionOnGridInkCanvasCover = new Point(0, 0);
 
         private void GridInkCanvasSelectionCover_MouseDown(object sender, MouseButtonEventArgs e)
         {
             isGridInkCanvasSelectionCoverMouseDown = true;
+            lastMousePositionOnGridInkCanvasCover = e.GetPosition(null);
+            initialMouseDownPositionOnGridInkCanvasCover = lastMousePositionOnGridInkCanvasCover;
+
+            if (isStrokeSelectionCloneOn)
+            {
+                StrokeCollection strokes = inkCanvas.GetSelectedStrokes();
+                isProgramChangeStrokeSelection = true;
+                inkCanvas.Select(new StrokeCollection());
+                StrokesSelectionClone = strokes.Clone();
+                inkCanvas.Select(strokes);
+                isProgramChangeStrokeSelection = false;
+                inkCanvas.Strokes.Add(StrokesSelectionClone);
+            }
+
+            ((UIElement)sender).CaptureMouse();
+        }
+
+        private void GridInkCanvasSelectionCover_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!isGridInkCanvasSelectionCoverMouseDown) return;
+
+            Point currentPosition = e.GetPosition(null);
+            Vector delta = currentPosition - lastMousePositionOnGridInkCanvasCover;
+            lastMousePositionOnGridInkCanvasCover = currentPosition;
+
+            if (delta.X == 0 && delta.Y == 0) return;
+
+            Matrix m = new Matrix();
+            m.Translate(delta.X, delta.Y);
+
+            StrokeCollection strokes = StrokesSelectionClone.Count != 0
+                ? StrokesSelectionClone
+                : inkCanvas.GetSelectedStrokes();
+
+            foreach (Stroke stroke in strokes)
+            {
+                stroke.Transform(m, false);
+            }
+            updateBorderStrokeSelectionControlLocation();
         }
 
         private void GridInkCanvasSelectionCover_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (isGridInkCanvasSelectionCoverMouseDown)
+            if (!isGridInkCanvasSelectionCoverMouseDown) return;
+
+            ((UIElement)sender).ReleaseMouseCapture();
+            isGridInkCanvasSelectionCoverMouseDown = false;
+            isProgramChangeStrokeSelection = false;
+
+            Point upPosition = e.GetPosition(null);
+            if (upPosition == initialMouseDownPositionOnGridInkCanvasCover)
             {
-                isGridInkCanvasSelectionCoverMouseDown = false;
+                // No movement — treat as a click
+                if (upPosition.X < inkCanvas.GetSelectionBounds().Left ||
+                    upPosition.Y < inkCanvas.GetSelectionBounds().Top ||
+                    upPosition.X > inkCanvas.GetSelectionBounds().Right ||
+                    upPosition.Y > inkCanvas.GetSelectionBounds().Bottom)
+                {
+                    inkCanvas.Select(new StrokeCollection());
+                    StrokesSelectionClone = new StrokeCollection();
+                    GridInkCanvasSelectionCover.Visibility = Visibility.Collapsed;
+                }
+            }
+            else if (inkCanvas.GetSelectedStrokes().Count == 0)
+            {
                 GridInkCanvasSelectionCover.Visibility = Visibility.Collapsed;
+                StrokesSelectionClone = new StrokeCollection();
+            }
+            else
+            {
+                GridInkCanvasSelectionCover.Visibility = Visibility.Visible;
+                StrokesSelectionClone = new StrokeCollection();
             }
         }
 
