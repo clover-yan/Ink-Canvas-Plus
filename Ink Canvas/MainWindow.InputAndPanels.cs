@@ -278,7 +278,7 @@ namespace InkCanvasPlus
 
         private void KeyClearAll(object sender, ExecutedRoutedEventArgs e)
         {
-            BtnClear_Click(null, null);
+            SymbolIconDelete_MouseUp(null, null);
         }
 
         private void KeyToggleFloatBarPosition(object sender, ExecutedRoutedEventArgs e)
