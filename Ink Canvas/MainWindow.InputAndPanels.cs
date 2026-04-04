@@ -201,6 +201,10 @@ namespace InkCanvasPlus
             {
                 SymbolIconCursor_Click(null, null);
             }
+            else if (ImageEraserMask.Visibility == Visibility.Visible || inkCanvas.EditingMode == InkCanvasEditingMode.Select)
+            {
+                SetColorByIndex(true);
+            }
             else
             {
                 if (currentMode == 0)
@@ -1544,9 +1548,9 @@ namespace InkCanvasPlus
                 ToggleSwitchTransparentButtonBackground_Toggled(ToggleSwitchTransparentButtonBackground, null);
             }
         }
-        private void SetColorByIndex()
+        private void SetColorByIndex(bool forced = false)
         {
-            if (currentMode != 0 || GridInkCanvasSelectionCover.Visibility != Visibility.Collapsed)
+            if (forced || currentMode != 0 || GridInkCanvasSelectionCover.Visibility != Visibility.Collapsed)
                 if (inkColor == 0)
                 {
                     BtnColorBlack_Click(null, null);
@@ -1609,8 +1613,10 @@ namespace InkCanvasPlus
                 GridBackgroundCoverHolder.Visibility = Visibility.Visible;
                 GridInkCanvasSelectionCover.Visibility = Visibility.Collapsed;
 
-                if (ImageEraserMask.Visibility == Visibility.Visible)
-                    BtnColorRed_Click(sender, null);
+                if (ImageEraserMask.Visibility == Visibility.Visible || inkCanvas.EditingMode == InkCanvasEditingMode.Select)
+                {
+                    SetColorByIndex(true);
+                }
 
                 if (GridBackgroundCover.Visibility == Visibility.Collapsed)
                 {
