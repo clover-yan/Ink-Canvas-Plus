@@ -50,6 +50,7 @@
         <RoutedUICommand x:Key="HotKey_DrawCircle" Text=" " />
         <RoutedUICommand x:Key="HotKey_SwitchToBoard" Text=" " />
         <RoutedUICommand x:Key="HotKey_ClearAll" Text=" " />
+        <RoutedUICommand x:Key="HotKey_ToggleFloatBarPosition" Text=" " />
     </Window.Resources>
     <!--输入命令绑定-->
     <Window.InputBindings>
@@ -75,6 +76,7 @@
         <KeyBinding Key="B" Command="{StaticResource HotKey_SwitchToBoard}" />
         <KeyBinding Modifiers="Alt" Key="B" Command="{StaticResource HotKey_SwitchToBoard}" />
         <KeyBinding Modifiers="Alt" Key="X" Command="{StaticResource HotKey_ClearAll}" />
+        <KeyBinding Modifiers="Alt" Key="T" Command="{StaticResource HotKey_ToggleFloatBarPosition}" />
     </Window.InputBindings>
     <!--命令执行方法绑定-->
     <Window.CommandBindings>
@@ -141,6 +143,9 @@
         <CommandBinding Command="{StaticResource HotKey_ClearAll}"
                         CanExecute="CommandBinding_CanExecute"
                         Executed="KeyClearAll" />
+        <CommandBinding Command="{StaticResource HotKey_ToggleFloatBarPosition}"
+                        CanExecute="CommandBinding_CanExecute"
+                        Executed="KeyToggleFloatBarPosition" />
     </Window.CommandBindings>
     <Grid x:Name="Main_Grid" Background="#01FFFFFF">
         <Grid Name="GridBackgroundCoverHolder">
@@ -745,6 +750,7 @@
                         <GroupBox Name="GroupBoxAppearanceNewUI" Header="外观">
                             <ui:SimpleStackPanel Spacing="12">
                                 <ui:ToggleSwitch Name="ToggleSwitchAutoCollapseFloatBar" Header="自动折叠浮动栏" IsOn="False" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchAutoCollapseFloatBar_Toggled" />
+                                <ui:ToggleSwitch Name="ToggleSwitchFloatBarShowOnRight" Header="浮动栏显示在右侧" IsOn="False" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchFloatBarShowOnRight_Toggled" />
                                 <ui:ToggleSwitch Header="显示“橡皮”按钮" IsOn="{Binding ElementName=ToggleSwitchShowButtonEraser, Path=IsOn}" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" />
                                 <ui:ToggleSwitch Name="ToggleSwitchShowButtonPPTNavigation" Header="显示 PPT 浏览切页按钮" IsOn="True" FontFamily="Microsoft YaHei UI" OnContent="开" OffContent="关" Toggled="ToggleSwitchShowButtonPPTNavigation_OnToggled" />
                                 <TextBlock Text="颜色主题" FontFamily="Microsoft YaHei UI" FontSize="14" />
@@ -847,7 +853,7 @@
                         </GroupBox>
 
                         <GroupBox Header="快捷键指南">
-                            <TextBlock TextWrapping="Wrap" Text="全局快捷键&#x000A;• Ctrl+Alt+D：激活 Ink Canvas Plus 并切换书写／鼠标模式&#x000A;&#x000A;应用内快捷键&#x000A;• Alt+V：展开或收起工具栏&#x000A;• Alt+D：切换到书写模式&#x000A;• Alt+S：切换到鼠标模式&#x000A;• Alt+`, Alt+1–5：切换画笔颜色&#x000A;• Alt+L：使用直线工具&#x000A;• Alt+R：使用矩形工具&#x000A;• Alt+O：使用圆形工具&#x000A;• Alt+Q：使用套索工具&#x000A;• Alt+E：切换橡皮擦&#x000A;• Ctrl+Z：撤销上一步&#x000A;• Ctrl+Shift+Z, Ctrl+Y：重做&#x000A;• Alt+X：清除选中笔迹／所有笔迹&#x000A;• Alt+C：屏幕截图&#x000A;• B, Alt+B：进入／退出黑板模式" />
+                            <TextBlock TextWrapping="Wrap" Text="全局快捷键&#x000A;• Ctrl+Alt+D：激活 Ink Canvas Plus 并切换书写／鼠标模式&#x000A;&#x000A;应用内快捷键&#x000A;• Alt+V：展开或收起工具栏&#x000A;• Alt+D：切换到书写模式&#x000A;• Alt+S：切换到鼠标模式&#x000A;• Alt+`, Alt+1–5：切换画笔颜色&#x000A;• Alt+L：使用直线工具&#x000A;• Alt+R：使用矩形工具&#x000A;• Alt+O：使用圆形工具&#x000A;• Alt+Q：使用套索工具&#x000A;• Alt+E：切换橡皮擦&#x000A;• Ctrl+Z：撤销上一步&#x000A;• Ctrl+Shift+Z, Ctrl+Y：重做&#x000A;• Alt+X：清除选中笔迹／所有笔迹&#x000A;• Alt+C：屏幕截图&#x000A;• B, Alt+B：进入／退出黑板模式&#x000A;• Alt+T：切换浮动工具栏位置" />
                         </GroupBox>
                     </StackPanel>
                 </ui:ScrollViewerEx>
@@ -1174,14 +1180,14 @@
             <Viewbox.LayoutTransform>
                 <ScaleTransform x:Name="ViewboxFloatingBarScaleTransform" ScaleX="1" ScaleY="1" />
             </Viewbox.LayoutTransform>
-            <ui:SimpleStackPanel Orientation="Horizontal">
-                <Border Width="36" Height="36" CornerRadius="18" Background="{DynamicResource FloatBarBackground}" BorderThickness="1" BorderBrush="{DynamicResource FloatBarBorderBrush}" MouseDown="SymbolIconEmoji_MouseDown" MouseUp="SymbolIconEmoji_MouseUp">
+            <ui:SimpleStackPanel x:Name="StackPanelFloatBarContainer" Orientation="Horizontal">
+                <Border x:Name="BorderFloatingBarEmoji" FlowDirection="LeftToRight" Width="36" Height="36" CornerRadius="18" Background="{DynamicResource FloatBarBackground}" BorderThickness="1" BorderBrush="{DynamicResource FloatBarBorderBrush}" MouseDown="SymbolIconEmoji_MouseDown" MouseUp="SymbolIconEmoji_MouseUp">
                     <ui:SimpleStackPanel Margin="0,5,0,5" Spacing="10" Orientation="Horizontal"
                                          HorizontalAlignment="Center">
                         <ui:SymbolIcon Name="SymbolIconEmoji" Symbol="Emoji2" Foreground="{DynamicResource FloatBarForeground}" />
                     </ui:SimpleStackPanel>
                 </Border>
-                <Border Margin="5,0,0,0" Visibility="Visible" Height="36" Name="BorderFloatingBarMainControls" Background="{DynamicResource FloatBarBackground}" CornerRadius="18" BorderThickness="1" BorderBrush="{DynamicResource FloatBarBorderBrush}">
+                <Border Margin="5,0,0,0" FlowDirection="LeftToRight" RenderTransformOrigin="0,0.5" Visibility="Visible" Height="36" Name="BorderFloatingBarMainControls" Background="{DynamicResource FloatBarBackground}" CornerRadius="18" BorderThickness="1" BorderBrush="{DynamicResource FloatBarBorderBrush}">
                     <Border.RenderTransform>
                         <ScaleTransform />
                     </Border.RenderTransform>

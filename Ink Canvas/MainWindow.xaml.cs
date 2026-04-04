@@ -82,7 +82,6 @@ namespace InkCanvasPlus
                 ViewBoxStackPanelShapes.Visibility = Visibility.Collapsed;
                 HideSubPanels();
 
-                ViewboxFloatingBar.Margin = new Thickness(SystemParameters.WorkArea.Left + 80, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80, -2000, -200);
                 if (Settings.Appearance.IsAutoCollapseFloatBar)
                 {
                     new Thread(new ThreadStart(() =>

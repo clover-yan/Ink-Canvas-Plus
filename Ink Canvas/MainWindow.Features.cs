@@ -1427,16 +1427,29 @@ namespace InkCanvasPlus
             }
             else
             {
+                var width = ViewboxFloatingBar.ActualWidth;
+                
                 BtnHideInkCanvas_Click(BtnHideInkCanvas, null);
 
                 if (BtnPPTSlideShowEnd.Visibility == Visibility.Visible)
                 {
                     if (ViewboxFloatingBar.Margin == new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200))
                     {
-                        await Task.Delay(100);
-                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                        await Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                        }), DispatcherPriority.Render);
                     }
                 }
+                else if (Settings.Appearance.IsFloatBarShowOnRight)
+                {
+                    await Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        ViewboxFloatingBar.Margin = new Thickness(ViewboxFloatingBar.Margin.Left + width - ViewboxFloatingBar.ActualWidth, ViewboxFloatingBar.Margin.Top, ViewboxFloatingBar.Margin.Right, ViewboxFloatingBar.Margin.Bottom);
+                    }), DispatcherPriority.Render);
+                }
+
+
             }
 
             SetColors();
@@ -1499,14 +1512,24 @@ namespace InkCanvasPlus
         Point pointDesktop = new Point(-1, -1); //用于记录上次进入PPT或白板时的坐标
         Point pointPPT = new Point(-1, -1); //用于记录上次在PPT中打开白板时的坐标
 
-        private void ImageBlackboard_MouseUp(object sender, MouseButtonEventArgs e)
+        private async void ImageBlackboard_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (currentMode == 0)
             {
                 //进入黑板
                 if (BtnPPTSlideShowEnd.Visibility == Visibility.Collapsed)
                 {
-                    pointDesktop = new Point(ViewboxFloatingBar.Margin.Left, ViewboxFloatingBar.Margin.Top);
+                    if (Main_Grid.Background != Brushes.Transparent)
+                    {
+                        await Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            SymbolIconCursor_Click(null, null);
+                        }), DispatcherPriority.Loaded);
+                    }
+                    await Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        pointDesktop = new Point(ViewboxFloatingBar.Margin.Left, ViewboxFloatingBar.Margin.Top);
+                    }), DispatcherPriority.Render);
                 }
                 else
                 {
@@ -1514,16 +1537,6 @@ namespace InkCanvasPlus
                     lockSmithPPT = _lockSmith;
                     ChangeLockSmithState(lockSmithDesktop);
                 }
-                //ViewboxFloatingBar.Margin = new Thickness(10, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
-
-                new Thread(new ThreadStart(() =>
-                {
-                    Thread.Sleep(100);
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
-                    });
-                })).Start();
                 if (Settings.Canvas.UsingWhiteboard)
                 {
                     BorderPenColorBlack_MouseUp(BorderPenColorBlack, null);
@@ -1538,42 +1551,51 @@ namespace InkCanvasPlus
                 //关闭黑板
                 if (isInMultiTouchMode) BorderMultiTouchMode_MouseUp(null, null);
 
-                if (BtnPPTSlideShowEnd.Visibility == Visibility.Collapsed)
-                {
-                    if (pointDesktop != new Point(-1, -1))
-                    {
-                        ViewboxFloatingBar.Margin = new Thickness(pointDesktop.X, pointDesktop.Y, -2000, -200);
-                        pointDesktop = new Point(-1, -1);
-                        if (Settings.Appearance.IsAutoCollapseFloatBar)
-                        {
-                            new Thread(new ThreadStart(() =>
-                            {
-                                Thread.Sleep(100);
-                                Application.Current.Dispatcher.Invoke(() =>
-                                {
-                                    SetBorderFloatingBarMainControlsVisibility(false);
-                                });
-                            })).Start();
-                        }
-
-                    }
-                }
-                else
+                if (BtnPPTSlideShowEnd.Visibility != Visibility.Collapsed)
                 {
                     lockSmithDesktop = _lockSmith;
                     ChangeLockSmithState(lockSmithPPT);
-                    new Thread(new ThreadStart(() =>
-                    {
-                        Thread.Sleep(100);
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
-                        });
-                    })).Start();
                 }
                 BorderPenColorRed_MouseUp(BorderPenColorRed, null);
             }
             BtnSwitch_Click(BtnSwitch, null);
+
+            if (currentMode != 0)
+            {
+                SetBorderFloatingBarMainControlsVisibility(true, false);
+
+                //ViewboxFloatingBar.Margin = new Thickness(10, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+
+                await Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                }), DispatcherPriority.Render);
+            }
+            else
+            {
+                if (BtnPPTSlideShowEnd.Visibility == Visibility.Collapsed)
+                {
+                    if (pointDesktop != new Point(-1, -1))
+                    {
+                        await Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            ViewboxFloatingBar.Margin = new Thickness(pointDesktop.X, pointDesktop.Y, -2000, -200);
+                            pointDesktop = new Point(-1, -1);
+                            if (Settings.Appearance.IsAutoCollapseFloatBar)
+                            {
+                                SetBorderFloatingBarMainControlsVisibility(false);
+                            }
+                        }), DispatcherPriority.Loaded);
+                    }
+                }
+                else
+                {
+                    await Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                    }), DispatcherPriority.Render);
+                }
+            }
 
             BtnExit.Foreground = Brushes.White;
             ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;

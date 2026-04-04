@@ -281,6 +281,11 @@ namespace InkCanvasPlus
             SymbolIconDelete_MouseUp(null, null);
         }
 
+        private void KeyToggleFloatBarPosition(object sender, ExecutedRoutedEventArgs e)
+        {
+            ToggleSwitchFloatBarShowOnRight.IsOn = !ToggleSwitchFloatBarShowOnRight.IsOn;
+        }
+
         private void ComponentDispatcher_ThreadPreprocessMessage(ref MSG msg, ref bool handled)
         {
             if (msg.message == WM_HOTKEY && msg.wParam.ToInt32() == HOTKEY_ID)
@@ -634,6 +639,11 @@ namespace InkCanvasPlus
             PreloadIALibrary();
 
             isLoaded = true;
+
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                UpdateFloatBarExpansionDirection();
+            }), DispatcherPriority.Render);
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -719,6 +729,14 @@ namespace InkCanvasPlus
             else
             {
                 ToggleSwitchAutoCollapseFloatBar.IsOn = false;
+            }
+            if (Settings.Appearance.IsFloatBarShowOnRight)
+            {
+                ToggleSwitchFloatBarShowOnRight.IsOn = true;
+            }
+            else
+            {
+                ToggleSwitchFloatBarShowOnRight.IsOn = false;
             }
             if (Settings.Appearance.IsShowEraserButton)
             {
@@ -1501,6 +1519,8 @@ namespace InkCanvasPlus
         {
             if (Main_Grid.Background == Brushes.Transparent)
             {
+                SetBorderFloatingBarMainControlsVisibility(true);
+
                 Main_Grid.Background = new SolidColorBrush(StringToColor("#01FFFFFF"));
                 if (Settings.Advanced.DisableEdgeGesture)
                 {
