@@ -674,15 +674,17 @@ namespace InkCanvasPlus
                 if (parts.Length != 2) return;
                 double x = double.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture);
                 double y = double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture);
+
                 double barWidth = ViewboxFloatingBar.ActualWidth;
                 double barHeight = ViewboxFloatingBar.ActualHeight;
                 if (barWidth <= 0 || barHeight <= 0) return;
-                double screenLeft = SystemParameters.VirtualScreenLeft;
-                double screenTop = SystemParameters.VirtualScreenTop;
-                double screenRight = screenLeft + SystemParameters.VirtualScreenWidth;
-                double screenBottom = screenTop + SystemParameters.VirtualScreenHeight;
-                if (x >= screenLeft && y >= screenTop &&
-                    x + barWidth <= screenRight && y + barHeight <= screenBottom)
+
+                Rect workArea = SystemParameters.WorkArea;
+                double minX = workArea.Left;
+                double minY = workArea.Top;
+                double maxX = workArea.Right - barWidth;
+                double maxY = workArea.Bottom - barHeight;
+                if (x >= minX && x <= maxX && y >= minY && y <= maxY)
                 {
                     ViewboxFloatingBar.Margin = new Thickness(x, y, -2000, -200);
                 }
