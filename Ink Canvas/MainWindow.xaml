@@ -679,6 +679,8 @@
                                 </ComboBox>
                                 <TextBlock Text="橡皮大小" FontFamily="Microsoft YaHei UI" FontSize="14" />
                                 <ComboBox Name="ComboBoxEraserSize" FontFamily="Microsoft YaHei UI" SelectedIndex="0" SelectionChanged="ComboBoxEraserSize_SelectionChanged">
+                                    <ComboBoxItem Content="极小" FontFamily="Microsoft YaHei UI" />
+                                    <ComboBoxItem Content="很小" FontFamily="Microsoft YaHei UI" />
                                     <ComboBoxItem Content="小（默认）" FontFamily="Microsoft YaHei UI" />
                                     <ComboBoxItem Content="较小" FontFamily="Microsoft YaHei UI" />
                                     <ComboBoxItem Content="中" FontFamily="Microsoft YaHei UI" />

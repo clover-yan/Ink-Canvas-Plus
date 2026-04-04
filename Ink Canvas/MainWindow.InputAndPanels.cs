@@ -993,7 +993,7 @@ namespace InkCanvasPlus
 
                 ComboBoxPenStyle.SelectedIndex = Settings.Canvas.InkStyle;
 
-                ComboBoxEraserSize.SelectedIndex = Settings.Canvas.EraserSize;
+                ComboBoxEraserSize.SelectedIndex = Settings.Canvas.EraserSize + 2;
 
                 ComboBoxHyperbolaAsymptoteOption.SelectedIndex = (int)Settings.Canvas.HyperbolaAsymptoteOption;
             }

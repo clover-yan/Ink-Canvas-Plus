@@ -210,6 +210,12 @@ namespace InkCanvasPlus
             double k = 1;
             switch (Settings.Canvas.EraserSize)
             {
+                case -2:
+                    k = 0.5;
+                    break;
+                case -1:
+                    k = 0.8;
+                    break;
                 case 1:
                     k = 1.6;
                     break;
@@ -1430,7 +1436,7 @@ namespace InkCanvasPlus
         private void ComboBoxEraserSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!isLoaded) return;
-            Settings.Canvas.EraserSize = ComboBoxEraserSize.SelectedIndex;
+            Settings.Canvas.EraserSize = ComboBoxEraserSize.SelectedIndex - 2;
             SaveSettingsToFile();
         }
 
