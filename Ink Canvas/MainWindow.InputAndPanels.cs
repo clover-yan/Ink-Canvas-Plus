@@ -1591,8 +1591,6 @@ namespace InkCanvasPlus
         {
             if (Main_Grid.Background == Brushes.Transparent)
             {
-                SetBorderFloatingBarMainControlsVisibility(true);
-
                 Main_Grid.Background = new SolidColorBrush(StringToColor("#01FFFFFF"));
                 if (Settings.Advanced.DisableEdgeGesture)
                 {
