@@ -69,3 +69,4 @@ jobs:
         with:
           name: Ink-Canvas-Installer
           path: packaging/output/Ink-Canvas-Plus_setup*.exe
+          archive: false
