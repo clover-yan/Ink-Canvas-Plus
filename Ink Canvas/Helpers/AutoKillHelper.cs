@@ -48,10 +48,12 @@ namespace InkCanvasPlus.Helpers
                     if (rect.Left <= -175 && (double)height / (double)rect.Left < -1)
                     {
                         GetWindowThreadProcessId(hWnd, out uint processId);
-                        Process process = Process.GetProcessById((int)processId);
-                        if (process.ProcessName.Equals("EasiNote", StringComparison.OrdinalIgnoreCase))
+                        using (Process process = Process.GetProcessById((int)processId))
                         {
-                            PostMessage(hWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                            if (process.ProcessName.Equals("EasiNote", StringComparison.OrdinalIgnoreCase))
+                            {
+                                PostMessage(hWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                            }
                         }
                     }
                 }

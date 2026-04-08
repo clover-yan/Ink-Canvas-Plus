@@ -1021,14 +1021,17 @@ namespace InkCanvasPlus
                 myrp = (HttpWebResponse)ex.Response;
             }
 
-            if (myrp?.StatusCode != HttpStatusCode.OK)
+            using (myrp)
             {
-                return "null";
-            }
+                if (myrp?.StatusCode != HttpStatusCode.OK)
+                {
+                    return "null";
+                }
 
-            using (StreamReader sr = new StreamReader(myrp.GetResponseStream()))
-            {
-                return sr.ReadToEnd();
+                using (StreamReader sr = new StreamReader(myrp.GetResponseStream()))
+                {
+                    return sr.ReadToEnd();
+                }
             }
         }
 
@@ -1747,7 +1750,7 @@ namespace InkCanvasPlus
                 });
             })).Start();
         }
-        bool isStopInkReplay = false;
+        volatile bool isStopInkReplay = false;
         private void InkCanvasForInkReplay_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
@@ -1912,9 +1915,11 @@ namespace InkCanvasPlus
                     Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Ink Canvas Strokes\User Saved");
                 }
 
-                FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
-                    @"\Ink Canvas Strokes\User Saved\" + DateTime.Now.ToString("u").Replace(':', '-') + ".icstk", FileMode.Create); //Ink Canvas STroKes
-                inkCanvas.Strokes.Save(fs);
+                using (FileStream fs = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +
+                    @"\Ink Canvas Strokes\User Saved\" + DateTime.Now.ToString("u").Replace(':', '-') + ".icstk", FileMode.Create)) //Ink Canvas STroKes
+                {
+                    inkCanvas.Strokes.Save(fs);
+                }
 
                 if (newNotice)
                 {

@@ -692,6 +692,7 @@ namespace InkCanvasPlus
                 var helper = new WindowInteropHelper(this);
                 UnregisterHotKey(helper.Handle, HOTKEY_ID);
                 ComponentDispatcher.ThreadPreprocessMessage -= ComponentDispatcher_ThreadPreprocessMessage;
+                Microsoft.Win32.SystemEvents.UserPreferenceChanged -= SystemEvents_UserPreferenceChanged;
 
                 e.Cancel = false;
                 return;

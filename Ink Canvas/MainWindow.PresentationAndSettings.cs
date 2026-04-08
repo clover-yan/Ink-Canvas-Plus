@@ -526,7 +526,9 @@ namespace InkCanvasPlus
             try
             {
                 Process[] processes = Process.GetProcessesByName("wpp");
-                if (processes.Length > 0 && !isWPSSupportOn)
+                bool hasWppProcesses = processes.Length > 0;
+                foreach (var proc in processes) proc.Dispose();
+                if (hasWppProcesses && !isWPSSupportOn)
                 {
                     return;
                 }
@@ -892,6 +894,7 @@ namespace InkCanvasPlus
                         {
                             if (memoryStreams[i].Length > 8)
                             {
+                                memoryStreams[i].Position = 0;
                                 byte[] srcBuf = new Byte[memoryStreams[i].Length];
                                 //MessageBox.Show(memoryStreams[i].Length.ToString());
                                 int byteLength = memoryStreams[i].Read(srcBuf, 0, srcBuf.Length);

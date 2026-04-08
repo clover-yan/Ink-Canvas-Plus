@@ -168,19 +168,23 @@ namespace InkCanvasPlus
                     {
                         arg += " /IM PPTService.exe";
                     }
+                    foreach (var proc in processes) proc.Dispose();
                     processes = Process.GetProcessesByName("SeewoIwbAssistant");
                     if (processes.Length > 0)
                     {
                         arg += " /IM SeewoIwbAssistant.exe" +
                             " /IM Sia.Guard.exe";
                     }
+                    foreach (var proc in processes) proc.Dispose();
                 }
                 if (arg != "/F")
                 {
-                    Process p = new Process();
-                    p.StartInfo = new ProcessStartInfo("taskkill", arg);
-                    p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    p.Start();
+                    using (Process p = new Process())
+                    {
+                        p.StartInfo = new ProcessStartInfo("taskkill", arg);
+                        p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                        p.Start();
+                    }
                 }
                 if (Settings.Automation.IsAutoKillEasiNote)
                 {
@@ -189,6 +193,7 @@ namespace InkCanvasPlus
                     {
                         AutoKillHelper.KillEasiNoteFloatBall();
                     }
+                    foreach (var proc in processes) proc.Dispose();
                 }
             }
             catch { }

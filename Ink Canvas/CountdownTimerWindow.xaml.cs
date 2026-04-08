@@ -335,6 +335,8 @@ namespace InkCanvasPlus
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             isTimerRunning = false;
+            timer.Stop();
+            timer.Dispose();
         }
 
         private void BtnClose_MouseUp(object sender, MouseButtonEventArgs e)

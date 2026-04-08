@@ -39,9 +39,10 @@ namespace InkCanvasPlus.Helpers
                 {
                     Directory.CreateDirectory(App.RootPath);
                 }
-                StreamWriter sw = new StreamWriter(file, true);
-                sw.WriteLine(string.Format("{0} [{1}] {2}", DateTime.Now.ToString("O"), strLogType, str));
-                sw.Close();
+                using (StreamWriter sw = new StreamWriter(file, true))
+                {
+                    sw.WriteLine(string.Format("{0} [{1}] {2}", DateTime.Now.ToString("O"), strLogType, str));
+                }
             }
             catch { }
         }
