@@ -65,7 +65,19 @@ namespace InkCanvasPlus
                 try
                 {
                     var current = Process.GetCurrentProcess();
-                    var others = Process.GetProcessesByName(current.ProcessName).Where(p => p.Id != current.Id).ToList();
+                    var others = Process.GetProcessesByName(current.ProcessName).Where(p => {
+                        if (p.Id == current.Id) return false;
+                        try
+                        {
+                            return string.Equals(p.MainModule.FileName, current.MainModule.FileName, StringComparison.InvariantCultureIgnoreCase);
+
+                        }
+                        catch
+                        {
+                            // Access denied to process info, maybe it's a system process or we don't have permissions. Just skip it.
+                            return false;
+                        }
+                    }).ToList();
                     foreach (var p in others)
                     {
                         try
