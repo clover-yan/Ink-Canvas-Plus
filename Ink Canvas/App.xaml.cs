@@ -2,9 +2,13 @@
 using iNKORE.UI.WPF.Modern.Controls;
 using System;
 using System.Linq;
+using System.Diagnostics;
+using System.Text;
+using System.Security.Cryptography;
 using System.Reflection;
 using System.Windows;
 using MessageBox = System.Windows.MessageBox;
+using System.Threading;
 
 namespace InkCanvasPlus
 {
@@ -37,15 +41,73 @@ namespace InkCanvasPlus
 
             LogHelper.NewLog(string.Format("Ink Canvas Starting (Version: {0})", Assembly.GetExecutingAssembly().GetName().Version.ToString()));
 
-            bool ret;
-            mutex = new System.Threading.Mutex(true, "Ink_Canvas", out ret);
+            string mutexName;
+            using (var sha1 = SHA1.Create())
+            {
+                var hashBytes = sha1.ComputeHash(Encoding.UTF8.GetBytes(AppDomain.CurrentDomain.BaseDirectory.ToLowerInvariant().Replace(":\\", ".").Replace("\\", ".")));
+                mutexName = "top.khyan.InkCanvasPlus." + BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant().Substring(0, 12);
+                LogHelper.NewLog($"Generated mutex name: {mutexName}");
+            }
+
+            mutex = new System.Threading.Mutex(true, mutexName, out bool ret);
 
             if (!ret && !e.Args.Contains("-m")) //-m multiple
             {
                 LogHelper.NewLog("Detected existing instance");
-                MessageBox.Show("已有一个程序实例正在运行");
-                LogHelper.NewLog("Ink Canvas automatically closed");
-                Environment.Exit(0);
+
+                var ask = MessageBox.Show("Ink Canvas Plus 可能已经在运行了。请寻找屏幕上笑脸形状的图标；\n\n如果没找到，您可以点击「是」来重新启动它。", "Ink Canvas Plus 检测到其他实例", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (ask == MessageBoxResult.No)
+                {
+                    LogHelper.NewLog("User chose not to kill other instances. Exiting.");
+                    Environment.Exit(0);
+                }
+
+                try
+                {
+                    var current = Process.GetCurrentProcess();
+                    var others = Process.GetProcessesByName(current.ProcessName).Where(p => p.Id != current.Id).ToList();
+                    foreach (var p in others)
+                    {
+                        try
+                        {
+                            LogHelper.NewLog($"Attempting to kill process {p.ProcessName} (PID {p.Id})");
+                            p.Kill();
+                            p.WaitForExit(2000);
+                            LogHelper.NewLog($"Killed process {p.ProcessName} (PID {p.Id})");
+                        }
+                        catch (Exception ex)
+                        {
+                            LogHelper.NewLog($"Failed to kill process {p.ProcessName} (PID {p.Id}): {ex}");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.NewLog(ex.ToString());
+                }
+
+                // Try to acquire the mutex again after attempting to kill other instances
+                mutex = new System.Threading.Mutex(false, mutexName);
+                bool got = false;
+                try
+                {
+                    got = mutex.WaitOne(5000); // Wait up to 5 seconds to acquire the mutex
+                }
+                catch (AbandonedMutexException)
+                {
+                    got = true; // The mutex was abandoned, but we can still acquire it
+                    LogHelper.NewLog("Mutex was abandoned, but acquired successfully.");
+                }
+                if (!got)
+                {
+                    MessageBox.Show("无法获得程序实例控制，程序将退出。", "Ink Canvas Plus 遇到错误", MessageBoxButton.OK, MessageBoxImage.Error);
+                    LogHelper.NewLog("Ink Canvas automatically closed - failed to acquire mutex after killing instances");
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    LogHelper.NewLog("Acquired mutex after killing other instances. Continuing.");
+                }
             }
 
             StartArgs = e.Args;
