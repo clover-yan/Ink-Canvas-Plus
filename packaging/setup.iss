@@ -103,3 +103,9 @@ Filename: "{sys}\taskkill.exe"; Parameters: "/IM ""{#MyAppExeName}"" /F"; RunOnc
 
 [Messages]
 BeveledLabel=https://khyan.top/ic+ {#MyAppVersion}
+
+[Code]
+procedure InitializeWizard();
+begin
+  WizardForm.LicenseAcceptedRadio.Checked := True;
+end;
