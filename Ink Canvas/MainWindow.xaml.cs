@@ -53,6 +53,12 @@ namespace InkCanvasPlus
         private const uint VK_D = 0x44;
         private const int HOTKEY_ID = 9000;
         private const int WM_HOTKEY = 0x0312;
+        private const int WM_SYSCOMMAND = 0x0112;
+        private const int SC_SIZE = 0xF000;
+        private const int SC_MOVE = 0xF010;
+        private const int SC_MINIMIZE = 0xF020;
+        private const int SC_RESTORE = 0xF120;
+        private const int SC_MAXIMIZE = 0xF030;
 
         #region Window Initialization
 
@@ -137,6 +143,35 @@ namespace InkCanvasPlus
                 title += "Active";
             }
             this.Title = title;
+        }
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+
+            var source = PresentationSource.FromVisual(this) as HwndSource;
+            source?.AddHook(WndProc);
+        }
+
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            if (msg == WM_SYSCOMMAND)
+            {
+                int command = wParam.ToInt32() & 0xFFF0;
+
+                switch (command)
+                {
+                    case SC_MINIMIZE:
+                    case SC_RESTORE:
+                    case SC_MAXIMIZE:
+                    case SC_MOVE:
+                    case SC_SIZE:
+                        handled = true;
+                        break;
+                }
+            }
+
+            return IntPtr.Zero;
         }
 
         #endregion
