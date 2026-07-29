@@ -1305,6 +1305,13 @@
                                         <ui:SymbolIcon Symbol="Accept" Foreground="Black" />
                                     </Viewbox>
                                 </Border>
+                                <Border Name="BorderMarker" Background="Transparent" CornerRadius="100"
+                                        Width="{Binding ElementName=BorderPenColorYellow, Path=ActualHeight}"
+                                        MouseUp="BorderMarker_MouseUp">
+                                    <Viewbox>
+                                        <ui:FontIcon Name="FontIconMarker" FontSize="64" Glyph="&#xED64;" Foreground="{DynamicResource FloatBarForeground}" />
+                                    </Viewbox>
+                                </Border>
                             </ui:SimpleStackPanel>
                             <Grid x:Name="EraserContainer" Width="21" Height="24" Margin="0,1.5,-2,0" MouseDown="Border_MouseDown" MouseUp="ImageEraser_MouseUp" Visibility="{Binding ElementName=BtnErase, Path=Visibility}">
                                 <Image Name="ImageEraser" Margin="0,-4,-1,-2" Source="{DynamicResource ImageSource.RubberNormal}" RenderTransformOrigin="0.5,0.5" />

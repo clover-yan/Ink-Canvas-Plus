@@ -1409,6 +1409,14 @@ namespace InkCanvasPlus
             HideSubPanels();
         }
 
+        private void BorderMarker_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            isMarkerMode = !isMarkerMode;
+            FontIconMarker.Foreground = isMarkerMode ? new SolidColorBrush(Colors.DodgerBlue) : (Brush)FindResource("FloatBarForeground");
+            ApplyMarkerMode();
+            HideSubPanels();
+        }
+
         private void SymbolIconUndo_MouseUp(object sender, MouseButtonEventArgs e)
         {
             BtnUndo_Click(BtnUndo, null);

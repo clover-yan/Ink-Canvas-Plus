@@ -1485,11 +1485,9 @@ namespace InkCanvasPlus
         {
             if (!isLoaded) return;
 
-            drawingAttributes.Height = ((Slider)sender).Value / 2;
-            drawingAttributes.Width = ((Slider)sender).Value / 2;
-
             Settings.Canvas.InkWidth = ((Slider)sender).Value / 2;
 
+            ApplyMarkerMode();
             SaveSettingsToFile();
         }
 

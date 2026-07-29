@@ -661,6 +661,8 @@ namespace InkCanvasPlus
 
             PreloadIALibrary();
 
+            ApplyMarkerMode();
+
             isLoaded = true;
 
             Dispatcher.BeginInvoke(new Action(() =>
@@ -1795,9 +1797,42 @@ namespace InkCanvasPlus
         #region Right Side Panel (Buttons - Color)
 
         int inkColor = 1;
+        bool isMarkerMode = false;
 
         const int ColorSwiftOpacityDurationOn = 150;
         const int ColorSwiftOpacityDurationOff = 50;
+        private Color GetBaseColor()
+        {
+            switch (inkColor)
+            {
+                case 0: return Colors.Black;
+                case 1: return ((SolidColorBrush)BtnColorRed.Background).Color;
+                case 2: return ((SolidColorBrush)BtnColorGreen.Background).Color;
+                case 3: return ((SolidColorBrush)BtnColorBlue.Background).Color;
+                case 4: return ((SolidColorBrush)BtnColorYellow.Background).Color;
+                case 5: return StringToColor("#FFFEFEFE");
+                default: return Colors.Black;
+            }
+        }
+
+        private void ApplyMarkerMode()
+        {
+            var baseWidth = Settings.Canvas.InkWidth;
+            var baseColor = GetBaseColor();
+            if (isMarkerMode)
+            {
+                drawingAttributes.Width = baseWidth * 10;
+                drawingAttributes.Height = baseWidth * 10;
+                drawingAttributes.Color = Color.FromArgb((byte)(baseColor.A * 0.5), baseColor.R, baseColor.G, baseColor.B);
+            }
+            else
+            {
+                drawingAttributes.Width = baseWidth;
+                drawingAttributes.Height = baseWidth;
+                drawingAttributes.Color = baseColor;
+            }
+        }
+
         private void ColorSwitchCheck()
         {
             //EraserContainer.Background = null;
@@ -1872,6 +1907,7 @@ namespace InkCanvasPlus
             }
 
             isLongPressSelected = false;
+            ApplyMarkerMode();
         }
 
         private void BtnColorBlack_Click(object sender, RoutedEventArgs e)
