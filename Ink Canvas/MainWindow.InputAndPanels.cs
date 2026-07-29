@@ -308,6 +308,11 @@ namespace InkCanvasPlus
             ToggleSwitchFloatBarShowOnRight.IsOn = !ToggleSwitchFloatBarShowOnRight.IsOn;
         }
 
+        private void KeyToggleMarker(object sender, ExecutedRoutedEventArgs e)
+        {
+            BorderMarker_MouseUp(null, null);
+        }
+
         private void ComponentDispatcher_ThreadPreprocessMessage(ref MSG msg, ref bool handled)
         {
             if (msg.message == WM_HOTKEY && msg.wParam.ToInt32() == HOTKEY_ID)

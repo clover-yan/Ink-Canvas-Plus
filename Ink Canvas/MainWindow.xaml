@@ -51,6 +51,7 @@
         <RoutedUICommand x:Key="HotKey_SwitchToBoard" Text=" " />
         <RoutedUICommand x:Key="HotKey_ClearAll" Text=" " />
         <RoutedUICommand x:Key="HotKey_ToggleFloatBarPosition" Text=" " />
+        <RoutedUICommand x:Key="HotKey_ToggleMarker" Text=" " />
     </Window.Resources>
     <!--输入命令绑定-->
     <Window.InputBindings>
@@ -77,6 +78,7 @@
         <KeyBinding Modifiers="Alt" Key="B" Command="{StaticResource HotKey_SwitchToBoard}" />
         <KeyBinding Modifiers="Alt" Key="X" Command="{StaticResource HotKey_ClearAll}" />
         <KeyBinding Modifiers="Alt" Key="T" Command="{StaticResource HotKey_ToggleFloatBarPosition}" />
+        <KeyBinding Modifiers="Alt" Key="M" Command="{StaticResource HotKey_ToggleMarker}" />
     </Window.InputBindings>
     <!--命令执行方法绑定-->
     <Window.CommandBindings>
@@ -146,6 +148,9 @@
         <CommandBinding Command="{StaticResource HotKey_ToggleFloatBarPosition}"
                         CanExecute="CommandBinding_CanExecute"
                         Executed="KeyToggleFloatBarPosition" />
+        <CommandBinding Command="{StaticResource HotKey_ToggleMarker}"
+                        CanExecute="CommandBinding_CanExecute"
+                        Executed="KeyToggleMarker" />
     </Window.CommandBindings>
     <Grid x:Name="Main_Grid" Background="#01FFFFFF">
         <Grid Name="GridBackgroundCoverHolder">
@@ -871,7 +876,7 @@
                         </GroupBox>
 
                         <GroupBox Header="快捷键指南">
-                            <TextBlock TextWrapping="Wrap" Text="全局快捷键&#x000A;• Ctrl+Alt+D：激活 Ink Canvas Plus 并切换书写／鼠标模式&#x000A;&#x000A;应用内快捷键&#x000A;• Alt+V：展开或收起工具栏&#x000A;• Alt+D：切换到书写模式&#x000A;• Alt+S：切换到鼠标模式&#x000A;• Alt+`, Alt+1–5：切换画笔颜色&#x000A;• Alt+L：使用直线工具&#x000A;• Alt+R：使用矩形工具&#x000A;• Alt+O：使用圆形工具&#x000A;• Alt+Q：使用套索工具&#x000A;• Alt+E：切换橡皮擦&#x000A;• Ctrl+Z：撤销上一步&#x000A;• Ctrl+Shift+Z, Ctrl+Y：重做&#x000A;• Alt+X：清除选中笔迹／所有笔迹&#x000A;• Alt+C：屏幕截图&#x000A;• B, Alt+B：进入／退出黑板模式&#x000A;• Alt+T：切换浮动工具栏位置" />
+                            <TextBlock TextWrapping="Wrap" Text="全局快捷键&#x000A;• Ctrl+Alt+D：激活 Ink Canvas Plus 并切换书写／鼠标模式&#x000A;&#x000A;应用内快捷键&#x000A;• Alt+V：展开或收起工具栏&#x000A;• Alt+D：切换到书写模式&#x000A;• Alt+S：切换到鼠标模式&#x000A;• Alt+`, Alt+1–5：切换画笔颜色&#x000A;• Alt+L：使用直线工具&#x000A;• Alt+R：使用矩形工具&#x000A;• Alt+O：使用圆形工具&#x000A;• Alt+Q：使用套索工具&#x000A;• Alt+E：切换橡皮擦&#x000A;• Ctrl+Z：撤销上一步&#x000A;• Ctrl+Shift+Z, Ctrl+Y：重做&#x000A;• Alt+X：清除选中笔迹／所有笔迹&#x000A;• Alt+C：屏幕截图&#x000A;• B, Alt+B：进入／退出黑板模式&#x000A;• Alt+M：切换荧光笔&#x000A;• Alt+T：切换浮动工具栏位置" />
                         </GroupBox>
                     </StackPanel>
                 </ui:ScrollViewerEx>
