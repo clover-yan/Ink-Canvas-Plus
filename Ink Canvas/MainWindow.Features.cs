@@ -40,6 +40,8 @@ namespace InkCanvasPlus
 {
     public partial class MainWindow : Window
     {
+        private double FloatingBarScale => ViewboxFloatingBarScaleTransform?.ScaleX ?? 1.0;
+
         #region Whiteboard Controls
 
         StrokeCollection[] strokeCollections = new StrokeCollection[101];
@@ -1427,8 +1429,9 @@ namespace InkCanvasPlus
             }
             else
             {
-                var width = ViewboxFloatingBar.ActualWidth;
-                var centerMargin = new Thickness((SystemParameters.PrimaryScreenWidth - width) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                var scale = FloatingBarScale;
+                var width = ViewboxFloatingBar.ActualWidth * scale;
+                var centerMargin = new Thickness((SystemParameters.PrimaryScreenWidth - width) / 2, SystemParameters.PrimaryScreenHeight - 60 + ViewboxFloatingBar.ActualHeight * (1 - scale), -2000, -200);
                 var isCentered = BtnPPTSlideShowEnd.Visibility == Visibility.Visible &&
                                  ViewboxFloatingBar.Margin == centerMargin;
 
@@ -1440,11 +1443,11 @@ namespace InkCanvasPlus
 
                     if (isCentered)
                     {
-                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth * FloatingBarScale) / 2, SystemParameters.PrimaryScreenHeight - 60 + ViewboxFloatingBar.ActualHeight * (1 - FloatingBarScale), -2000, -200);
                     }
                     else if (Settings.Appearance.IsFloatBarShowOnRight)
                     {
-                        ViewboxFloatingBar.Margin = new Thickness(ViewboxFloatingBar.Margin.Left + width - ViewboxFloatingBar.ActualWidth, ViewboxFloatingBar.Margin.Top, ViewboxFloatingBar.Margin.Right, ViewboxFloatingBar.Margin.Bottom);
+                        ViewboxFloatingBar.Margin = new Thickness(ViewboxFloatingBar.Margin.Left + width - ViewboxFloatingBar.ActualWidth * FloatingBarScale, ViewboxFloatingBar.Margin.Top, ViewboxFloatingBar.Margin.Right, ViewboxFloatingBar.Margin.Bottom);
                     }
                 }
             }
@@ -1582,7 +1585,7 @@ namespace InkCanvasPlus
 
                 await Dispatcher.BeginInvoke(new Action(() =>
                 {
-                    ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                    ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth * FloatingBarScale) / 2, SystemParameters.PrimaryScreenHeight - 60 + ViewboxFloatingBar.ActualHeight * (1 - FloatingBarScale), -2000, -200);
                 }), DispatcherPriority.Render);
             }
             else
@@ -1611,7 +1614,7 @@ namespace InkCanvasPlus
                 {
                     await Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth * FloatingBarScale) / 2, SystemParameters.PrimaryScreenHeight - 60 + ViewboxFloatingBar.ActualHeight * (1 - FloatingBarScale), -2000, -200);
                     }), DispatcherPriority.Render);
                 }
             }

@@ -819,7 +819,7 @@ namespace InkCanvasPlus
                     Thread.Sleep(100);
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth * FloatingBarScale) / 2, SystemParameters.PrimaryScreenHeight - 60 + ViewboxFloatingBar.ActualHeight * (1 - FloatingBarScale), -2000, -200);
                     });
                 })).Start();
             });
@@ -1096,11 +1096,11 @@ namespace InkCanvasPlus
             // 控制居中
             if (BtnPPTSlideShowEnd.Visibility == Visibility.Visible)
             {
-                if (ViewboxFloatingBar.Margin == new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200))
+                if (ViewboxFloatingBar.Margin == new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth * FloatingBarScale) / 2, SystemParameters.PrimaryScreenHeight - 60 + ViewboxFloatingBar.ActualHeight * (1 - FloatingBarScale), -2000, -200))
                 {
                     await Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth * FloatingBarScale) / 2, SystemParameters.PrimaryScreenHeight - 60 + ViewboxFloatingBar.ActualHeight * (1 - FloatingBarScale), -2000, -200);
                     }), DispatcherPriority.Render);
                 }
             }
@@ -1274,11 +1274,11 @@ namespace InkCanvasPlus
             if (currentMode != 0 || BtnPPTSlideShowEnd.Visibility == Visibility.Visible) return;
             if (isFloatBarShowOnRight)
             {
-                ViewboxFloatingBar.Margin = new Thickness(SystemParameters.WorkArea.Left + SystemParameters.WorkArea.Width - 80 - ViewboxFloatingBar.ActualWidth, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80, -2000, -200);
+                ViewboxFloatingBar.Margin = new Thickness(SystemParameters.WorkArea.Left + SystemParameters.WorkArea.Width - 80 - ViewboxFloatingBar.ActualWidth * FloatingBarScale, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80 + ViewboxFloatingBar.ActualHeight * (1 - FloatingBarScale), -2000, -200);
             }
             else
             {
-                ViewboxFloatingBar.Margin = new Thickness(SystemParameters.WorkArea.Left + 80, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80, -2000, -200);
+                ViewboxFloatingBar.Margin = new Thickness(SystemParameters.WorkArea.Left + 80, SystemParameters.WorkArea.Top + SystemParameters.WorkArea.Height - 80 + ViewboxFloatingBar.ActualHeight * (1 - FloatingBarScale), -2000, -200);
             }
         }
 
@@ -1461,6 +1461,24 @@ namespace InkCanvasPlus
             if (!isLoaded) return;
             Settings.Canvas.EraserType = ComboBoxEraserType.SelectedIndex;
             SaveSettingsToFile();
+        }
+
+        private void FloatingBarScaleSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var slider = (Slider)sender;
+            double val = slider.Value / 100.0;
+            double clampedVal = val < 0.5 ? 0.5 : val > 1.0 ? 1.0 : val;
+            if (slider.Value != clampedVal * 100)
+            {
+                slider.Value = clampedVal * 100;
+                return;
+            }
+            if (!isLoaded) return;
+            Settings.Appearance.ViewboxFloatingBarScaleTransformValue = clampedVal;
+            SaveSettingsToFile();
+
+            ViewboxFloatingBarScaleTransform.ScaleX = clampedVal;
+            ViewboxFloatingBarScaleTransform.ScaleY = clampedVal;
         }
 
         private void InkWidthSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

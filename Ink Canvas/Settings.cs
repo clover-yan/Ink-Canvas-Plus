@@ -98,6 +98,8 @@ namespace InkCanvasPlus
         public bool IsRememberFloatBarPosition { get; set; } = false;
         [JsonProperty("theme")]
         public int Theme { get; set; } = 5;
+        [JsonProperty("viewboxFloatingBarScaleTransformValue")]
+        public double ViewboxFloatingBarScaleTransformValue { get; set; } = 0.8;
     }
 
     public class PowerPointSettings

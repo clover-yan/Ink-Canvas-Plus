@@ -712,8 +712,8 @@ namespace InkCanvasPlus
                 double x = double.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture);
                 double y = double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture);
 
-                double barWidth = ViewboxFloatingBar.ActualWidth;
-                double barHeight = ViewboxFloatingBar.ActualHeight;
+                double barWidth = ViewboxFloatingBar.ActualWidth * FloatingBarScale;
+                double barHeight = ViewboxFloatingBar.ActualHeight * FloatingBarScale;
                 if (barWidth <= 0 || barHeight <= 0) return;
 
                 Rect workArea = SystemParameters.WorkArea;
@@ -848,6 +848,16 @@ namespace InkCanvasPlus
             ToggleSwitchShowVerticalPPTNavigation.IsOn = Settings.PowerPointSettings.IsShowVerticalPPTNavigation;
 
             ComboBoxTheme.SelectedIndex = Settings.Appearance.Theme;
+
+            if (Settings.Appearance.ViewboxFloatingBarScaleTransformValue != 0)
+            {
+                double userVal = Settings.Appearance.ViewboxFloatingBarScaleTransformValue;
+                double clampedUserVal = userVal < 0.5 ? 0.5 : userVal > 1.0 ? 1.0 : userVal;
+                ViewboxFloatingBarScaleTransform.ScaleX = clampedUserVal;
+                ViewboxFloatingBarScaleTransform.ScaleY = clampedUserVal;
+                FloatingBarScaleSlider.Value = clampedUserVal * 100;
+            }
+
             if (Settings.Appearance.IsShowHideControlButton)
             {
                 BtnHideControl.Visibility = Visibility.Visible;

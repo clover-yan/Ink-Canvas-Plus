@@ -773,6 +773,19 @@
                                     <ComboBoxItem Content="Plus 朱砂红 - 深色" FontFamily="Microsoft YaHei UI" />
                                     <ComboBoxItem Content="Plus 朱砂红 - 跟随系统" FontFamily="Microsoft YaHei UI" />
                                 </ComboBox>
+                                <StackPanel Orientation="Horizontal">
+                                    <Slider x:Name="FloatingBarScaleSlider"
+                                            HorizontalAlignment="Left"
+                                            Minimum="50" Maximum="100"
+                                            Width="320" FontFamily="Microsoft YaHei UI"
+                                            ui:ControlHelper.Header="工具栏图标缩放"
+                                            IsSnapToTickEnabled="True" Value="100"
+                                            TickFrequency="5" TickPlacement="Both"
+                                            ValueChanged="FloatingBarScaleSlider_ValueChanged" />
+                                    <TextBlock Text="{Binding Value, ElementName=FloatingBarScaleSlider, Mode=OneWay}"
+                                               VerticalAlignment="Bottom" Margin="10,0,0,8"
+                                               FontSize="14" Width="25" HorizontalAlignment="Center" />
+                                </StackPanel>
                             </ui:SimpleStackPanel>
                         </GroupBox>
                         <GroupBox Header="PowerPoint 相关">
