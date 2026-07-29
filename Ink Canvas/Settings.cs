@@ -104,6 +104,8 @@ namespace InkCanvasPlus
     {
         [JsonProperty("isShowPPTNavigation")]
         public bool IsShowPPTNavigation { get; set; } = true;
+        [JsonProperty("isShowVerticalPPTNavigation")]
+        public bool IsShowVerticalPPTNavigation { get; set; } = false;
         [JsonProperty("powerPointSupport")]
         public bool PowerPointSupport { get; set; } = true;
         [JsonProperty("isShowCanvasAtNewSlideShow")]

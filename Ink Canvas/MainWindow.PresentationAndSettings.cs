@@ -1322,8 +1322,23 @@ namespace InkCanvasPlus
             Settings.PowerPointSettings.IsShowPPTNavigation = ToggleSwitchShowButtonPPTNavigation.IsOn;
             SaveSettingsToFile();
 
-            PptNavigationBtn.Visibility =
+            ViewboxPPTSidesControl.Visibility =
                 Settings.PowerPointSettings.IsShowPPTNavigation ? Visibility.Visible : Visibility.Collapsed;
+            ViewboxPPTRightBottom.Visibility =
+                Settings.PowerPointSettings.IsShowPPTNavigation ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void ToggleSwitchShowVerticalPPTNavigation_OnToggled(object sender, RoutedEventArgs e)
+        {
+            if (!isLoaded) return;
+
+            Settings.PowerPointSettings.IsShowVerticalPPTNavigation = ToggleSwitchShowVerticalPPTNavigation.IsOn;
+            SaveSettingsToFile();
+
+            ViewboxPPTLeftCenter.Visibility =
+                Settings.PowerPointSettings.IsShowVerticalPPTNavigation ? Visibility.Visible : Visibility.Collapsed;
+            ViewboxPPTRightCenter.Visibility =
+                Settings.PowerPointSettings.IsShowVerticalPPTNavigation ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void ComboBoxTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)

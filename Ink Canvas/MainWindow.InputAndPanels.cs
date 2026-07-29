@@ -835,9 +835,17 @@ namespace InkCanvasPlus
                 ToggleSwitchShowButtonExit.IsOn = false;
             }
 
-            PptNavigationBtn.Visibility =
+            ViewboxPPTSidesControl.Visibility =
+                Settings.PowerPointSettings.IsShowPPTNavigation ? Visibility.Visible : Visibility.Collapsed;
+            ViewboxPPTRightBottom.Visibility =
                 Settings.PowerPointSettings.IsShowPPTNavigation ? Visibility.Visible : Visibility.Collapsed;
             ToggleSwitchShowButtonPPTNavigation.IsOn = Settings.PowerPointSettings.IsShowPPTNavigation;
+
+            ViewboxPPTLeftCenter.Visibility =
+                Settings.PowerPointSettings.IsShowVerticalPPTNavigation ? Visibility.Visible : Visibility.Collapsed;
+            ViewboxPPTRightCenter.Visibility =
+                Settings.PowerPointSettings.IsShowVerticalPPTNavigation ? Visibility.Visible : Visibility.Collapsed;
+            ToggleSwitchShowVerticalPPTNavigation.IsOn = Settings.PowerPointSettings.IsShowVerticalPPTNavigation;
 
             ComboBoxTheme.SelectedIndex = Settings.Appearance.Theme;
             if (Settings.Appearance.IsShowHideControlButton)
