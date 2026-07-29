@@ -1428,18 +1428,19 @@ namespace InkCanvasPlus
             else
             {
                 var width = ViewboxFloatingBar.ActualWidth;
+                var centerMargin = new Thickness((SystemParameters.PrimaryScreenWidth - width) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
+                var isCentered = BtnPPTSlideShowEnd.Visibility == Visibility.Visible &&
+                                 ViewboxFloatingBar.Margin == centerMargin;
+
                 using (Dispatcher.DisableProcessing())
                 {
                     BtnHideInkCanvas_Click(BtnHideInkCanvas, null);
 
                     ViewboxFloatingBar.UpdateLayout();
 
-                    if (BtnPPTSlideShowEnd.Visibility == Visibility.Visible)
+                    if (isCentered)
                     {
-                        if (ViewboxFloatingBar.Margin == new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200))
-                        {
-                            ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
-                        }
+                        ViewboxFloatingBar.Margin = new Thickness((SystemParameters.PrimaryScreenWidth - ViewboxFloatingBar.ActualWidth) / 2, SystemParameters.PrimaryScreenHeight - 60, -2000, -200);
                     }
                     else if (Settings.Appearance.IsFloatBarShowOnRight)
                     {
