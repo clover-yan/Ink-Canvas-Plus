@@ -106,6 +106,7 @@ namespace InkCanvasPlus
 
             AutoUpdater.RunUpdateAsAdmin = false;
             AutoUpdater.TopMost = true;
+            AutoUpdater.SetOwner(this);
             AutoUpdater.ApplicationExitEvent += () =>
             {
                 Environment.Exit(0);

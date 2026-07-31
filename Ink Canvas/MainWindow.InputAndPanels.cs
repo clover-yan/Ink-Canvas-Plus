@@ -1281,6 +1281,7 @@ namespace InkCanvasPlus
         {
             BtnCheckForUpdate.IsEnabled = false;
             AutoUpdater.Mandatory = true;
+            AutoUpdater.ReportErrors = true;
             CheckForUpdate();
             CheckingUpdatesTip.Visibility = Visibility.Visible;
             AssemblyVersionInfoPanel.Visibility = Visibility.Collapsed;
