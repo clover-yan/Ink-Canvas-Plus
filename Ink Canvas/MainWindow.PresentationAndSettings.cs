@@ -1823,7 +1823,7 @@ namespace InkCanvasPlus
 
         private void HyperlinkWebsite_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://www.khyan.top/apps/Ink-Canvas-Plus");
+            Process.Start("https://cloveryan.com/apps/Ink-Canvas-Plus");
         }
 
         private void HyperlinkQQGroup_Click(object sender, RoutedEventArgs e)

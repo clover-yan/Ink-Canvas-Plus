@@ -4,7 +4,7 @@
 #define MyAppName "Ink Canvas Plus"
 ; #define MyAppVersion "4.0.0.4"
 #define MyAppPublisher "Clover Yan"
-#define MyAppURL "https://www.khyan.top/apps/Ink-Canvas-Plus"
+#define MyAppURL "https://cloveryan.com/apps/Ink-Canvas-Plus"
 #define MyAppExeName "Ink Canvas.exe"
 #define MyAppAssocName MyAppName + " Strokes"
 #define MyAppAssocExt ".icstk"
@@ -104,7 +104,7 @@ Type: files; Name: "{userstartup}\InkCanvas.lnk"
 Filename: "{sys}\taskkill.exe"; Parameters: "/IM ""{#MyAppExeName}"" /F"; RunOnceId: "KillInkCanvasPlus"; Flags: runhidden
 
 [Messages]
-BeveledLabel=https://khyan.top/ic+ {#MyAppVersion}
+BeveledLabel=https://cloveryan.com/ic+ {#MyAppVersion}
 
 [Code]
 procedure InitializeWizard();

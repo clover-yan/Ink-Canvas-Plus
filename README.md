@@ -3,7 +3,7 @@
 [![LOGO](Ink%20Canvas/Resources/InkCanvas.png?raw=true "LOGO")](# "LOGO")
 
 # Ink-Canvas-Plus
-[下载](https://www.khyan.top/apps/Ink-Canvas-Plus/installer "从 khyan.top 下载")
+[下载](https://cloveryan.com/apps/Ink-Canvas-Plus/installer "从 cloveryan.com 下载")
 
 [![QQ 群 996760298](https://img.shields.io/badge/QQ%20群-996760298-blue)](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=KBN8I8M6E24RFoeFw7FNlXdGpOQybxTW&authKey=CNheMzaibvP5cGRwSGP9HTLiTQtpFfPwySrJ0%2BpoCYYF22JqhINFi3Mi8lNLuXCV&noverify=0&group_code=996760298) ![GitHub issues](https://img.shields.io/github/issues/clover-yan/Ink-Canvas-Plus?logo=github)
 
@@ -36,7 +36,7 @@ Ink Canvas Plus (IC+) 是一款由 Clover Yan 维护、复刻自 WXRIW/Ink Canva
    错误报告：https://github.com/clover-yan/Ink-Canvas-Plus/labels/bug/new
 2. [加入 QQ 群组](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=KBN8I8M6E24RFoeFw7FNlXdGpOQybxTW&authKey=CNheMzaibvP5cGRwSGP9HTLiTQtpFfPwySrJ0%2BpoCYYF22JqhINFi3Mi8lNLuXCV&noverify=0&group_code=996760298)：996760298
 3. 联系作者  
-   [查看联系方式](https://www.khyan.top/contact "联系作者")。请附上复现此问题的操作步骤，等待回复。
+   [查看联系方式](https://cloveryan.com/ "联系作者")。请附上复现此问题的操作步骤，等待回复。
 
 
 ## 感谢
