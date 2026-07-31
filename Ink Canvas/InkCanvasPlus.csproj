@@ -41,6 +41,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Resources\InkCanvas.png" />
+	  <None Remove="Resources\Clover Yan.png" />
 	</ItemGroup>
 	
 	
@@ -137,9 +138,9 @@
 		<Resource Include="Resources\InkCanvas.png">
 		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
-	</ItemGroup>
-	<ItemGroup>
-		<Resource Include="Resources\logo2.png" />
+		<Resource Include="Resources\Clover Yan.png">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 	</ItemGroup>
 	<ItemGroup>
 		<BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

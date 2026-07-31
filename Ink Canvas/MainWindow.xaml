@@ -533,11 +533,26 @@
                                     </Grid.RowDefinitions>
                                 </Grid>
                                 <StackPanel Orientation="Vertical" Margin="0,-12,0,0">
-                                    <Image Grid.Column="0" Grid.Row="0" Width="64" Height="64" Stretch="Uniform">
-                                        <Image.Source>
-                                            <BitmapImage DecodePixelWidth="60" DecodePixelHeight="60" UriSource="pack://application:,,,/Resources/InkCanvas.png" />
-                                        </Image.Source>
-                                    </Image>
+                                    <Grid HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Ellipse Grid.Column="0" Grid.Row="0" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2">
+                                            <Ellipse.Fill>
+                                                <ImageBrush Stretch="UniformToFill">
+                                                    <ImageBrush.ImageSource>
+                                                        <BitmapImage UriSource="pack://application:,,,/Resources/Clover Yan.png" DecodePixelWidth="120" DecodePixelHeight="120" />
+                                                    </ImageBrush.ImageSource>
+                                                </ImageBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Image Grid.Column="1" Grid.Row="0" Width="64" Height="64" Stretch="Uniform">
+                                            <Image.Source>
+                                                <BitmapImage DecodePixelWidth="128" DecodePixelHeight="128" UriSource="pack://application:,,,/Resources/InkCanvas.png" />
+                                            </Image.Source>
+                                        </Image>
+                                    </Grid>
                                     <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="20" Text="Ink Canvas Plus" />
                                     <TextBlock HorizontalAlignment="Center" FontSize="14" Text="Ink Canvas 的浴火重生版" />
                                     <TextBlock Grid.Column="1" Grid.Row="0" FontSize="14" TextWrapping="Wrap" TextAlignment="Center" Opacity="0.65" Margin="0,12,0,0">
@@ -582,7 +597,10 @@
                                         </Canvas>
                                         <TextBlock Margin="8,0,0,0" FontSize="14" Text="少安毋躁，正在检查更新…" />
                                     </StackPanel>
-                                    <Button Name="BtnCheckForUpdate" Content="检查更新" HorizontalAlignment="Center" Width="100" FontFamily="Microsoft YaHei UI" Click="BtnCheckForUpdate_Click" Margin="0,0,0,10" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Button Name="BtnLearnMore" Content="了解此版本" Width="100" FontFamily="Microsoft YaHei UI" Click="BtnLearnMore_Click" Margin="5" />
+                                        <Button Name="BtnCheckForUpdate" Content="检查更新" Width="100" FontFamily="Microsoft YaHei UI" Click="BtnCheckForUpdate_Click" Margin="5" />
+                                    </StackPanel>
                                 </StackPanel>
                                 <ui:SimpleStackPanel Orientation="Horizontal" VerticalAlignment="Center" Spacing="4">
                                     <Canvas Width="20" Height="20">
@@ -1037,8 +1055,6 @@
                         Margin="0,10,0,0" Width="{Binding ElementName=StackPanelMain, Path=ActualWidth}"
                         Click="BtnHideControl_Click" Foreground="{Binding ElementName=BtnExit, Path=Foreground}" Background="{Binding ElementName=BtnExit, Path=Background}" />
                 <StackPanel>
-                    <TextBlock Visibility="{Binding ElementName=GroupBoxMASEZVersion, Path=Visibility}" Text="二中专版" FontSize="11" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="{Binding ElementName=BtnExit, Path=Foreground}" />
-                    <Image Visibility="{Binding ElementName=GroupBoxMASEZVersion, Path=Visibility}" Source="Resources/logo2.png" Margin="0,-5,0,-15" />
                     <StackPanel x:Name="StackPanelInfo">
                         <TextBlock Text="Developer" FontSize="8.5" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="{Binding ElementName=BtnExit, Path=Foreground}" />
                         <TextBlock Text="XY Wang" FontSize="9" HorizontalAlignment="Center" Margin="0,3,0,0" Foreground="{Binding ElementName=BtnExit, Path=Foreground}" />

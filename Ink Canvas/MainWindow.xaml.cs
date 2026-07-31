@@ -114,6 +114,36 @@ namespace InkCanvasPlus
             CheckForUpdate();
 
             UpdateWindowTitle();
+
+            CheckVersionAndShowWelcome();
+        }
+
+        private void CheckVersionAndShowWelcome()
+        {
+            try
+            {
+                string versionFile = Path.Combine(App.RootPath, "Version.ini");
+                string currentVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                string savedVersion = File.Exists(versionFile) ? File.ReadLines(versionFile).FirstOrDefault() : null;
+
+                if (savedVersion == currentVersion) return;
+
+                try
+                {
+                    Directory.CreateDirectory(App.RootPath);
+                    File.WriteAllText(versionFile, currentVersion + Environment.NewLine);
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.NewLog("Failed to write Version.ini: " + ex);
+                }
+
+                new WelcomeWindow().Show();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.NewLog("Failed to read Version.ini: " + ex);
+            }
         }
 
         private void UpdateWindowTitle()

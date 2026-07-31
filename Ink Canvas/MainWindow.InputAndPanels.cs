@@ -1277,6 +1277,11 @@ namespace InkCanvasPlus
 
         public static bool CloseIsFromButton = false;
 
+        private void BtnLearnMore_Click(object sender, RoutedEventArgs e)
+        {
+            new WelcomeWindow().Show();
+        }
+
         private void BtnCheckForUpdate_Click(object sender, RoutedEventArgs e)
         {
             BtnCheckForUpdate.IsEnabled = false;
