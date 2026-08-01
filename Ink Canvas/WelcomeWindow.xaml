@@ -42,11 +42,9 @@
         </Image>
         <Grid Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Margin="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="更新内容：" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
-            <ScrollViewer Grid.Row="1">
+            <ScrollViewer Grid.Row="0">
                 <TextBlock Name="TextBlockUpdateContent" TextWrapping="Wrap" FontSize="14"/>
             </ScrollViewer>
         </Grid>
@@ -55,6 +53,7 @@
                 <ui:HyperlinkButton Name="HyperlinkButtonWebsite" Content="https://cloveryan.com/ic+" Click="HyperlinkButtonWebsite_Click" />
             </StackPanel>
             <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="10">
+                <Button Name="ButtonShowMore" Content="显示更多" Width="100" Height="30" Click="ButtonShowMore_Click" Margin="0 0 10 0"/>
                 <Button Name="ButtonClose" Content="关闭" Width="100" Height="30" Click="ButtonClose_Click"/>
             </StackPanel>
         </DockPanel>
