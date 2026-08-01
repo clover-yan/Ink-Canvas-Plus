@@ -1628,7 +1628,7 @@ namespace InkCanvasPlus
             }
 
             BtnExit.Foreground = Brushes.White;
-            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
             if (currentMode == 0 && inkCanvas.Strokes.Count == 0 && BtnPPTSlideShowEnd.Visibility != Visibility.Visible)
             {
                 BtnHideInkCanvas_Click(BtnHideInkCanvas, null);

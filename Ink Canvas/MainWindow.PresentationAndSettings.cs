@@ -703,7 +703,7 @@ namespace InkCanvasPlus
                             //Light
                             BtnExit.Foreground = Brushes.White;
                             SymbolIconBtnColorBlackContent.Foreground = Brushes.White;
-                            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
                             //BtnExit.Background = new SolidColorBrush(StringToColor("#AACCCCCC"));
                         }
                         else
@@ -921,7 +921,7 @@ namespace InkCanvasPlus
                     //Light
                     BtnExit.Foreground = Brushes.Black;
                     SymbolIconBtnColorBlackContent.Foreground = Brushes.White;
-                    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+                    //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
                 }
                 else
                 {

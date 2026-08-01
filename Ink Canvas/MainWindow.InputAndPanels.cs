@@ -1262,7 +1262,7 @@ namespace InkCanvasPlus
                 Settings.InkToShape = new InkToShape();
             }
 
-            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
             SystemEvents_UserPreferenceChanged(null, null);
         }
 
@@ -1465,13 +1465,13 @@ namespace InkCanvasPlus
                         {
                             BtnExit.Foreground = Brushes.White;
                             SymbolIconBtnColorBlackContent.Foreground = Brushes.White;
-                            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
                         }
                         else
                         {
                             BtnExit.Foreground = Brushes.Black;
                             SymbolIconBtnColorBlackContent.Foreground = Brushes.White;
-                            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+                            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
                         }
                     }
                     StackPanelPPTButtons.Visibility = Visibility.Visible;
@@ -1496,7 +1496,7 @@ namespace InkCanvasPlus
                             BtnSwitch.Content = "黑板";
                             BtnExit.Foreground = Brushes.White;
                             SymbolIconBtnColorBlackContent.Foreground = Brushes.Black;
-                            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
                         }
                         else
                         {
@@ -1505,13 +1505,13 @@ namespace InkCanvasPlus
                             {
                                 BtnExit.Foreground = Brushes.White;
                                 SymbolIconBtnColorBlackContent.Foreground = Brushes.White;
-                                ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                                //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
                             }
                             else
                             {
                                 BtnExit.Foreground = Brushes.Black;
                                 SymbolIconBtnColorBlackContent.Foreground = Brushes.White;
-                                ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+                                //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
                             }
                         }
 
@@ -1531,13 +1531,13 @@ namespace InkCanvasPlus
                         {
                             BtnExit.Foreground = Brushes.White;
                             SymbolIconBtnColorBlackContent.Foreground = Brushes.Black;
-                            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
                         }
                         else
                         {
                             BtnExit.Foreground = Brushes.Black;
                             SymbolIconBtnColorBlackContent.Foreground = Brushes.White;
-                            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+                            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
                         }
 
                         StackPanelPPTButtons.Visibility = Visibility.Collapsed;
@@ -1560,7 +1560,7 @@ namespace InkCanvasPlus
                 }
                 BtnExit.Foreground = Brushes.White;
                 GridBackgroundCover.Background = new SolidColorBrush(StringToColor("#FFF2F2F2"));
-                ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
             }
             else
             {
@@ -1571,7 +1571,7 @@ namespace InkCanvasPlus
                 }
                 BtnExit.Foreground = Brushes.Black;
                 GridBackgroundCover.Background = new SolidColorBrush(StringToColor("#FF1A1A1A"));
-                ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+                //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
             }
             SetColorByIndex();
             if (!Settings.Appearance.IsTransparentButtonBackground)
