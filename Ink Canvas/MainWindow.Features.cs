@@ -1157,6 +1157,12 @@ namespace InkCanvasPlus
                 case 3:
                     SetTheme("Red", favor);
                     break;
+                case 4:
+                    SetTheme("Blue", favor);
+                    break;
+                case 5:
+                    SetTheme("Yellow", favor);
+                    break;
             }
         }
 

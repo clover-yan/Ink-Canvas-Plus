@@ -795,6 +795,12 @@
                                     <ComboBoxItem Content="Plus 朱砂红 - 浅色" FontFamily="Microsoft YaHei UI" />
                                     <ComboBoxItem Content="Plus 朱砂红 - 深色" FontFamily="Microsoft YaHei UI" />
                                     <ComboBoxItem Content="Plus 朱砂红 - 跟随系统" FontFamily="Microsoft YaHei UI" />
+                                    <ComboBoxItem Content="Plus 太空蓝 - 浅色" FontFamily="Microsoft YaHei UI" />
+                                    <ComboBoxItem Content="Plus 太空蓝 - 深色" FontFamily="Microsoft YaHei UI" />
+                                    <ComboBoxItem Content="Plus 太空蓝 - 跟随系统" FontFamily="Microsoft YaHei UI" />
+                                    <ComboBoxItem Content="Plus 金秋黄 - 浅色" FontFamily="Microsoft YaHei UI" />
+                                    <ComboBoxItem Content="Plus 金秋黄 - 深色" FontFamily="Microsoft YaHei UI" />
+                                    <ComboBoxItem Content="Plus 金秋黄 - 跟随系统" FontFamily="Microsoft YaHei UI" />
                                 </ComboBox>
                                 <StackPanel Orientation="Horizontal">
                                     <Slider x:Name="FloatingBarScaleSlider"
