@@ -1279,7 +1279,7 @@ namespace InkCanvasPlus
 
         private void BtnLearnMore_Click(object sender, RoutedEventArgs e)
         {
-            new WelcomeWindow().Show();
+            new WelcomeWindow { Owner = this }.Show();
         }
 
         private void BtnCheckForUpdate_Click(object sender, RoutedEventArgs e)

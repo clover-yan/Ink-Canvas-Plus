@@ -138,7 +138,7 @@ namespace InkCanvasPlus
                     LogHelper.NewLog("Failed to write Version.ini: " + ex);
                 }
 
-                new WelcomeWindow().Show();
+                new WelcomeWindow { Owner = this }.Show();
             }
             catch (Exception ex)
             {
