@@ -226,50 +226,18 @@ namespace InkCanvasPlus
 
         private void SetColors()
         {
-            if (currentMode != 0 && !Settings.Canvas.UsingWhiteboard)
+            try
             {
-                if (File.Exists(App.RootPath + "Colors\\Light.ini"))
-                {
-                    try
-                    {
-                        string[] lightColors = File.ReadAllLines(App.RootPath + "Colors\\Light.ini");
-                        BtnColorRed.Background = new SolidColorBrush(StringToColor(lightColors[0]));
-                        BtnColorGreen.Background = new SolidColorBrush(StringToColor(lightColors[1]));
-                        BtnColorBlue.Background = new SolidColorBrush(StringToColor(lightColors[2]));
-                        BtnColorYellow.Background = new SolidColorBrush(StringToColor(lightColors[3]));
-                    }
-                    catch (Exception) { ShowNotification("读取亮色画笔颜色配置文件时遇到问题"); }
-                }
-                else
-                {
-                    BtnColorRed.Background = new SolidColorBrush(StringToColor("#FFFF3333"));
-                    BtnColorGreen.Background = new SolidColorBrush(StringToColor("#FF1ED760"));
-                    BtnColorBlue.Background = new SolidColorBrush(StringToColor("#FF239AD6"));
-                    BtnColorYellow.Background = new SolidColorBrush(StringToColor("#FFFFC000"));
-                }
+                bool useLightTheme = currentMode != 0 && !Settings.Canvas.UsingWhiteboard;
+                Color[] colors = useLightTheme
+                    ? ColorConfigHelper.LoadColors(ColorConfigHelper.LightColorFile, ColorConfigHelper.DefaultLightColors)
+                    : ColorConfigHelper.LoadColors(ColorConfigHelper.DarkColorFile, ColorConfigHelper.DefaultDarkColors);
+                BtnColorRed.Background = new SolidColorBrush(colors[0]);
+                BtnColorGreen.Background = new SolidColorBrush(colors[1]);
+                BtnColorBlue.Background = new SolidColorBrush(colors[2]);
+                BtnColorYellow.Background = new SolidColorBrush(colors[3]);
             }
-            else
-            {
-                if (File.Exists(App.RootPath + "Colors\\Dark.ini"))
-                {
-                    try
-                    {
-                        string[] darkColors = File.ReadAllLines(App.RootPath + "Colors\\Dark.ini");
-                        BtnColorRed.Background = new SolidColorBrush(StringToColor(darkColors[0]));
-                        BtnColorGreen.Background = new SolidColorBrush(StringToColor(darkColors[1]));
-                        BtnColorBlue.Background = new SolidColorBrush(StringToColor(darkColors[2]));
-                        BtnColorYellow.Background = new SolidColorBrush(StringToColor(darkColors[3]));
-                    }
-                    catch (Exception) { ShowNotification("读取深色画笔颜色配置文件时遇到问题"); }
-                }
-                else
-                {
-                    BtnColorRed.Background = new SolidColorBrush(Colors.Red);
-                    BtnColorGreen.Background = new SolidColorBrush(StringToColor("#FF169141"));
-                    BtnColorBlue.Background = new SolidColorBrush(StringToColor("#FF239AD6"));
-                    BtnColorYellow.Background = new SolidColorBrush(StringToColor("#FFF38B00"));
-                }
-            }
+            catch (Exception) { ShowNotification("读取画笔颜色配置文件时遇到问题"); }
         }
 
         #endregion Whiteboard Controls

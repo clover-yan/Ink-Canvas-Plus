@@ -672,6 +672,7 @@
                         </GroupBox>
                         <GroupBox Header="画板">
                             <ui:SimpleStackPanel Spacing="12">
+                                <Button Name="BtnColorConfig" Content="配置画笔颜色…" FontFamily="Microsoft YaHei UI" Click="BtnColorConfig_Click" />
                                 <StackPanel Orientation="Horizontal">
                                     <Slider x:Name="InkWidthSlider"
                                             HorizontalAlignment="Left"

@@ -1349,6 +1349,13 @@ namespace InkCanvasPlus
             SaveSettingsToFile();
         }
 
+        private void BtnColorConfig_Click(object sender, RoutedEventArgs e)
+        {
+            new ColorConfigWindow { Owner = this }.Show();
+            SetColors();
+            ApplyMarkerMode();
+        }
+
 
         private void ToggleSwitchShowButtonHideControl_Toggled(object sender, RoutedEventArgs e)
         {
