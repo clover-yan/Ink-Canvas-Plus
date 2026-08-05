@@ -24,6 +24,7 @@ namespace InkCanvasPlus
         {
             InitializeComponent();
             TextBlockVersion.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            TextBlockUpdateContent.Inlines.Add(new Bold(new Run("Ink Canvas Plus 迎来 4.4 版本全新更新，祝您事事顺意！\n\n")));
             TextBlockUpdateContent.Inlines.Add(new Bold(new Run("【新功能】")));
             TextBlockUpdateContent.Inlines.Add(@"
 本次更新增加了很多新设置项，点击工具栏中的「齿轮」按钮可以设置这些功能。

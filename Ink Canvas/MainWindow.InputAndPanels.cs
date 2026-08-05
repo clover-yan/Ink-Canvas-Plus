@@ -1268,7 +1268,7 @@ namespace InkCanvasPlus
 
         private void CheckForUpdate()
         {
-            AutoUpdater.Start($"https://www.khyan.top/apps/Ink-Canvas-Plus/autoupdate.xml");
+            AutoUpdater.Start($"https://dl.inkcanvasplus.khyan.top/autoupdate.xml?version={Application.ResourceAssembly.GetName().Version}");
         }
 
         #endregion Definations and Loading
